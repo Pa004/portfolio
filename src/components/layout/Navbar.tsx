@@ -13,8 +13,12 @@ const navLinks = [
 
 type Lang = "en" | "es";
 
-export default function Navbar() {
-  const [lang, setLang] = useState<Lang>("en");
+interface NavbarProps {
+  lang: Lang;
+  setLang: (lang: Lang) => void;
+}
+
+export default function Navbar({ lang, setLang }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
