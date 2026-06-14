@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const roles = {
   en: [
@@ -21,41 +21,46 @@ interface TypeWriterProps {
   lang: "en" | "es";
 }
 
-export default function TypeWriter({ lang }: TypeWriterProps) {
-  const [index, setIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [deleting, setDeleting] = useState(false);
+function TypeWriterInner({ lang }: TypeWriterProps) {
   const [text, setText] = useState("");
+  const indexRef = useRef(0);
+  const charIndexRef = useRef(0);
+  const deletingRef = useRef(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    setIndex(0);
-    setCharIndex(0);
-    setDeleting(false);
-    setText("");
-  }, [lang]);
+    function tick() {
+      const words = roles[lang];
+      const word = words[indexRef.current];
+      const ci = charIndexRef.current;
+      const del = deletingRef.current;
+      const delay = del ? 40 : ci === word.length ? 1800 : 80;
 
-  useEffect(() => {
-    const words = roles[lang];
-    const word = words[index];
-    const delay = deleting ? 40 : charIndex === word.length ? 1800 : 80;
-
-    const timer = setTimeout(() => {
-      if (!deleting) {
-        setText(word.slice(0, charIndex + 1));
-        setCharIndex((c) => c + 1);
-        if (charIndex + 1 === word.length) setDeleting(true);
-      } else {
-        setText(word.slice(0, charIndex - 1));
-        setCharIndex((c) => c - 1);
-        if (charIndex - 1 === 0) {
-          setDeleting(false);
-          setIndex((i) => (i + 1) % words.length);
+      timerRef.current = setTimeout(() => {
+        if (!del) {
+          const next = ci + 1;
+          setText(word.slice(0, next));
+          charIndexRef.current = next;
+          if (next === word.length) deletingRef.current = true;
+        } else {
+          const next = ci - 1;
+          setText(word.slice(0, next));
+          charIndexRef.current = next;
+          if (next === 0) {
+            deletingRef.current = false;
+            indexRef.current = (indexRef.current + 1) % words.length;
+          }
         }
-      }
-    }, delay);
+        tick();
+      }, delay);
+    }
 
-    return () => clearTimeout(timer);
-  }, [charIndex, deleting, index, lang]);
+    tick();
+
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [lang]);
 
   return (
     <span className="text-[#06b6d4] font-medium">
@@ -63,4 +68,8 @@ export default function TypeWriter({ lang }: TypeWriterProps) {
       <span className="animate-blink ml-0.5 inline-block w-0.5 h-5 bg-[#06b6d4] align-middle" />
     </span>
   );
+}
+
+export default function TypeWriter({ lang }: TypeWriterProps) {
+  return <TypeWriterInner key={lang} lang={lang} />;
 }

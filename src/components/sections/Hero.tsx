@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import ParticleCanvas from "@/components/ui/ParticleCanvas";
 import TypeWriter from "@/components/ui/TypeWriter";
 import AvatarIllustration from "@/components/ui/AvatarIllustration";
@@ -38,14 +38,18 @@ interface HeroProps {
 export default function Hero({ lang = "en" }: HeroProps) {
   const t = content[lang];
 
-  const fadeUp = {
+    const fadeUp: Variants = {
     hidden: { opacity: 0, y: 24 },
     visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.12, duration: 0.55, ease: "easeOut" },
+        opacity: 1,
+        y: 0,
+        transition: {
+        delay: i * 0.12,
+        duration: 0.55,
+        ease: "easeOut" as const,
+        },
     }),
-  };
+    };
 
   return (
     <section
