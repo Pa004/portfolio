@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { ReactNode } from "react";
 
 interface RevealSectionProps {
@@ -14,11 +14,11 @@ export default function RevealSection({
   delay = 0,
   direction = "up",
 }: RevealSectionProps) {
-  const variants = {
+  const variants: Variants = {
     hidden: {
       opacity: 0,
-      y:  direction === "up"    ?  40 : 0,
-      x:  direction === "left"  ? -40 : direction === "right" ? 40 : 0,
+      y: direction === "up" ? 40 : 0,
+      x: direction === "left" ? -40 : direction === "right" ? 40 : 0,
       filter: "blur(8px)",
     },
     visible: {
@@ -29,7 +29,7 @@ export default function RevealSection({
       transition: {
         duration: 0.7,
         delay,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: "easeOut",
       },
     },
   };
