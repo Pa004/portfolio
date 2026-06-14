@@ -85,7 +85,6 @@ export default function CustomCursor() {
       {/* Ring */}
       <div ref={ringRef} style={{
         position: "fixed", top: 0, left: 0,
-        width: "32px", height: "32px",
         borderRadius: "50%",
         border: `1.5px solid ${isHovering ? "rgba(6,182,212,0.6)" : "rgba(59,130,246,0.4)"}`,
         pointerEvents: "none", zIndex: 9998,
