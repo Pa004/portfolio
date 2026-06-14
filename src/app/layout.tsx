@@ -5,6 +5,8 @@ import "./globals.css";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import CustomCursor from "@/components/ui/CustomCursor";
+import BackToTop from "@/components/ui/BackToTop";
+import ConsoleEasterEgg from "@/components/ui/ConsoleEasterEgg";
 
 export const metadata: Metadata = {
   title: "Pablo Domínguez — Full Stack Developer",
@@ -25,6 +27,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SmoothScroll />
         <ScrollProgress />
         <CustomCursor />
+        <BackToTop />
+        <ConsoleEasterEgg />
         {children}
       </body>
     </html>

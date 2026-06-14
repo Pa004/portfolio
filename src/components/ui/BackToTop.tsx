@@ -1,0 +1,46 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+export default function BackToTop() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setVisible(window.scrollY > 400);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8, y: 10 }}
+          animate={{ opacity: 1, scale: 1,   y: 0  }}
+          exit={{    opacity: 0, scale: 0.8, y: 10 }}
+          transition={{ duration: 0.25 }}
+          onClick={scrollToTop}
+          aria-label="Back to top"
+          style={{
+            position: "fixed", bottom: "28px", left: "24px",
+            zIndex: 9998,
+            width: "40px", height: "40px", borderRadius: "10px",
+            background: "rgba(9,9,11,0.9)",
+            border: "0.5px solid rgba(59,130,246,0.3)",
+            backdropFilter: "blur(12px)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            cursor: "pointer", color: "#3b82f6",
+            boxShadow: "0 0 16px rgba(59,130,246,0.1)",
+          }}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path strokeLinecap="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+          </svg>
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
+}

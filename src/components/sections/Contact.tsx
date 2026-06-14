@@ -1,11 +1,13 @@
 ﻿"use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { glass, glassBlue } from "@/lib/styles";
 import { links } from "@/lib/content";
 import React from "react";
 import SectionBackground from "@/components/ui/SectionBackground";
 import RevealSection from "@/components/ui/RevealSection";
+import Toast from "@/components/ui/Toast";
 
 type Lang = "en" | "es";
 interface ContactProps { lang: Lang; }
@@ -18,12 +20,38 @@ const socialLinks = [
 ];
 
 const content = {
-  en: { label: "Contact", title: "Let's work together", subtitle: "I'm open to new opportunities, collaborations, and interesting projects. Feel free to reach out.", email_label: "Send me an email", email_desc: "Best way to reach me directly.", or: "or find me on", cta: "Send email" },
-  es: { label: "Contacto", title: "Trabajemos juntos", subtitle: "Estoy abierto a nuevas oportunidades, colaboraciones y proyectos interesantes. No dudes en escribirme.", email_label: "Envíame un email", email_desc: "La mejor manera de contactarme directamente.", or: "o encuéntrame en", cta: "Enviar email" },
+  en: {
+    label: "Contact",
+    title: "Let's work together",
+    subtitle: "I'm open to new opportunities, collaborations, and interesting projects. Feel free to reach out.",
+    email_label: "Send me an email",
+    email_desc: "Best way to reach me directly.",
+    email_copy: "Click to copy",
+    or: "or find me on",
+    cta: "Send email",
+    copied: "Email copied to clipboard!",
+  },
+  es: {
+    label: "Contacto",
+    title: "Trabajemos juntos",
+    subtitle: "Estoy abierto a nuevas oportunidades, colaboraciones y proyectos interesantes. No dudes en escribirme.",
+    email_label: "Envíame un email",
+    email_desc: "La mejor manera de contactarme directamente.",
+    email_copy: "Clic para copiar",
+    or: "o encuéntrame en",
+    cta: "Enviar email",
+    copied: "¡Email copiado al portapapeles!",
+  },
 };
 
 export default function Contact({ lang }: ContactProps) {
   const t = content[lang];
+  const [toast, setToast] = useState({ visible: false, message: "" });
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText(links.email);
+    setToast({ visible: true, message: t.copied });
+  };
 
   return (
     <section id="contact" style={{ position: "relative", padding: "80px 24px 64px", overflow: "hidden" }}>
@@ -41,6 +69,7 @@ export default function Contact({ lang }: ContactProps) {
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "32px", alignItems: "start" }}>
 
+          {/* Email card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -49,22 +78,52 @@ export default function Contact({ lang }: ContactProps) {
             style={{ ...glassBlue, borderRadius: "16px", padding: "32px", position: "relative", overflow: "hidden" }}
           >
             <div style={{ position: "absolute", top: 0, right: 0, width: "160px", height: "160px", background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
+
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
               <div style={{ width: "40px", height: "40px", borderRadius: "10px", ...glass, display: "flex", alignItems: "center", justifyContent: "center", color: "#3b82f6" }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path strokeLinecap="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                </svg>
               </div>
               <div>
                 <p style={{ fontSize: "14px", fontWeight: 600, color: "#f4f4f5" }}>{t.email_label}</p>
                 <p style={{ fontSize: "12px", color: "#71717a" }}>{t.email_desc}</p>
               </div>
             </div>
-            <p style={{ fontSize: "13px", color: "#93c5fd", marginBottom: "24px", fontFamily: "monospace" }}>{links.email}</p>
-            <a href={`mailto:${links.email}`} style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "10px 20px", borderRadius: "8px", background: "#3b82f6", color: "#fff", fontSize: "13px", fontWeight: 500, textDecoration: "none" }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
+
+            {/* Clickable email to copy */}
+            <div
+              onClick={copyEmail}
+              title={t.email_copy}
+              style={{
+                display: "flex", alignItems: "center", gap: "8px",
+                fontSize: "13px", color: "#93c5fd",
+                marginBottom: "24px", fontFamily: "monospace",
+                cursor: "pointer", width: "fit-content",
+                padding: "6px 10px", borderRadius: "6px",
+                background: "rgba(59,130,246,0.06)",
+                border: "0.5px solid rgba(59,130,246,0.15)",
+                transition: "background 0.2s",
+              }}
+            >
+              {links.email}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ opacity: 0.5, flexShrink: 0 }}>
+                <path strokeLinecap="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
+              </svg>
+            </div>
+
+            <a
+              href={`mailto:${links.email}`}
+              style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "10px 20px", borderRadius: "8px", background: "#3b82f6", color: "#fff", fontSize: "13px", fontWeight: 500, textDecoration: "none" }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+              </svg>
               {t.cta}
             </a>
           </motion.div>
 
+          {/* Social links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -87,12 +146,21 @@ export default function Contact({ lang }: ContactProps) {
               >
                 <span style={{ color: social.color, flexShrink: 0 }}>{social.icon}</span>
                 <span style={{ fontSize: "14px", fontWeight: 500 }}>{social.label}</span>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: "auto", opacity: 0.3 }}><path strokeLinecap="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: "auto", opacity: 0.3 }}>
+                  <path strokeLinecap="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
               </motion.a>
             ))}
           </motion.div>
         </div>
       </div>
+
+      {/* Toast notification */}
+      <Toast
+        visible={toast.visible}
+        message={toast.message}
+        onClose={() => setToast({ visible: false, message: "" })}
+      />
     </section>
   );
 }
