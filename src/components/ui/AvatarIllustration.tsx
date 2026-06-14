@@ -17,15 +17,6 @@ const allBadges = [
   { label: "Express.js",  color: "#a78bfa", border: "rgba(167,139,250,0.4)" },
 ];
 
-const positions = [
-  { top: "4%",  left: "-10%" },
-  { top: "4%",  right: "-10%" },
-  { top: "38%", left: "-14%" },
-  { top: "38%", right: "-14%" },
-  { top: "72%", left: "-10%" },
-  { top: "72%", right: "-10%" },
-];
-
 const lines = [
   { text: "const developer = {",                        color: "#f4f4f5", indent: 0  },
   { text: "  name: 'Pablo Domínguez',",                 color: "#a78bfa", indent: 1  },
@@ -46,48 +37,39 @@ const lines = [
 
 export default function AvatarIllustration() {
   const [visibleLines, setVisibleLines] = useState(0);
-  const [badges, setBadges]             = useState(allBadges.slice(0, 6));
-  const [badgesVisible, setBadgesVisible] = useState(true);
   const [cursorOn, setCursorOn]         = useState(true);
-  const hasTyped = useRef(false);
 
   // Typewriter for code lines
-  useEffect(() => {
-    if (hasTyped.current) return;
-    hasTyped.current = true;
+  const [cycle, setCycle] = useState(0);
+
+    useEffect(() => {
+    setVisibleLines(0);
     let i = 0;
+    let cancelled = false;
+
     const type = () => {
-      if (i <= lines.length) {
+        if (cancelled) return;
+        if (i <= lines.length) {
         setVisibleLines(i);
         i++;
-        setTimeout(type, i === lines.length ? 1000 : 90);
-      } else {
-        // restart
+        const delay = i === lines.length ? 4000 : 90;
         setTimeout(() => {
-          hasTyped.current = false;
-          setVisibleLines(0);
-        }, 4000);
-      }
+            if (i > lines.length) {
+            if (!cancelled) setCycle(c => c + 1);
+            } else {
+            type();
+            }
+        }, delay);
+        }
     };
+
     type();
-  }, []);
+    return () => { cancelled = true; };
+    }, [cycle]);
 
   // Cursor blink
   useEffect(() => {
     const interval = setInterval(() => setCursorOn(p => !p), 530);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Badge rotation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setBadgesVisible(false);
-      setTimeout(() => {
-        const shuffled = [...allBadges].sort(() => Math.random() - 0.5);
-        setBadges(shuffled.slice(0, 6));
-        setBadgesVisible(true);
-      }, 400);
-    }, 5500);
     return () => clearInterval(interval);
   }, []);
 
@@ -184,32 +166,50 @@ export default function AvatarIllustration() {
         </div>
       </div>
 
-      {/* Floating badges */}
-      {positions.map((pos, i) => {
-        const badge = badges[i];
-        if (!badge) return null;
-        return (
-          <div key={`${badge.label}-${i}`} style={{
-            position: "absolute", ...pos,
-            padding: "4px 10px", borderRadius: "6px",
-            background: "rgba(9,9,11,0.9)",
-            border: `0.5px solid ${badge.border}`,
-            backdropFilter: "blur(8px)",
-            fontSize: "10px", fontWeight: 600,
-            color: badge.color,
-            fontFamily: "monospace",
-            whiteSpace: "nowrap",
-            boxShadow: `0 0 10px ${badge.border}`,
-            opacity: badgesVisible ? 1 : 0,
-            transform: badgesVisible ? "translateY(0) scale(1)" : "translateY(4px) scale(0.95)",
-            transition: "opacity 0.4s ease, transform 0.4s ease",
-            animation: `float-${i % 3} ${3 + i * 0.5}s ease-in-out infinite`,
-            zIndex: 3,
-          }}>
-            {badge.label}
-          </div>
-        );
-      })}
+      {/* Vertical badge marquee — right side */}
+      <div style={{
+        position: "absolute",
+        right: "-100px",
+        top: "0",
+        bottom: "0",
+        width: "88px",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        maskImage: "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+        WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+      }}>
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          animation: "marquee-up 12s linear infinite",
+        }}>
+          {/* Double the badges for seamless loop */}
+          {[...allBadges, ...allBadges].map((badge, i) => (
+            <div key={i} style={{
+              padding: "5px 8px",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              width: "100%",
+              boxSizing: "border-box" as const,
+              borderRadius: "8px",
+              background: "rgba(9,9,11,0.9)",
+              border: `0.5px solid ${badge.border}`,
+              backdropFilter: "blur(8px)",
+              fontSize: "10px",
+              fontWeight: 600,
+              color: badge.color,
+              fontFamily: "monospace",
+              boxShadow: `0 0 8px ${badge.border}`,
+              textAlign: "center",
+            }}>
+              {badge.label}
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Glow behind terminal */}
       <div style={{
@@ -220,9 +220,10 @@ export default function AvatarIllustration() {
       }} />
 
       <style>{`
-        @keyframes float-0 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
-        @keyframes float-1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(7px)} }
-        @keyframes float-2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+        @keyframes marquee-up {
+          0%   { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
+        }
       `}</style>
     </div>
   );

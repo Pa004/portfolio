@@ -3,18 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 
 const roles = {
-  en: [
-    "Full Stack Developer",
-    "Frontend Engineer",
-    "AI Enthusiast",
-    "Flutter Developer",
-  ],
-  es: [
-    "Desarrollador Full Stack",
-    "Ingeniero Frontend",
-    "Entusiasta de IA",
-    "Desarrollador Flutter",
-  ],
+  en: ["Full Stack Developer", "Frontend Engineer", "AI Enthusiast", "Flutter Developer"],
+  es: ["Desarrollador Full Stack", "Ingeniero Frontend", "Entusiasta de IA", "Desarrollador Flutter"],
 };
 
 interface TypeWriterProps {
@@ -23,17 +13,17 @@ interface TypeWriterProps {
 
 function TypeWriterInner({ lang }: TypeWriterProps) {
   const [text, setText] = useState("");
-  const indexRef = useRef(0);
+  const indexRef    = useRef(0);
   const charIndexRef = useRef(0);
   const deletingRef = useRef(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const timerRef    = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     function tick() {
       const words = roles[lang];
-      const word = words[indexRef.current];
-      const ci = charIndexRef.current;
-      const del = deletingRef.current;
+      const word  = words[indexRef.current];
+      const ci    = charIndexRef.current;
+      const del   = deletingRef.current;
       const delay = del ? 40 : ci === word.length ? 1800 : 80;
 
       timerRef.current = setTimeout(() => {
@@ -56,16 +46,17 @@ function TypeWriterInner({ lang }: TypeWriterProps) {
     }
 
     tick();
-
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
   }, [lang]);
 
   return (
-    <span className="text-[#06b6d4] font-medium">
+    <span style={{ color: "#06b6d4", fontWeight: 500 }}>
       {text}
-      <span className="animate-blink ml-0.5 inline-block w-0.5 h-5 bg-[#06b6d4] align-middle" />
+      <span style={{
+        display: "inline-block", width: "2px", height: "20px",
+        background: "#06b6d4", marginLeft: "2px",
+        verticalAlign: "middle", animation: "blink 2s infinite",
+      }} />
     </span>
   );
 }
