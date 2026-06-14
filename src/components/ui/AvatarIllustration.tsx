@@ -1,108 +1,229 @@
-﻿export default function AvatarIllustration() {
+﻿"use client";
+
+import { useEffect, useState, useRef } from "react";
+
+const allBadges = [
+  { label: "React",       color: "#3b82f6", border: "rgba(59,130,246,0.4)"  },
+  { label: "Flutter",     color: "#06b6d4", border: "rgba(6,182,212,0.4)"   },
+  { label: "Python",      color: "#a78bfa", border: "rgba(167,139,250,0.4)" },
+  { label: "Node.js",     color: "#3b82f6", border: "rgba(59,130,246,0.4)"  },
+  { label: "TypeScript",  color: "#06b6d4", border: "rgba(6,182,212,0.4)"   },
+  { label: "TensorFlow",  color: "#a78bfa", border: "rgba(167,139,250,0.4)" },
+  { label: "MongoDB",     color: "#3b82f6", border: "rgba(59,130,246,0.4)"  },
+  { label: "Docker",      color: "#06b6d4", border: "rgba(6,182,212,0.4)"   },
+  { label: "Next.js",     color: "#a78bfa", border: "rgba(167,139,250,0.4)" },
+  { label: "PostgreSQL",  color: "#3b82f6", border: "rgba(59,130,246,0.4)"  },
+  { label: "Tailwind",    color: "#06b6d4", border: "rgba(6,182,212,0.4)"   },
+  { label: "Express.js",  color: "#a78bfa", border: "rgba(167,139,250,0.4)" },
+];
+
+const positions = [
+  { top: "4%",  left: "-10%" },
+  { top: "4%",  right: "-10%" },
+  { top: "38%", left: "-14%" },
+  { top: "38%", right: "-14%" },
+  { top: "72%", left: "-10%" },
+  { top: "72%", right: "-10%" },
+];
+
+const lines = [
+  { text: "const developer = {",                        color: "#f4f4f5", indent: 0  },
+  { text: "  name: 'Pablo Domínguez',",                 color: "#a78bfa", indent: 1  },
+  { text: "  role: 'Full Stack Developer',",            color: "#a78bfa", indent: 1  },
+  { text: "  university: 'ESPE',",                      color: "#a78bfa", indent: 1  },
+  { text: "  stack: [",                                 color: "#f4f4f5", indent: 1  },
+  { text: "    'React', 'Next.js',",                    color: "#06b6d4", indent: 2  },
+  { text: "    'Node.js', 'Flutter',",                  color: "#06b6d4", indent: 2  },
+  { text: "    'Python', 'TypeScript',",                color: "#06b6d4", indent: 2  },
+  { text: "  ],",                                       color: "#f4f4f5", indent: 1  },
+  { text: "  passion: 'Building things',",              color: "#a78bfa", indent: 1  },
+  { text: "  available: true,",                         color: "#22c55e", indent: 1  },
+  { text: "};",                                         color: "#f4f4f5", indent: 0  },
+  { text: "",                                           color: "",        indent: 0  },
+  { text: "developer.init();",                          color: "#fbbf24", indent: 0  },
+  { text: "// ✓ Ready for new challenges",              color: "#52525b", indent: 0  },
+];
+
+export default function AvatarIllustration() {
+  const [visibleLines, setVisibleLines] = useState(0);
+  const [badges, setBadges]             = useState(allBadges.slice(0, 6));
+  const [badgesVisible, setBadgesVisible] = useState(true);
+  const [cursorOn, setCursorOn]         = useState(true);
+  const hasTyped = useRef(false);
+
+  // Typewriter for code lines
+  useEffect(() => {
+    if (hasTyped.current) return;
+    hasTyped.current = true;
+    let i = 0;
+    const type = () => {
+      if (i <= lines.length) {
+        setVisibleLines(i);
+        i++;
+        setTimeout(type, i === lines.length ? 1000 : 90);
+      } else {
+        // restart
+        setTimeout(() => {
+          hasTyped.current = false;
+          setVisibleLines(0);
+        }, 4000);
+      }
+    };
+    type();
+  }, []);
+
+  // Cursor blink
+  useEffect(() => {
+    const interval = setInterval(() => setCursorOn(p => !p), 530);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Badge rotation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBadgesVisible(false);
+      setTimeout(() => {
+        const shuffled = [...allBadges].sort(() => Math.random() - 0.5);
+        setBadges(shuffled.slice(0, 6));
+        setBadgesVisible(true);
+      }, 400);
+    }, 5500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="relative w-64 h-64 md:w-80 md:h-80 flex-shrink-0">
-      <svg
-        viewBox="0 0 320 320"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full"
-      >
-        {/* Glow ring */}
-        <circle cx="160" cy="160" r="140" stroke="#3b82f6" strokeWidth="0.5" strokeDasharray="4 6" opacity="0.3">
-          <animateTransform attributeName="transform" type="rotate" from="0 160 160" to="360 160 160" dur="30s" repeatCount="indefinite" />
-        </circle>
-        <circle cx="160" cy="160" r="118" stroke="#06b6d4" strokeWidth="0.5" strokeDasharray="2 8" opacity="0.2">
-          <animateTransform attributeName="transform" type="rotate" from="360 160 160" to="0 160 160" dur="20s" repeatCount="indefinite" />
-        </circle>
+    <div style={{ position: "relative", width: "340px", flexShrink: 0 }}>
 
-        {/* Background circle */}
-        <circle cx="160" cy="160" r="100" fill="#111113" stroke="#3b82f6" strokeWidth="0.5" opacity="0.8" />
+      {/* Terminal window */}
+      <div style={{
+        background: "rgba(9,9,11,0.92)",
+        border: "0.5px solid rgba(59,130,246,0.25)",
+        borderRadius: "12px",
+        overflow: "hidden",
+        boxShadow: "0 0 40px rgba(59,130,246,0.08), 0 20px 60px rgba(0,0,0,0.5)",
+        backdropFilter: "blur(12px)",
+        position: "relative",
+        zIndex: 2,
+      }}>
 
-        {/* Glow center */}
-        <circle cx="160" cy="160" r="100" fill="url(#glowGrad)" opacity="0.15" />
+        {/* Title bar */}
+        <div style={{
+          display: "flex", alignItems: "center", gap: "6px",
+          padding: "10px 14px",
+          background: "rgba(255,255,255,0.03)",
+          borderBottom: "0.5px solid rgba(255,255,255,0.06)",
+        }}>
+          {/* Traffic lights */}
+          {["#ff5f57","#ffbd2e","#28c840"].map((c, i) => (
+            <div key={i} style={{ width: "10px", height: "10px", borderRadius: "50%", background: c, opacity: 0.8 }} />
+          ))}
+          <span style={{ marginLeft: "8px", fontSize: "11px", color: "#52525b", fontFamily: "monospace" }}>
+            pablo@dev: ~/portfolio
+          </span>
+          {/* Glow dot */}
+          <div style={{ marginLeft: "auto", width: "6px", height: "6px", borderRadius: "50%", background: "#22c55e", animation: "blink 2s infinite" }} />
+        </div>
 
-        {/* Body */}
-        <rect x="120" y="195" width="80" height="55" rx="16" fill="#1e293b" />
-        <rect x="125" y="200" width="70" height="45" rx="14" fill="#0f172a" />
+        {/* Code body */}
+        <div style={{ padding: "16px 18px", fontFamily: "monospace", fontSize: "12px", lineHeight: "1.75", minHeight: "280px" }}>
 
-        {/* Shirt detail */}
-        <rect x="148" y="205" width="24" height="3" rx="1.5" fill="#3b82f6" opacity="0.6" />
-        <rect x="153" y="211" width="14" height="2" rx="1" fill="#3b82f6" opacity="0.3" />
+          {/* Prompt line */}
+          <div style={{ display: "flex", gap: "8px", marginBottom: "10px" }}>
+            <span style={{ color: "#22c55e" }}>❯</span>
+            <span style={{ color: "#3b82f6" }}>node</span>
+            <span style={{ color: "#a1a1aa" }}>portfolio.js</span>
+          </div>
 
-        {/* Neck */}
-        <rect x="150" y="183" width="20" height="16" rx="6" fill="#fbbf80" />
+          {/* Typed lines */}
+          {lines.slice(0, visibleLines).map((line, i) => (
+            <div key={i} style={{ display: "flex", minHeight: "21px" }}>
+              {/* Line number */}
+              <span style={{ color: "#3f3f46", userSelect: "none", marginRight: "14px", minWidth: "16px", textAlign: "right", fontSize: "10px", paddingTop: "2px" }}>
+                {i + 1}
+              </span>
+              {/* Code */}
+              <span style={{ color: line.color || "transparent" }}>
+                {line.text}
+              </span>
+              {/* Cursor on last visible line */}
+              {i === visibleLines - 1 && visibleLines < lines.length && (
+                <span style={{
+                  display: "inline-block", width: "7px", height: "14px",
+                  background: "#3b82f6", marginLeft: "1px", marginTop: "2px",
+                  opacity: cursorOn ? 1 : 0, borderRadius: "1px",
+                  transition: "opacity 0.1s",
+                }} />
+              )}
+            </div>
+          ))}
 
-        {/* Head */}
-        <ellipse cx="160" cy="163" rx="32" ry="34" fill="#fbbf80" />
+          {/* Idle cursor after typing done */}
+          {visibleLines >= lines.length && (
+            <div style={{ display: "flex", gap: "8px", marginTop: "4px" }}>
+              <span style={{ color: "#22c55e" }}>❯</span>
+              <span style={{
+                display: "inline-block", width: "7px", height: "14px",
+                background: "#22c55e", marginTop: "2px",
+                opacity: cursorOn ? 1 : 0, borderRadius: "1px",
+              }} />
+            </div>
+          )}
+        </div>
 
-        {/* Hair */}
-        <ellipse cx="160" cy="133" rx="32" ry="14" fill="#1c1917" />
-        <rect x="128" y="133" width="8" height="18" rx="4" fill="#1c1917" />
-        <rect x="184" y="133" width="8" height="14" rx="4" fill="#1c1917" />
-        <ellipse cx="160" cy="130" rx="28" ry="10" fill="#292524" />
+        {/* Bottom status bar */}
+        <div style={{
+          display: "flex", alignItems: "center", gap: "12px",
+          padding: "6px 14px",
+          background: "#3b82f6",
+          fontSize: "10px", fontFamily: "monospace", color: "rgba(255,255,255,0.85)",
+        }}>
+          <span>● NORMAL</span>
+          <span style={{ marginLeft: "auto" }}>portfolio.js</span>
+          <span>UTF-8</span>
+          <span>JS</span>
+        </div>
+      </div>
 
-        {/* Eyes */}
-        <ellipse cx="148" cy="162" rx="5" ry="5.5" fill="white" />
-        <ellipse cx="172" cy="162" rx="5" ry="5.5" fill="white" />
-        <circle cx="149.5" cy="163" r="3" fill="#1e293b" />
-        <circle cx="173.5" cy="163" r="3" fill="#1e293b" />
-        <circle cx="150.5" cy="161.5" r="1" fill="white" />
-        <circle cx="174.5" cy="161.5" r="1" fill="white" />
+      {/* Floating badges */}
+      {positions.map((pos, i) => {
+        const badge = badges[i];
+        if (!badge) return null;
+        return (
+          <div key={`${badge.label}-${i}`} style={{
+            position: "absolute", ...pos,
+            padding: "4px 10px", borderRadius: "6px",
+            background: "rgba(9,9,11,0.9)",
+            border: `0.5px solid ${badge.border}`,
+            backdropFilter: "blur(8px)",
+            fontSize: "10px", fontWeight: 600,
+            color: badge.color,
+            fontFamily: "monospace",
+            whiteSpace: "nowrap",
+            boxShadow: `0 0 10px ${badge.border}`,
+            opacity: badgesVisible ? 1 : 0,
+            transform: badgesVisible ? "translateY(0) scale(1)" : "translateY(4px) scale(0.95)",
+            transition: "opacity 0.4s ease, transform 0.4s ease",
+            animation: `float-${i % 3} ${3 + i * 0.5}s ease-in-out infinite`,
+            zIndex: 3,
+          }}>
+            {badge.label}
+          </div>
+        );
+      })}
 
-        {/* Eyebrows */}
-        <path d="M143 155 Q148 152 153 155" stroke="#1c1917" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-        <path d="M167 155 Q172 152 177 155" stroke="#1c1917" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+      {/* Glow behind terminal */}
+      <div style={{
+        position: "absolute", inset: "-20px",
+        background: "radial-gradient(ellipse at center, rgba(59,130,246,0.06) 0%, transparent 70%)",
+        pointerEvents: "none", zIndex: 1,
+        filter: "blur(20px)",
+      }} />
 
-        {/* Smile */}
-        <path d="M151 173 Q160 180 169 173" stroke="#c2855a" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-
-        {/* Laptop */}
-        <rect x="108" y="228" width="104" height="62" rx="6" fill="#0f172a" stroke="#3b82f6" strokeWidth="0.5" />
-        <rect x="113" y="232" width="94" height="50" rx="4" fill="#020617" />
-
-        {/* Code lines on screen */}
-        <rect x="119" y="238" width="30" height="2" rx="1" fill="#3b82f6" opacity="0.8" />
-        <rect x="119" y="243" width="50" height="2" rx="1" fill="#06b6d4" opacity="0.6" />
-        <rect x="124" y="248" width="40" height="2" rx="1" fill="#a78bfa" opacity="0.6" />
-        <rect x="119" y="253" width="35" height="2" rx="1" fill="#3b82f6" opacity="0.5" />
-        <rect x="124" y="258" width="55" height="2" rx="1" fill="#06b6d4" opacity="0.4" />
-        <rect x="119" y="263" width="28" height="2" rx="1" fill="#a78bfa" opacity="0.5" />
-        <rect x="124" y="268" width="45" height="2" rx="1" fill="#3b82f6" opacity="0.6" />
-
-        {/* Cursor blink on screen */}
-        <rect x="174" y="238" width="1.5" height="10" rx="1" fill="#3b82f6">
-          <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite" />
-        </rect>
-
-        {/* Floating badges */}
-        <g>
-          <rect x="32" y="120" width="52" height="22" rx="6" fill="#0f172a" stroke="#3b82f6" strokeWidth="0.5" />
-          <text x="58" y="135" textAnchor="middle" fill="#93c5fd" fontSize="9" fontFamily="monospace">React</text>
-          <animateTransform attributeName="transform" type="translate" values="0,0;0,-5;0,0" dur="3s" repeatCount="indefinite" />
-        </g>
-        <g>
-          <rect x="236" y="108" width="56" height="22" rx="6" fill="#0f172a" stroke="#06b6d4" strokeWidth="0.5" />
-          <text x="264" y="123" textAnchor="middle" fill="#67e8f9" fontSize="9" fontFamily="monospace">Flutter</text>
-          <animateTransform attributeName="transform" type="translate" values="0,0;0,6;0,0" dur="4s" repeatCount="indefinite" />
-        </g>
-        <g>
-          <rect x="40" y="210" width="58" height="22" rx="6" fill="#0f172a" stroke="#a78bfa" strokeWidth="0.5" />
-          <text x="69" y="225" textAnchor="middle" fill="#c4b5fd" fontSize="9" fontFamily="monospace">Python</text>
-          <animateTransform attributeName="transform" type="translate" values="0,0;0,5;0,0" dur="3.5s" repeatCount="indefinite" />
-        </g>
-        <g>
-          <rect x="230" y="205" width="60" height="22" rx="6" fill="#0f172a" stroke="#3b82f6" strokeWidth="0.5" />
-          <text x="260" y="220" textAnchor="middle" fill="#93c5fd" fontSize="9" fontFamily="monospace">Node.js</text>
-          <animateTransform attributeName="transform" type="translate" values="0,0;0,-6;0,0" dur="2.8s" repeatCount="indefinite" />
-        </g>
-
-        <defs>
-          <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#3b82f6" />
-            <stop offset="100%" stopColor="transparent" />
-          </radialGradient>
-        </defs>
-      </svg>
+      <style>{`
+        @keyframes float-0 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+        @keyframes float-1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(7px)} }
+        @keyframes float-2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+      `}</style>
     </div>
   );
 }

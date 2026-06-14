@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { label: { en: "About", es: "Sobre mí" }, href: "#about" },
-  { label: { en: "Skills", es: "Skills" }, href: "#skills" },
-  { label: { en: "Projects", es: "Proyectos" }, href: "#projects" },
+  { label: { en: "About",     es: "Sobre mí"  }, href: "#about"     },
+  { label: { en: "Skills",    es: "Skills"    }, href: "#skills"    },
+  { label: { en: "Projects",  es: "Proyectos" }, href: "#projects"  },
   { label: { en: "Education", es: "Educación" }, href: "#education" },
-  { label: { en: "Contact", es: "Contacto" }, href: "#contact" },
+  { label: { en: "Contact",   es: "Contacto"  }, href: "#contact"   },
 ];
 
 type Lang = "en" | "es";
@@ -21,101 +21,123 @@ interface NavbarProps {
 export default function Navbar({ lang, setLang }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    useEffect(() => {
+        const checkMobile = () => {
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+            if (!mobile) setMenuOpen(false);
+        };
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-[#09090b]/90 backdrop-blur-md border-b border-white/[0.06]"
-          : "bg-transparent"
-      }`}
-    >
-      <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <header style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
+      transition: "all 0.3s",
+      background: scrolled || menuOpen ? "rgba(9,9,11,0.9)" : "transparent",
+      backdropFilter: scrolled || menuOpen ? "blur(12px)" : "none",
+      borderBottom: scrolled ? "0.5px solid rgba(255,255,255,0.06)" : "none",
+    }}>
+      <nav style={{
+        maxWidth: "1152px", margin: "0 auto", padding: "0 24px",
+        height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between",
+      }}>
 
         {/* Logo */}
-        <a
-            href="#"
-            className="text-sm font-bold tracking-tight text-zinc-100 hover:text-white transition-colors"
-        >
-            PD<span className="text-[#3b82f6]">.</span>
+        <a href="#" style={{ fontSize: "15px", fontWeight: 700, letterSpacing: "-0.02em", color: "#f4f4f5", textDecoration: "none" }}>
+          PD<span style={{ color: "#3b82f6" }}>.</span>
         </a>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-                <a
-                    href={link.href}
-                    className="text-xs text-zinc-400 hover:text-zinc-100 transition-colors duration-200 tracking-wide"
-                >
-                    {link.label[lang]}
+        {/* Desktop links — hidden on mobile */}
+        {!isMobile && (
+          <ul style={{ display: "flex", alignItems: "center", gap: "32px", listStyle: "none", margin: 0, padding: 0 }}>
+            {navLinks.map(link => (
+              <li key={link.href}>
+                <a href={link.href} style={{ fontSize: "13px", color: "#a1a1aa", textDecoration: "none", letterSpacing: "0.02em" }}>
+                  {link.label[lang]}
                 </a>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        )}
 
         {/* Right side */}
-        <div className="flex items-center gap-3">
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+
           {/* Language toggle */}
-          <div className="flex items-center gap-1 p-1 rounded-md border border-white/[0.08] bg-white/[0.02]">
-            {(["en", "es"] as Lang[]).map((l) => (
-              <button
-                key={l}
-                onClick={() => setLang(l)}
-                className={`px-2.5 py-1 rounded text-xs font-medium transition-all duration-200 cursor-pointer ${
-                  lang === l
-                    ? "bg-[#3b82f6]/20 text-[#93c5fd] border border-[#3b82f6]/30"
-                    : "text-zinc-500 hover:text-zinc-300"
-                }`}
-              >
+          <div style={{
+            display: "flex", alignItems: "center", gap: "4px",
+            padding: "4px", borderRadius: "8px",
+            border: "0.5px solid rgba(255,255,255,0.08)",
+            background: "rgba(255,255,255,0.02)",
+          }}>
+            {(["en", "es"] as Lang[]).map(l => (
+              <button key={l} onClick={() => setLang(l)} style={{
+                padding: "4px 10px", borderRadius: "6px", fontSize: "12px", fontWeight: 500,
+                cursor: "pointer", border: "none", fontFamily: "inherit",
+                background: lang === l ? "rgba(59,130,246,0.2)" : "transparent",
+                color: lang === l ? "#93c5fd" : "#71717a",
+                outline: lang === l ? "0.5px solid rgba(59,130,246,0.3)" : "none",
+                transition: "all 0.2s",
+              }}>
                 {l.toUpperCase()}
               </button>
             ))}
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden text-zinc-400 hover:text-zinc-100 transition-colors cursor-pointer"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              {menuOpen ? (
-                <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+          {/* Hamburger — only on mobile */}
+          {isMobile && (
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+              style={{ background: "none", border: "none", color: "#a1a1aa", cursor: "pointer", padding: "4px", display: "flex", alignItems: "center" }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                {menuOpen
+                  ? <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12" />
+                  : <path strokeLinecap="round" d="M4 6h16M4 12h16M4 18h16" />
+                }
+              </svg>
+            </button>
+          )}
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile dropdown menu */}
       <AnimatePresence>
-        {menuOpen && (
+        {menuOpen && isMobile && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-[#09090b]/95 backdrop-blur-md border-b border-white/[0.06] px-6 py-4"
+            style={{
+              background: "rgba(9,9,11,0.97)",
+              backdropFilter: "blur(12px)",
+              borderBottom: "0.5px solid rgba(255,255,255,0.06)",
+              padding: "20px 24px 24px",
+            }}
           >
-            <ul className="flex flex-col gap-4">
-              {navLinks.map((link) => (
+            <ul style={{ display: "flex", flexDirection: "column", gap: "20px", listStyle: "none", margin: 0, padding: 0 }}>
+              {navLinks.map(link => (
                 <li key={link.href}>
                     <a
                         href={link.href}
                         onClick={() => setMenuOpen(false)}
-                        className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
+                        style={{ fontSize: "15px", color: "#a1a1aa", textDecoration: "none", fontWeight: 500 }}
                     >
-                        {link.label[lang]}
-                    </a>
+                    {link.label[lang]}
+                  </a>
                 </li>
               ))}
             </ul>

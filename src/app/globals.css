@@ -1,38 +1,18 @@
 @import "tailwindcss";
 
-@theme {
-  --color-base: #09090b;
-  --color-surface: #111113;
-  --color-blue-electric: #3b82f6;
-  --color-blue-light: #93c5fd;
-  --color-blue-glow: rgba(59, 130, 246, 0.12);
-  --color-cyan-accent: #06b6d4;
-  --color-cyan-light: #67e8f9;
-  --color-zinc-muted: #71717a;
-  --color-zinc-subtle: #52525b;
-  --color-zinc-faint: #3f3f46;
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
 
-  --font-family-sans: var(--font-geist-sans), sans-serif;
-  --font-family-mono: var(--font-geist-mono), monospace;
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  --animate-blink: blink 2s infinite;
-  --animate-fade-up: fadeUp 0.6s ease forwards;
-  --animate-fade-in: fadeIn 0.5s ease forwards;
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 * {
@@ -58,49 +38,10 @@ body {
   color: #f4f4f5;
 }
 
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: #09090b;
-}
-::-webkit-scrollbar-thumb {
-  background: #3b82f6;
-  border-radius: 4px;
-}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #09090b; }
+::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
 
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
+section { scroll-margin-top: 70px; }
 
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  border: 0.5px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.glass-blue {
-  background: rgba(59, 130, 246, 0.04);
-  border: 0.5px solid rgba(59, 130, 246, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.glow-blue {
-  box-shadow: 0 0 40px rgba(59, 130, 246, 0.08);
-}
-
-.text-gradient {
-  background: linear-gradient(135deg, #3b82f6, #06b6d4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-section {
-  scroll-margin-top: 80px;
-}
+.animate-blink { animation: blink 2s infinite; }
