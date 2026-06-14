@@ -5,6 +5,7 @@ import { glass, glassBlue } from "@/lib/styles";
 import { links } from "@/lib/content";
 import React from "react";
 import SectionBackground from "@/components/ui/SectionBackground";
+import RevealSection from "@/components/ui/RevealSection";
 
 type Lang = "en" | "es";
 interface ContactProps { lang: Lang; }
@@ -25,22 +26,28 @@ export default function Contact({ lang }: ContactProps) {
   const t = content[lang];
 
   return (
-    <section id="contact" style={{ position: "relative", padding: "60px 24px" }}>
+    <section id="contact" style={{ position: "relative", padding: "80px 24px 64px", overflow: "hidden" }}>
       <SectionBackground variant="waves" />
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "1px", background: "linear-gradient(to right, transparent, rgba(59,130,246,0.2), transparent)" }} />
-      <div style={{ maxWidth: "1152px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1152px", margin: "0 auto", position: "relative", zIndex: 1 }}>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: "56px" }}>
-          <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#3b82f6", marginBottom: "8px" }}>{t.label}</p>
-          <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#f4f4f5", marginBottom: "12px" }}>{t.title}</h2>
-          <p style={{ fontSize: "14px", color: "#71717a", maxWidth: "28rem" }}>{t.subtitle}</p>
-        </motion.div>
+        <RevealSection>
+          <div style={{ marginBottom: "56px" }}>
+            <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#3b82f6", marginBottom: "8px" }}>{t.label}</p>
+            <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#f4f4f5", marginBottom: "12px" }}>{t.title}</h2>
+            <p style={{ fontSize: "14px", color: "#71717a", maxWidth: "28rem" }}>{t.subtitle}</p>
+          </div>
+        </RevealSection>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "32px", alignItems: "start" }}>
 
-          {/* Email card */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-            style={{ ...glassBlue, borderRadius: "16px", padding: "32px", position: "relative", overflow: "hidden" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            style={{ ...glassBlue, borderRadius: "16px", padding: "32px", position: "relative", overflow: "hidden" }}
+          >
             <div style={{ position: "absolute", top: 0, right: 0, width: "160px", height: "160px", background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
               <div style={{ width: "40px", height: "40px", borderRadius: "10px", ...glass, display: "flex", alignItems: "center", justifyContent: "center", color: "#3b82f6" }}>
@@ -58,14 +65,26 @@ export default function Contact({ lang }: ContactProps) {
             </a>
           </motion.div>
 
-          {/* Social links */}
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
-            style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            style={{ display: "flex", flexDirection: "column", gap: "12px" }}
+          >
             <p style={{ fontSize: "11px", color: "#52525b", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: "4px" }}>{t.or}</p>
             {socialLinks.map((social, i) => (
-              <motion.a key={social.label} href={social.url} target="_blank" rel="noopener noreferrer"
-                initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 }}
-                style={{ ...glass, borderRadius: "12px", padding: "16px 20px", display: "flex", alignItems: "center", gap: "16px", color: "#a1a1aa", textDecoration: "none" }}>
+              <motion.a
+                key={social.label}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                style={{ ...glass, borderRadius: "12px", padding: "16px 20px", display: "flex", alignItems: "center", gap: "16px", color: "#a1a1aa", textDecoration: "none" }}
+              >
                 <span style={{ color: social.color, flexShrink: 0 }}>{social.icon}</span>
                 <span style={{ fontSize: "14px", fontWeight: 500 }}>{social.label}</span>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: "auto", opacity: 0.3 }}><path strokeLinecap="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { glass } from "@/lib/styles";
 import React from "react";
 import SectionBackground from "@/components/ui/SectionBackground";
+import RevealSection from "@/components/ui/RevealSection";
 
 type Lang = "en" | "es";
 interface EducationProps { lang: Lang; }
@@ -22,8 +23,8 @@ const educationItems = [
     },
     tags: ["Software Architecture", "Design Patterns", "AI", "Databases", "Full Stack"],
     links: [
-      { label: "ORCID",        url: "https://orcid.org/0009-0000-6400-026X",                              color: "#a6ce39" },
-      { label: "ResearchGate", url: "https://www.researchgate.net/profile/Pablo-Dominguez-21",            color: "#00d0af" },
+      { label: "ORCID",        url: "https://orcid.org/0009-0000-6400-026X",                           color: "#a6ce39" },
+      { label: "ResearchGate", url: "https://www.researchgate.net/profile/Pablo-Dominguez-21",         color: "#00d0af" },
     ],
     accent: "blue" as const,
     current: true,
@@ -53,35 +54,39 @@ const accentColors = {
 
 const content = {
   en: { label: "Background", title: "Education & Certifications", subtitle: "Academic formation and professional certifications.", current: "Current", cert: "Certificate" },
-  es: { label: "Formación",  title: "Educación y Certificaciones", subtitle: "Formación académica y certificaciones profesionales.",  current: "En curso", cert: "Certificado" },
+  es: { label: "Formación",  title: "Educación y Certificaciones", subtitle: "Formación académica y certificaciones profesionales.", current: "En curso", cert: "Certificado" },
 };
 
 export default function Education({ lang }: EducationProps) {
   const t = content[lang];
 
   return (
-    <section id="education" style={{ position: "relative", padding: "60px 24px" }}>
-        <SectionBackground variant="dots" />
-      <div style={{ maxWidth: "1152px", margin: "0 auto" }}>
+    <section id="education" style={{ position: "relative", padding: "80px 24px 64px", overflow: "hidden" }}>
+      <SectionBackground variant="dots" />
+      <div style={{ maxWidth: "1152px", margin: "0 auto", position: "relative", zIndex: 1 }}>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: "56px" }}>
-          <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#3b82f6", marginBottom: "8px" }}>{t.label}</p>
-          <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#f4f4f5", marginBottom: "12px" }}>{t.title}</h2>
-          <p style={{ fontSize: "14px", color: "#71717a", maxWidth: "28rem" }}>{t.subtitle}</p>
-        </motion.div>
+        <RevealSection>
+          <div style={{ marginBottom: "56px" }}>
+            <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#3b82f6", marginBottom: "8px" }}>{t.label}</p>
+            <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#f4f4f5", marginBottom: "12px" }}>{t.title}</h2>
+            <p style={{ fontSize: "14px", color: "#71717a", maxWidth: "28rem" }}>{t.subtitle}</p>
+          </div>
+        </RevealSection>
 
         <div style={{ position: "relative" }}>
-          {/* Vertical line */}
           <div style={{ position: "absolute", left: "19px", top: "8px", bottom: "8px", width: "1px", background: "linear-gradient(to bottom, rgba(59,130,246,0.4), rgba(6,182,212,0.1), transparent)" }} />
-
           <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
             {educationItems.map((item, i) => {
               const accent = accentColors[item.accent];
               return (
-                <motion.div key={item.id} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.15 }}
-                  style={{ display: "flex", gap: "24px" }}>
-
-                  {/* Dot */}
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.15 }}
+                  style={{ display: "flex", gap: "24px" }}
+                >
                   <div style={{ flexShrink: 0 }}>
                     <div style={{ width: "40px", height: "40px", borderRadius: "50%", ...glass, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: accent.ring, position: "relative", zIndex: 10 }}>
                       {item.type === "degree" ? (
@@ -92,7 +97,6 @@ export default function Education({ lang }: EducationProps) {
                     </div>
                   </div>
 
-                  {/* Card */}
                   <div style={{ flex: 1, ...glass, borderRadius: "12px", padding: "24px", borderLeft: accent.borderLeft, marginBottom: "8px" }}>
                     <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-start", justifyContent: "space-between", gap: "12px", marginBottom: "12px" }}>
                       <div>

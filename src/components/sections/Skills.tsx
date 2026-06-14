@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { glass } from "@/lib/styles";
 import React from "react";
 import SectionBackground from "@/components/ui/SectionBackground";
+import RevealSection from "@/components/ui/RevealSection";
+import TiltCard from "@/components/ui/TiltCard";
 
 type Lang = "en" | "es";
 interface SkillsProps { lang: Lang; }
@@ -54,10 +56,10 @@ const skills = [
 ];
 
 const accentMap = {
-  blue:   { icon: "#3b82f6", tag: { background: "rgba(59,130,246,0.1)", color: "#93c5fd", border: "0.5px solid rgba(59,130,246,0.2)" }, hoverBorder: "rgba(59,130,246,0.3)" },
-  cyan:   { icon: "#06b6d4", tag: { background: "rgba(6,182,212,0.1)",  color: "#67e8f9", border: "0.5px solid rgba(6,182,212,0.2)"  }, hoverBorder: "rgba(6,182,212,0.3)"  },
-  purple: { icon: "#a78bfa", tag: { background: "rgba(167,139,250,0.1)",color: "#c4b5fd", border: "0.5px solid rgba(167,139,250,0.2)"}, hoverBorder: "rgba(167,139,250,0.3)"},
-  gray:   { icon: "#71717a", tag: { background: "rgba(255,255,255,0.04)",color: "#71717a", border: "0.5px solid rgba(255,255,255,0.08)"}, hoverBorder: "rgba(255,255,255,0.2)"},
+  blue:   { icon: "#3b82f6", tag: { background: "rgba(59,130,246,0.1)", color: "#93c5fd", border: "0.5px solid rgba(59,130,246,0.2)" } },
+  cyan:   { icon: "#06b6d4", tag: { background: "rgba(6,182,212,0.1)",  color: "#67e8f9", border: "0.5px solid rgba(6,182,212,0.2)"  } },
+  purple: { icon: "#a78bfa", tag: { background: "rgba(167,139,250,0.1)",color: "#c4b5fd", border: "0.5px solid rgba(167,139,250,0.2)"} },
+  gray:   { icon: "#71717a", tag: { background: "rgba(255,255,255,0.04)",color: "#71717a", border: "0.5px solid rgba(255,255,255,0.08)"} },
 };
 
 const content = {
@@ -68,29 +70,40 @@ const content = {
 export default function Skills({ lang }: SkillsProps) {
   const t = content[lang];
   return (
-    <section id="skills" style={{ position: "relative", padding: "60px 24px" }}>
-        <SectionBackground variant="grid" />
-      <div style={{ maxWidth: "1152px", margin: "0 auto" }}>
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: "56px" }}>
-          <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#3b82f6", marginBottom: "8px" }}>{t.label}</p>
-          <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#f4f4f5", marginBottom: "12px" }}>{t.title}</h2>
-          <p style={{ fontSize: "14px", color: "#71717a", maxWidth: "28rem" }}>{t.subtitle}</p>
-        </motion.div>
+    <section id="skills" style={{ position: "relative", padding: "80px 24px 64px", overflow: "hidden" }}>
+      <SectionBackground variant="grid" />
+      <div style={{ maxWidth: "1152px", margin: "0 auto", position: "relative", zIndex: 1 }}>
+
+        <RevealSection>
+          <div style={{ marginBottom: "56px" }}>
+            <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#3b82f6", marginBottom: "8px" }}>{t.label}</p>
+            <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#f4f4f5", marginBottom: "12px" }}>{t.title}</h2>
+            <p style={{ fontSize: "14px", color: "#71717a", maxWidth: "28rem" }}>{t.subtitle}</p>
+          </div>
+        </RevealSection>
+
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "16px" }}>
           {skills.map((skill, i) => {
             const accent = accentMap[skill.accent];
             return (
-              <motion.div key={skill.category.en} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.07 }}
-                style={{ ...glass, borderRadius: "12px", padding: "20px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-                  <span style={{ color: accent.icon }}>{skill.icon}</span>
-                  <span style={{ fontSize: "12px", fontWeight: 600, color: "#d4d4d8", letterSpacing: "0.05em" }}>{skill.category[lang]}</span>
-                </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-                  {skill.items.map((item) => (
-                    <span key={item} style={{ fontSize: "11px", padding: "2px 8px", borderRadius: "4px", ...accent.tag }}>{item}</span>
-                  ))}
-                </div>
+              <motion.div
+                key={skill.category.en}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+              >
+                <TiltCard style={{ ...glass, borderRadius: "12px", padding: "20px", height: "100%" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+                    <span style={{ color: accent.icon }}>{skill.icon}</span>
+                    <span style={{ fontSize: "12px", fontWeight: 600, color: "#d4d4d8", letterSpacing: "0.05em" }}>{skill.category[lang]}</span>
+                  </div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+                    {skill.items.map((item) => (
+                      <span key={item} style={{ fontSize: "11px", padding: "2px 8px", borderRadius: "4px", ...accent.tag }}>{item}</span>
+                    ))}
+                  </div>
+                </TiltCard>
               </motion.div>
             );
           })}

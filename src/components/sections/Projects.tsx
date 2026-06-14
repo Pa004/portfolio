@@ -5,6 +5,8 @@ import { glass, glassBlue } from "@/lib/styles";
 import { links } from "@/lib/content";
 import React from "react";
 import SectionBackground from "@/components/ui/SectionBackground";
+import RevealSection from "@/components/ui/RevealSection";
+import TiltCard from "@/components/ui/TiltCard";
 
 type Lang = "en" | "es";
 interface ProjectsProps { lang: Lang; }
@@ -97,16 +99,17 @@ export default function Projects({ lang }: ProjectsProps) {
   const t = content[lang];
 
   return (
-    <section id="projects" style={{ position: "relative", padding: "60px 24px" }}>
-        <SectionBackground variant="orbs" />
-      <div style={{ maxWidth: "1152px", margin: "0 auto" }}>
+    <section id="projects" style={{ position: "relative", padding: "80px 24px 64px", overflow: "hidden" }}>
+      <SectionBackground variant="orbs" />
+      <div style={{ maxWidth: "1152px", margin: "0 auto", position: "relative", zIndex: 1 }}>
 
-        {/* Header */}
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ marginBottom: "56px" }}>
-          <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#3b82f6", marginBottom: "8px" }}>{t.label}</p>
-          <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#f4f4f5", marginBottom: "12px" }}>{t.title}</h2>
-          <p style={{ fontSize: "14px", color: "#71717a", maxWidth: "28rem" }}>{t.subtitle}</p>
-        </motion.div>
+        <RevealSection>
+          <div style={{ marginBottom: "56px" }}>
+            <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#3b82f6", marginBottom: "8px" }}>{t.label}</p>
+            <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#f4f4f5", marginBottom: "12px" }}>{t.title}</h2>
+            <p style={{ fontSize: "14px", color: "#71717a", maxWidth: "28rem" }}>{t.subtitle}</p>
+          </div>
+        </RevealSection>
 
         {/* Featured */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px", marginBottom: "20px" }}>
@@ -114,34 +117,41 @@ export default function Projects({ lang }: ProjectsProps) {
             const status = statusConfig[project.status];
             const tag = tagStyles[project.accent];
             return (
-              <motion.div key={project.id} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
-                style={{ ...glassBlue, borderRadius: "16px", padding: "24px", position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", top: 0, right: 0, width: "160px", height: "160px", background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
-                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "16px" }}>
-                  <h3 style={{ fontSize: "17px", fontWeight: 700, color: "#f4f4f5", letterSpacing: "-0.02em" }}>{project.name}</h3>
-                  <span style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "11px", padding: "3px 10px", borderRadius: "20px", ...status.badge }}>
-                    <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: status.dot, animation: status.blink ? "blink 2s infinite" : "none" }} />
-                    {status[lang]}
-                  </span>
-                </div>
-                <p style={{ fontSize: "13px", color: "#71717a", lineHeight: 1.7, marginBottom: "20px" }}>{project.description[lang]}</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "20px" }}>
-                  {project.tags.map(tag2 => (
-                    <span key={tag2} style={{ fontSize: "11px", padding: "2px 8px", borderRadius: "4px", ...tag }}>{tag2}</span>
-                  ))}
-                </div>
-                <div style={{ display: "flex", gap: "16px" }}>
-                  {project.liveUrl && (
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "#3b82f6", textDecoration: "none" }}>
-                      <ExternalIcon />{t.demo}
-                    </a>
-                  )}
-                  {project.repoUrl && (
-                    <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "#71717a", textDecoration: "none" }}>
-                      <CodeIcon />{t.repo}
-                    </a>
-                  )}
-                </div>
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+                <TiltCard style={{ ...glassBlue, borderRadius: "16px", padding: "24px" }}>
+                  <div style={{ position: "absolute", top: 0, right: 0, width: "160px", height: "160px", background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
+                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "16px" }}>
+                    <h3 style={{ fontSize: "17px", fontWeight: 700, color: "#f4f4f5", letterSpacing: "-0.02em" }}>{project.name}</h3>
+                    <span style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "11px", padding: "3px 10px", borderRadius: "20px", ...status.badge }}>
+                      <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: status.dot, animation: status.blink ? "blink 2s infinite" : "none" }} />
+                      {status[lang]}
+                    </span>
+                  </div>
+                  <p style={{ fontSize: "13px", color: "#71717a", lineHeight: 1.7, marginBottom: "20px" }}>{project.description[lang]}</p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "20px" }}>
+                    {project.tags.map(tag2 => (
+                      <span key={tag2} style={{ fontSize: "11px", padding: "2px 8px", borderRadius: "4px", ...tag }}>{tag2}</span>
+                    ))}
+                  </div>
+                  <div style={{ display: "flex", gap: "16px" }}>
+                    {project.liveUrl && (
+                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "#3b82f6", textDecoration: "none" }}>
+                        <ExternalIcon />{t.demo}
+                      </a>
+                    )}
+                    {project.repoUrl && (
+                      <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "#71717a", textDecoration: "none" }}>
+                        <CodeIcon />{t.repo}
+                      </a>
+                    )}
+                  </div>
+                </TiltCard>
               </motion.div>
             );
           })}
@@ -153,33 +163,40 @@ export default function Projects({ lang }: ProjectsProps) {
             const status = statusConfig[project.status];
             const tag = tagStyles[project.accent];
             return (
-              <motion.div key={project.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
-                style={{ ...glass, borderRadius: "12px", padding: "20px" }}>
-                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "12px" }}>
-                  <h3 style={{ fontSize: "14px", fontWeight: 700, color: "#f4f4f5" }}>{project.name}</h3>
-                  <span style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "11px", padding: "2px 8px", borderRadius: "20px", ...status.badge }}>
-                    <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: status.dot }} />
-                    {status[lang]}
-                  </span>
-                </div>
-                <p style={{ fontSize: "12px", color: "#71717a", lineHeight: 1.6, marginBottom: "16px" }}>{project.description[lang]}</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "16px" }}>
-                  {project.tags.map(tag2 => (
-                    <span key={tag2} style={{ fontSize: "11px", padding: "2px 8px", borderRadius: "4px", ...tag }}>{tag2}</span>
-                  ))}
-                </div>
-                <div style={{ display: "flex", gap: "16px" }}>
-                  {project.liveUrl && (
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "#3b82f6", textDecoration: "none" }}>
-                      <ExternalIcon />{t.demo}
-                    </a>
-                  )}
-                  {project.repoUrl && (
-                    <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "#71717a", textDecoration: "none" }}>
-                      <CodeIcon />{t.repo}
-                    </a>
-                  )}
-                </div>
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+              >
+                <TiltCard style={{ ...glass, borderRadius: "12px", padding: "20px" }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "12px" }}>
+                    <h3 style={{ fontSize: "14px", fontWeight: 700, color: "#f4f4f5" }}>{project.name}</h3>
+                    <span style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "11px", padding: "2px 8px", borderRadius: "20px", ...status.badge }}>
+                      <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: status.dot }} />
+                      {status[lang]}
+                    </span>
+                  </div>
+                  <p style={{ fontSize: "12px", color: "#71717a", lineHeight: 1.6, marginBottom: "16px" }}>{project.description[lang]}</p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "16px" }}>
+                    {project.tags.map(tag2 => (
+                      <span key={tag2} style={{ fontSize: "11px", padding: "2px 8px", borderRadius: "4px", ...tag }}>{tag2}</span>
+                    ))}
+                  </div>
+                  <div style={{ display: "flex", gap: "16px" }}>
+                    {project.liveUrl && (
+                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "#3b82f6", textDecoration: "none" }}>
+                        <ExternalIcon />{t.demo}
+                      </a>
+                    )}
+                    {project.repoUrl && (
+                      <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "#71717a", textDecoration: "none" }}>
+                        <CodeIcon />{t.repo}
+                      </a>
+                    )}
+                  </div>
+                </TiltCard>
               </motion.div>
             );
           })}
