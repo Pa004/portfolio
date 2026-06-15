@@ -7,6 +7,8 @@ import ScrollProgress from "@/components/ui/ScrollProgress";
 import CustomCursor from "@/components/ui/CustomCursor";
 import BackToTop from "@/components/ui/BackToTop";
 import ConsoleEasterEgg from "@/components/ui/ConsoleEasterEgg";
+import LoadingScreen from "@/components/ui/LoadingScreen";
+import NoiseOverlay from "@/components/ui/NoiseOverlay";
 
 export const metadata: Metadata = {
   title: "Pablo Domínguez — Full Stack Developer",
@@ -17,6 +19,13 @@ export const metadata: Metadata = {
     title: "Pablo Domínguez — Full Stack Developer",
     description: "Software Engineering student at ESPE. Building modern web experiences and intelligent systems.",
     type: "website",
+    url: "https://portfolio-pabl004.vercel.app",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pablo Domínguez — Full Stack Developer",
+    description: "Software Engineering student at ESPE. Building modern web experiences and intelligent systems.",
   },
 };
 
@@ -24,6 +33,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}>
+        <LoadingScreen />
+        <NoiseOverlay />
         <SmoothScroll />
         <ScrollProgress />
         <CustomCursor />

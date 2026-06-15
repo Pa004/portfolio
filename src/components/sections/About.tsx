@@ -5,6 +5,7 @@ import { glass, glassBlue } from "@/lib/styles";
 import RevealSection from "@/components/ui/RevealSection";
 import SectionBackground from "@/components/ui/SectionBackground";
 import CounterStat from "@/components/ui/CounterStat";
+import GradientText from "@/components/ui/GradientText";
 
 type Lang = "en" | "es";
 interface AboutProps { lang: Lang; }
@@ -63,13 +64,14 @@ export default function About({ lang }: AboutProps) {
         <RevealSection>
           <div style={{ marginBottom: "56px" }}>
             <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#3b82f6", marginBottom: "8px" }}>{t.label}</p>
-            <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#f4f4f5", marginBottom: "12px" }}>{t.title}</h2>
+            <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", marginBottom: "12px" }}>
+              <GradientText>{lang === "en" ? "Who I am" : "Quién soy"}</GradientText>
+            </h2>
           </div>
         </RevealSection>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "32px", alignItems: "start" }}>
 
-          {/* Left — Bio */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -81,7 +83,6 @@ export default function About({ lang }: AboutProps) {
               <p key={i} style={{ fontSize: "14px", color: "#a1a1aa", lineHeight: 1.8 }}>{para}</p>
             ))}
 
-            {/* Info pills */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "8px" }}>
               {[
                 { icon: "📍", text: t.location },
@@ -94,7 +95,6 @@ export default function About({ lang }: AboutProps) {
               ))}
             </div>
 
-            {/* Status badge */}
             <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "8px 14px", borderRadius: "10px", ...glassBlue, width: "fit-content", marginTop: "4px" }}>
               <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#22c55e", animation: "blink 2s infinite" }} />
               <span style={{ fontSize: "12px", color: "#93c5fd" }}>{t.status}:</span>
@@ -102,10 +102,8 @@ export default function About({ lang }: AboutProps) {
             </div>
           </motion.div>
 
-          {/* Right — Stats + Interests */}
           <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
 
-            {/* Stats with counter */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -130,7 +128,6 @@ export default function About({ lang }: AboutProps) {
               ))}
             </motion.div>
 
-            {/* Interests */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

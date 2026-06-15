@@ -6,6 +6,7 @@ import React from "react";
 import SectionBackground from "@/components/ui/SectionBackground";
 import RevealSection from "@/components/ui/RevealSection";
 import TiltCard from "@/components/ui/TiltCard";
+import GradientText from "@/components/ui/GradientText";
 
 type Lang = "en" | "es";
 interface SkillsProps { lang: Lang; }
@@ -77,7 +78,9 @@ export default function Skills({ lang }: SkillsProps) {
         <RevealSection>
           <div style={{ marginBottom: "56px" }}>
             <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#3b82f6", marginBottom: "8px" }}>{t.label}</p>
-            <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#f4f4f5", marginBottom: "12px" }}>{t.title}</h2>
+            <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", marginBottom: "12px" }}>
+              <GradientText>{t.title}</GradientText>
+            </h2>
             <p style={{ fontSize: "14px", color: "#71717a", maxWidth: "28rem" }}>{t.subtitle}</p>
           </div>
         </RevealSection>

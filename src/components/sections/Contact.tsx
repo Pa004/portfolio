@@ -8,6 +8,7 @@ import React from "react";
 import SectionBackground from "@/components/ui/SectionBackground";
 import RevealSection from "@/components/ui/RevealSection";
 import Toast from "@/components/ui/Toast";
+import GradientText from "@/components/ui/GradientText";
 
 type Lang = "en" | "es";
 interface ContactProps { lang: Lang; }
@@ -62,14 +63,15 @@ export default function Contact({ lang }: ContactProps) {
         <RevealSection>
           <div style={{ marginBottom: "56px" }}>
             <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "#3b82f6", marginBottom: "8px" }}>{t.label}</p>
-            <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", color: "#f4f4f5", marginBottom: "12px" }}>{t.title}</h2>
+            <h2 style={{ fontSize: "clamp(28px,4vw,36px)", fontWeight: 700, letterSpacing: "-0.03em", marginBottom: "12px" }}>
+              <GradientText>{t.title}</GradientText>
+            </h2>
             <p style={{ fontSize: "14px", color: "#71717a", maxWidth: "28rem" }}>{t.subtitle}</p>
           </div>
         </RevealSection>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "32px", alignItems: "start" }}>
 
-          {/* Email card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -78,7 +80,6 @@ export default function Contact({ lang }: ContactProps) {
             style={{ ...glassBlue, borderRadius: "16px", padding: "32px", position: "relative", overflow: "hidden" }}
           >
             <div style={{ position: "absolute", top: 0, right: 0, width: "160px", height: "160px", background: "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
-
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
               <div style={{ width: "40px", height: "40px", borderRadius: "10px", ...glass, display: "flex", alignItems: "center", justifyContent: "center", color: "#3b82f6" }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -91,7 +92,6 @@ export default function Contact({ lang }: ContactProps) {
               </div>
             </div>
 
-            {/* Clickable email to copy */}
             <div
               onClick={copyEmail}
               title={t.email_copy}
@@ -103,7 +103,6 @@ export default function Contact({ lang }: ContactProps) {
                 padding: "6px 10px", borderRadius: "6px",
                 background: "rgba(59,130,246,0.06)",
                 border: "0.5px solid rgba(59,130,246,0.15)",
-                transition: "background 0.2s",
               }}
             >
               {links.email}
@@ -112,7 +111,7 @@ export default function Contact({ lang }: ContactProps) {
               </svg>
             </div>
 
-            <a
+              <a
               href={`mailto:${links.email}`}
               style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "10px 20px", borderRadius: "8px", background: "#3b82f6", color: "#fff", fontSize: "13px", fontWeight: 500, textDecoration: "none" }}
             >
@@ -123,7 +122,6 @@ export default function Contact({ lang }: ContactProps) {
             </a>
           </motion.div>
 
-          {/* Social links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -155,7 +153,6 @@ export default function Contact({ lang }: ContactProps) {
         </div>
       </div>
 
-      {/* Toast notification */}
       <Toast
         visible={toast.visible}
         message={toast.message}
