@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 const allBadges = [
   { label: "React",       color: "#3b82f6", border: "rgba(59,130,246,0.4)"  },
@@ -42,30 +42,29 @@ export default function AvatarIllustration() {
   // Typewriter for code lines
   const [cycle, setCycle] = useState(0);
 
-    useEffect(() => {
-    setVisibleLines(0);
+  useEffect(() => {
     let i = 0;
     let cancelled = false;
 
     const type = () => {
-        if (cancelled) return;
-        if (i <= lines.length) {
+      if (cancelled) return;
+      if (i <= lines.length) {
         setVisibleLines(i);
         i++;
         const delay = i === lines.length ? 4000 : 90;
         setTimeout(() => {
-            if (i > lines.length) {
+          if (i > lines.length) {
             if (!cancelled) setCycle(c => c + 1);
-            } else {
+          } else {
             type();
-            }
+          }
         }, delay);
-        }
+      }
     };
 
     type();
     return () => { cancelled = true; };
-    }, [cycle]);
+  }, [cycle]);
 
   // Cursor blink
   useEffect(() => {

@@ -45,7 +45,7 @@ export const projects: Project[] = [
       es: "Sistema de gestión académica en dos versiones — Java + SQL Server y C# + MongoDB — demostrando versatilidad de lenguajes.",
     },
     tags: ["Java", "C#", "MongoDB", "SQL Server"],
-    repoUrl: "https://github.com/Pa004",
+    repoUrl: "https://github.com/Pa004/monster-university-java-sqlserver",
     featured: false,
     status: "academic",
   },
@@ -92,7 +92,7 @@ export const skills: Skill[] = [
 
 export const links = {
   github: "https://github.com/Pa004",
-  linkedin: "https://www.linkedin.com/in/pablo-dom%C3%ADnguez-445241385/",
+  linkedin: "https://www.linkedin.com/in/pabl004-dev",
   email: "pablodo004@gmail.com",
   researchgate: "https://www.researchgate.net/profile/Pablo-Dominguez-21",
   orcid: "https://orcid.org/0009-0000-6400-026X",

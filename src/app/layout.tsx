@@ -10,16 +10,20 @@ import ConsoleEasterEgg from "@/components/ui/ConsoleEasterEgg";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import NoiseOverlay from "@/components/ui/NoiseOverlay";
 
+const SITE_URL = "https://portfolio-ochre-xi-ba44zo6k9y.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Pablo Domínguez — Full Stack Developer",
   description: "Software Engineering student at ESPE. Building modern web experiences and intelligent systems.",
   keywords: ["Full Stack Developer", "Frontend", "React", "Next.js", "TypeScript", "AI", "Flutter", "Pablo Domínguez"],
   authors: [{ name: "Pablo Domínguez" }],
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Pablo Domínguez — Full Stack Developer",
     description: "Software Engineering student at ESPE. Building modern web experiences and intelligent systems.",
     type: "website",
-    url: "https://portfolio-pabl004.vercel.app",
+    url: "/",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
   twitter: {

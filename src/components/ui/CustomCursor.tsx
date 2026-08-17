@@ -10,30 +10,20 @@ export default function CustomCursor() {
   const [visible, setVisible]       = useState(false);
 
   useEffect(() => {
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
     const dot  = dotRef.current;
     const ring = ringRef.current;
     if (!dot || !ring) return;
 
     let mouseX = 0, mouseY = 0;
     let ringX  = 0, ringY  = 0;
-    let animId: number;
+    let animId: number | null = null;
+    let isVisible = false;
 
-    const onMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      setVisible(true);
+    const isInteractive = (el: Element | null) =>
+      !!el?.closest("a, button, [data-hover]");
 
-      // Dot follows instantly — centered on cursor
-      dot.style.left = `${mouseX}px`;
-      dot.style.top  = `${mouseY}px`;
-    };
-
-    const onLeave  = () => setVisible(false);
-    const onEnter  = () => setVisible(true);
-    const onDown   = () => setIsClicking(true);
-    const onUp     = () => setIsClicking(false);
-
-    // Ring follows with lag via RAF
     const animate = () => {
       ringX += (mouseX - ringX) * 0.12;
       ringY += (mouseY - ringY) * 0.12;
@@ -41,28 +31,45 @@ export default function CustomCursor() {
       ring.style.top  = `${ringY}px`;
       animId = requestAnimationFrame(animate);
     };
-    animate();
 
-    const updateInteractives = () => {
-      const interactives = document.querySelectorAll("a, button, [data-hover]");
-      interactives.forEach(el => {
-        el.addEventListener("mouseenter", () => setIsHovering(true));
-        el.addEventListener("mouseleave", () => setIsHovering(false));
-      });
+    const startRaf = () => { if (animId === null) animate(); };
+    const stopRaf  = () => {
+      if (animId !== null) { cancelAnimationFrame(animId); animId = null; }
     };
-    updateInteractives();
+
+    const onMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!isVisible) { isVisible = true; setVisible(true); }
+      dot.style.left = `${mouseX}px`;
+      dot.style.top  = `${mouseY}px`;
+      startRaf();
+    };
+
+    const onLeave = () => { isVisible = false; setVisible(false); stopRaf(); };
+
+    const onOver = (e: MouseEvent) => {
+      if (isInteractive(e.target as Element)) setIsHovering(true);
+    };
+    const onOut = (e: MouseEvent) => {
+      if (isInteractive(e.target as Element)) setIsHovering(false);
+    };
+    const onDown = () => setIsClicking(true);
+    const onUp   = () => setIsClicking(false);
 
     document.addEventListener("mousemove",  onMove);
     document.addEventListener("mouseleave", onLeave);
-    document.addEventListener("mouseenter", onEnter);
+    document.addEventListener("mouseover",  onOver);
+    document.addEventListener("mouseout",   onOut);
     document.addEventListener("mousedown",  onDown);
     document.addEventListener("mouseup",    onUp);
 
     return () => {
-      cancelAnimationFrame(animId);
+      stopRaf();
       document.removeEventListener("mousemove",  onMove);
       document.removeEventListener("mouseleave", onLeave);
-      document.removeEventListener("mouseenter", onEnter);
+      document.removeEventListener("mouseover",  onOver);
+      document.removeEventListener("mouseout",   onOut);
       document.removeEventListener("mousedown",  onDown);
       document.removeEventListener("mouseup",    onUp);
     };
@@ -76,6 +83,7 @@ export default function CustomCursor() {
       {/* Dot — centered via marginLeft/marginTop */}
       <div
         ref={dotRef}
+        aria-hidden="true"
         style={{
           position: "fixed",
           top: 0, left: 0,
@@ -97,6 +105,7 @@ export default function CustomCursor() {
       {/* Ring — centered via marginLeft/marginTop */}
       <div
         ref={ringRef}
+        aria-hidden="true"
         style={{
           position: "fixed",
           top: 0, left: 0,
