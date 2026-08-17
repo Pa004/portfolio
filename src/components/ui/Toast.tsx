@@ -22,6 +22,8 @@ export default function Toast({ message, visible, onClose, type = "success" }: T
     <AnimatePresence>
       {visible && (
         <motion.div
+          role="status"
+          aria-live="polite"
           initial={{ opacity: 0, y: 40, scale: 0.95 }}
           animate={{ opacity: 1, y: 0,  scale: 1    }}
           exit={{    opacity: 0, y: 20, scale: 0.95 }}
@@ -50,11 +52,16 @@ export default function Toast({ message, visible, onClose, type = "success" }: T
           }}>
             {message}
           </span>
-          <button onClick={onClose} style={{
-            background: "none", border: "none", cursor: "pointer",
-            color: "#52525b", marginLeft: "4px", padding: "0",
-            fontSize: "14px", lineHeight: 1,
-          }}>✕</button>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close notification"
+            style={{
+              background: "none", border: "none", cursor: "pointer",
+              color: "#a1a1aa", marginLeft: "4px", padding: "0",
+              fontSize: "14px", lineHeight: 1,
+            }}
+          >✕</button>
         </motion.div>
       )}
     </AnimatePresence>

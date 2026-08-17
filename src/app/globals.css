@@ -1,18 +1,12 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: dark;
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.3; }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 * {
@@ -21,16 +15,23 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   background-color: #09090b;
   color: #f4f4f5;
   font-family: var(--font-geist-sans), sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
 }
 
 ::selection {
@@ -42,6 +43,28 @@ body {
 ::-webkit-scrollbar-track { background: #09090b; }
 ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
 
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 #09090b;
+}
+
 section { scroll-margin-top: 70px; }
 
-.animate-blink { animation: blink 2s infinite; }
+@supports not (background-clip: text) {
+  .gradient-text {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: #93c5fd;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getLenis } from "@/lib/lenis";
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -12,7 +13,11 @@ export default function BackToTop() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollToTop = () => {
+    const lenis = getLenis();
+    if (lenis) lenis.scrollTo(0);
+    else window.scrollTo(0, 0);
+  };
 
   return (
     <AnimatePresence>

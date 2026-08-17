@@ -126,7 +126,9 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
             {(["en", "es"] as Lang[]).map((l) => (
               <button
                 key={l}
+                type="button"
                 onClick={() => setLang(l)}
+                aria-pressed={lang === l}
                 style={{
                   padding: "4px 10px",
                   borderRadius: "6px",

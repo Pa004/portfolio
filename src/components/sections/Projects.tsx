@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { glass, glassBlue } from "@/lib/styles";
 import { links } from "@/lib/content";
-import React from "react";
+
 import SectionBackground from "@/components/ui/SectionBackground";
 import RevealSection from "@/components/ui/RevealSection";
 import TiltCard from "@/components/ui/TiltCard";
@@ -62,7 +62,7 @@ const projects = [
       es: "Sistema de gestión académica en dos versiones — Java + SQL Server y C# + MongoDB — demostrando versatilidad de lenguajes.",
     },
     tags: ["Java", "C#", "MongoDB", "SQL Server"],
-    repoUrl: "https://github.com/Pa004",
+    repoUrl: "https://github.com/Pa004/monster-university-java-sqlserver",
     featured: false,
     status: "academic" as const,
     accent: "gray" as const,

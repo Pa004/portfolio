@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function LoadingScreen() {
   const [visible, setVisible] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [phase, setPhase] = useState(0);
 
   const phases = [
     "Initializing...",
@@ -14,6 +13,8 @@ export default function LoadingScreen() {
     "Building interface...",
     "Almost ready...",
   ];
+
+  const phase = Math.min(Math.floor(progress / 25), phases.length - 1);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,9 +27,9 @@ export default function LoadingScreen() {
   }, []);
 
   useEffect(() => {
-    setPhase(Math.min(Math.floor(progress / 25), phases.length - 1));
     if (progress >= 100) {
-      setTimeout(() => setVisible(false), 800);
+      const timeout = setTimeout(() => setVisible(false), 800);
+      return () => clearTimeout(timeout);
     }
   }, [progress]);
 
@@ -36,6 +37,8 @@ export default function LoadingScreen() {
     <AnimatePresence>
       {visible && (
         <motion.div
+          role="status"
+          aria-live="polite"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.02 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}

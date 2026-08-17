@@ -15,25 +15,32 @@ export default function CounterStat({ value, suffix = "", duration = 1500 }: Cou
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting && !started) setStarted(true); },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
       { threshold: 0.5 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [started]);
+  }, []);
 
   useEffect(() => {
     if (!started) return;
     let startTime: number;
+    let rafId: number;
     const step = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.floor(eased * value));
-      if (progress < 1) requestAnimationFrame(step);
+      if (progress < 1) rafId = requestAnimationFrame(step);
       else setCount(value);
     };
-    requestAnimationFrame(step);
+    rafId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(rafId);
   }, [started, value, duration]);
 
   return (

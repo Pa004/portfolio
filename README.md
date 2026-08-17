@@ -2,7 +2,7 @@
 
 > Full Stack Developer · Software Engineering student at ESPE · Quito, Ecuador
 
-[![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://portfolio-pabl004.vercel.app)
+[![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?logo=tailwindcss)](https://tailwindcss.com)
@@ -11,7 +11,7 @@
 
 ## 🌐 Live
 
-**[portfolio-pabl004.vercel.app](https://portfolio-pabl004.vercel.app)**
+**[portfolio-ochre-xi-ba44zo6k9y.vercel.app](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app)**
 
 ---
 

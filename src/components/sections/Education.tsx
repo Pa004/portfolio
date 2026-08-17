@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { glass } from "@/lib/styles";
-import React from "react";
+
 import SectionBackground from "@/components/ui/SectionBackground";
 import RevealSection from "@/components/ui/RevealSection";
 import GradientText from "@/components/ui/GradientText";

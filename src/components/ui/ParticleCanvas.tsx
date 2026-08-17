@@ -19,23 +19,29 @@ export default function ParticleCanvas() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const W = canvas.offsetWidth;
-    const H = canvas.offsetHeight;
-    canvas.width = W;
-    canvas.height = H;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const setSize = () => {
+      canvas.width = canvas.offsetWidth * dpr;
+      canvas.height = canvas.offsetHeight * dpr;
+    };
+    setSize();
 
     const particles: Particle[] = Array.from({ length: 55 }, () => ({
-      x: Math.random() * W,
-      y: Math.random() * H,
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
       vx: (Math.random() - 0.5) * 0.35,
       vy: (Math.random() - 0.5) * 0.35,
       r: Math.random() * 1.6 + 0.5,
     }));
 
-    let animId: number;
+    let animId: number | null = null;
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-    function draw() {
-      if (!ctx || !canvas) return;
+    const paint = () => {
+      const W = canvas.width;
+      const H = canvas.height;
       ctx.clearRect(0, 0, W, H);
 
       particles.forEach((p) => {
@@ -65,17 +71,45 @@ export default function ParticleCanvas() {
           }
         }
       }
+    };
 
-      animId = requestAnimationFrame(draw);
-    }
+    const loop = () => {
+      paint();
+      animId = requestAnimationFrame(loop);
+    };
 
-    draw();
-    return () => cancelAnimationFrame(animId);
+    const stop = () => {
+      if (animId !== null) { cancelAnimationFrame(animId); animId = null; }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !prefersReduced) {
+          if (animId === null) loop();
+        } else {
+          stop();
+        }
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+
+    window.addEventListener("resize", setSize);
+
+    if (prefersReduced) paint();
+    else if (animId === null) loop();
+
+    return () => {
+      stop();
+      observer.disconnect();
+      window.removeEventListener("resize", setSize);
+    };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       className="absolute inset-0 w-full h-full pointer-events-none"
     />
   );

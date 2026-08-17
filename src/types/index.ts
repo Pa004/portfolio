@@ -13,7 +13,7 @@ export interface Skill {
   category: { en: string; es: string };
   icon: string;
   items: string[];
-  color: "blue" | "cyan" | "gray";
+  color: "blue" | "cyan" | "gray" | "purple";
 }
 
 export type Lang = "en" | "es";

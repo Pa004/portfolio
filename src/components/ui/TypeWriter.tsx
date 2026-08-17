@@ -50,7 +50,7 @@ function TypeWriterInner({ lang }: TypeWriterProps) {
   }, [lang]);
 
   return (
-    <span style={{ color: "#06b6d4", fontWeight: 500 }}>
+    <span aria-hidden="true" style={{ color: "#06b6d4", fontWeight: 500 }}>
       {text}
       <span style={{
         display: "inline-block", width: "2px", height: "20px",
