@@ -6,13 +6,21 @@ export default function ScrollProgress() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let rafId: number | null = null;
+    const update = () => {
+      rafId = null;
       const total = document.documentElement.scrollHeight - window.innerHeight;
       const current = window.scrollY;
       setProgress(total > 0 ? (current / total) * 100 : 0);
     };
+    const handleScroll = () => {
+      if (rafId === null) rafId = requestAnimationFrame(update);
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
