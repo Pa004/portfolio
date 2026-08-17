@@ -211,6 +211,7 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       style={{
         position: "absolute",
         inset: 0,

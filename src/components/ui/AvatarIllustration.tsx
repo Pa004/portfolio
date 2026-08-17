@@ -73,7 +73,7 @@ export default function AvatarIllustration() {
   }, []);
 
   return (
-    <div style={{ position: "relative", width: "340px", flexShrink: 0 }}>
+    <div aria-hidden="true" style={{ position: "relative", width: "340px", flexShrink: 0 }}>
 
       {/* Terminal window */}
       <div style={{

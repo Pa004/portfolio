@@ -76,6 +76,7 @@ export default function ParticleCanvas() {
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       className="absolute inset-0 w-full h-full pointer-events-none"
     />
   );
