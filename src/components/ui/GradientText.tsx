@@ -14,13 +14,16 @@ export default function GradientText({
   style,
 }: GradientTextProps) {
   return (
-    <span style={{
-      background: `linear-gradient(135deg, ${from}, ${to})`,
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent",
-      backgroundClip: "text",
-      ...style,
-    }}>
+    <span
+      className="gradient-text"
+      style={{
+        background: `linear-gradient(135deg, ${from}, ${to})`,
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        backgroundClip: "text",
+        ...style,
+      }}
+    >
       {children}
     </span>
   );

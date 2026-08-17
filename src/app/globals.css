@@ -50,6 +50,14 @@ html {
 
 section { scroll-margin-top: 70px; }
 
+@supports not (background-clip: text) {
+  .gradient-text {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: #93c5fd;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

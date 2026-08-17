@@ -1,5 +1,5 @@
 ﻿import { links } from "@/lib/content";
-import React from "react";
+
 
 type Lang = "en" | "es";
 interface FooterProps {

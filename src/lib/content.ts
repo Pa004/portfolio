@@ -73,19 +73,25 @@ export const skills: Skill[] = [
   {
     category: { en: "AI / ML", es: "IA / ML" },
     icon: "brain",
-    items: ["Python", "TensorFlow", "Neural Networks", "NLP"],
-    color: "cyan",
+    items: ["Python", "TensorFlow", "Neural Networks", "NLP", "Machine Learning"],
+    color: "purple",
   },
   {
     category: { en: "Mobile", es: "Mobile" },
     icon: "device-mobile",
-    items: ["Flutter", "Dart", "MVVM", "Clean Architecture"],
+    items: ["Flutter", "Dart", "MVVM", "Clean Architecture", "Provider"],
+    color: "cyan",
+  },
+  {
+    category: { en: "Tools & DevOps", es: "Herramientas" },
+    icon: "tools",
+    items: ["Git", "Docker", "Cypress", "Postman", "Vercel", "Render"],
     color: "gray",
   },
   {
-    category: { en: "Tools", es: "Herramientas" },
-    icon: "tools",
-    items: ["Git", "Docker", "Cypress", "Postman", "Vercel", "Render"],
+    category: { en: "Other Languages", es: "Otros lenguajes" },
+    icon: "code",
+    items: ["Java", "C#", "C++", "SQL", "Python"],
     color: "gray",
   },
 ];

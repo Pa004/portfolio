@@ -6,7 +6,7 @@ import ParticleCanvas from "@/components/ui/ParticleCanvas";
 import TypeWriter from "@/components/ui/TypeWriter";
 import AvatarIllustration from "@/components/ui/AvatarIllustration";
 import GradientText from "@/components/ui/GradientText";
-import React from "react";
+
 
 type Lang = "en" | "es";
 interface HeroProps {

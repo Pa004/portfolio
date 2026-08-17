@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { glass, glassBlue } from "@/lib/styles";
 import { links } from "@/lib/content";
-import React from "react";
+
 import SectionBackground from "@/components/ui/SectionBackground";
 import RevealSection from "@/components/ui/RevealSection";
 import TiltCard from "@/components/ui/TiltCard";
