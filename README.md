@@ -1,4 +1,4 @@
-# Pablo Domínguez — Portfolio 2025
+# Pablo Domínguez — Portfolio 2026
 
 > Full Stack Developer · Software Engineering student at ESPE · Quito, Ecuador
 
@@ -105,6 +105,7 @@ src/
 │       └── TypeWriter.tsx          # Typewriter role animation
 ├── lib/
 │   ├── content.ts              # All project data, links and skills
+│   ├── lenis.ts                # Lenis smooth scroll configuration
 │   └── styles.ts               # Shared inline style objects (glass, gridBg)
 └── types/
     └── index.ts                # Shared TypeScript types
@@ -115,7 +116,7 @@ src/
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+
+- Node.js 20.9+
 - npm
 
 ### Installation
@@ -148,16 +149,7 @@ npm start
 ```
 main          ← production (auto-deploys to Vercel)
 └── dev       ← integration branch
-    ├── feat/setup
-    ├── feat/navbar
-    ├── feat/hero
-    ├── feat/skills
-    ├── feat/projects
-    ├── feat/education
-    ├── feat/contact
-    ├── feat/tier1-enhancements
-    ├── feat/tier2-enhancements
-    └── feat/tier3-enhancements
+    └── feat/*   ← feature branches branched off dev
 ```
 
 ---
@@ -168,7 +160,7 @@ main          ← production (auto-deploys to Vercel)
 |---|---|
 | **Email** | pablodo004@gmail.com |
 | **GitHub** | [github.com/Pa004](https://github.com/Pa004) |
-| **LinkedIn** | [linkedin.com/in/pablo-domínguez-445241385](https://www.linkedin.com/in/pablo-dom%C3%ADnguez-445241385/) |
+| **LinkedIn** | [linkedin.com/in/pabl004-dev](https://www.linkedin.com/in/pabl004-dev) |
 | **ResearchGate** | [researchgate.net/profile/Pablo-Dominguez-21](https://www.researchgate.net/profile/Pablo-Dominguez-21) |
 | **ORCID** | [orcid.org/0009-0000-6400-026X](https://orcid.org/0009-0000-6400-026X) |
 
@@ -176,4 +168,4 @@ main          ← production (auto-deploys to Vercel)
 
 ## 📄 License
 
-MIT © 2025 Pablo Domínguez
+MIT © 2026 Pablo Domínguez
