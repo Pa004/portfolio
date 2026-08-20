@@ -12,7 +12,7 @@ export const projects: Project[] = [
     liveUrl: "https://aplicacion-summer-dent.vercel.app/login",
     featured: true,
     status: "live",
-    imageUrl: "/projects/summer-dent.png",
+    imageUrl: "/projects/summer-dent.svg",
   },
   {
     id: "roomify",
