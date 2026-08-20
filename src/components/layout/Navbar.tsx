@@ -100,9 +100,23 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
                     color: "#a1a1aa",
                     textDecoration: "none",
                     letterSpacing: "0.02em",
+                    position: "relative",
+                    paddingBottom: "2px",
                   }}
                 >
                   {link.label[lang]}
+                  <span
+                    className="nav-underline"
+                    style={{
+                      position: "absolute",
+                      bottom: 0,
+                      left: "50%",
+                      width: 0,
+                      height: "1px",
+                      background: "#3b82f6",
+                      transition: "width 0.25s ease, left 0.25s ease",
+                    }}
+                  />
                 </a>
               </li>
             ))}

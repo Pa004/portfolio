@@ -7,6 +7,7 @@ export interface Project {
   repoUrl?: string;
   featured: boolean;
   status: "live" | "deployed" | "academic";
+  imageUrl?: string;
 }
 
 export interface Skill {

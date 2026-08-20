@@ -12,6 +12,7 @@ export const projects: Project[] = [
     liveUrl: "https://aplicacion-summer-dent.vercel.app/login",
     featured: true,
     status: "live",
+    imageUrl: "/projects/summer-dent.png",
   },
   {
     id: "roomify",
@@ -24,6 +25,7 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/Pa004/roomify",
     featured: true,
     status: "deployed",
+    imageUrl: "/projects/roomify.png",
   },
   {
     id: "secureauth-mern",

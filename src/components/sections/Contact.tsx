@@ -1,14 +1,13 @@
 ﻿"use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { glass, glassBlue } from "@/lib/styles";
 import { links } from "@/lib/content";
 
 import SectionBackground from "@/components/ui/SectionBackground";
 import RevealSection from "@/components/ui/RevealSection";
-import Toast from "@/components/ui/Toast";
 import GradientText from "@/components/ui/GradientText";
+import { toast } from "sonner";
 
 type Lang = "en" | "es";
 interface ContactProps {
@@ -87,11 +86,10 @@ const content = {
 
 export default function Contact({ lang }: ContactProps) {
   const t = content[lang];
-  const [toast, setToast] = useState({ visible: false, message: "" });
 
   const copyEmail = () => {
     navigator.clipboard.writeText(links.email);
-    setToast({ visible: true, message: t.copied });
+    toast.success(t.copied);
   };
 
   return (
@@ -372,12 +370,6 @@ export default function Contact({ lang }: ContactProps) {
           </motion.div>
         </div>
       </div>
-
-      <Toast
-        visible={toast.visible}
-        message={toast.message}
-        onClose={() => setToast({ visible: false, message: "" })}
-      />
     </section>
   );
 }

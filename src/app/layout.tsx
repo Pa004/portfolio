@@ -9,6 +9,7 @@ import BackToTop from "@/components/ui/BackToTop";
 import ConsoleEasterEgg from "@/components/ui/ConsoleEasterEgg";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import NoiseOverlay from "@/components/ui/NoiseOverlay";
+import { Toaster } from "sonner";
 
 const SITE_URL = "https://portfolio-ochre-xi-ba44zo6k9y.vercel.app";
 
@@ -48,6 +49,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CustomCursor />
         <BackToTop />
         <ConsoleEasterEgg />
+        <Toaster
+          position="bottom-right"
+          theme="dark"
+          toastOptions={{
+            style: {
+              background: "rgba(9,9,11,0.95)",
+              border: "0.5px solid rgba(59,130,246,0.3)",
+              color: "#f4f4f5",
+            },
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

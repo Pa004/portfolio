@@ -12,6 +12,14 @@ import Contact from "@/components/sections/Contact";
 
 type Lang = "en" | "es";
 
+const SectionDivider = () => (
+  <div style={{
+    height: "1px",
+    background: "linear-gradient(to right, transparent, rgba(59,130,246,0.15), transparent)",
+    margin: "0 24px"
+  }} />
+);
+
 export default function Home() {
   const [lang, setLang] = useState<Lang>("en");
 
@@ -19,10 +27,15 @@ export default function Home() {
     <main style={{ minHeight: "100vh", background: "#09090b" }}>
       <Navbar lang={lang} setLang={setLang} />
       <Hero lang={lang} />
+      <SectionDivider />
       <About lang={lang} />
+      <SectionDivider />
       <Skills lang={lang} />
+      <SectionDivider />
       <Projects lang={lang} />
+      <SectionDivider />
       <Education lang={lang} />
+      <SectionDivider />
       <Contact lang={lang} />
       <Footer lang={lang} />
     </main>

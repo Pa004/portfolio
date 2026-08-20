@@ -223,14 +223,16 @@ export default function Skills({ lang }: SkillsProps) {
         </RevealSection>
 
         <div
+          className="skills-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+            gridTemplateColumns: "repeat(4, 1fr)",
             gap: "16px",
           }}
         >
           {skillData.map((skill, i) => {
             const accent = accentMap[skill.color];
+            const isLarge = skill.category.en === "Frontend" || skill.category.en === "Backend";
             return (
               <motion.div
                 key={skill.category.en}
@@ -238,10 +240,14 @@ export default function Skills({ lang }: SkillsProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.07 }}
+                style={{
+                  gridColumn: isLarge ? "span 2" : "span 1",
+                }}
               >
                 <TiltCard
                   style={{
                     ...glass,
+                    borderColor: isLarge ? accent.icon : "rgba(255,255,255,0.08)",
                     borderRadius: "12px",
                     padding: "20px",
                     height: "100%",

@@ -68,3 +68,17 @@ section { scroll-margin-top: 70px; }
     scroll-behavior: auto !important;
   }
 }
+
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .skills-grid > div {
+    grid-column: span 1 !important;
+  }
+}
+
+a:hover .nav-underline {
+  width: 100%;
+  left: 0;
+}

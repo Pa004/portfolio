@@ -1,8 +1,9 @@
 ﻿"use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { glass, glassBlue } from "@/lib/styles";
-import { links } from "@/lib/content";
+import { projects as projectData } from "@/lib/content";
 
 import SectionBackground from "@/components/ui/SectionBackground";
 import RevealSection from "@/components/ui/RevealSection";
@@ -14,60 +15,10 @@ interface ProjectsProps {
   lang: Lang;
 }
 
-const projects = [
-  {
-    id: "summer-dent",
-    name: "Summer Dent",
-    description: {
-      en: "Full Stack dental clinic management system in production with real users. Handles patients, appointments, treatments, inventory and finance modules.",
-      es: "Sistema de gestión odontológica Full Stack en producción con usuarios reales. Módulos de pacientes, citas, tratamientos, inventario y finanzas.",
-    },
-    tags: ["React", "Node.js", "Express", "Cypress"],
-    liveUrl: links.summerdent,
-    featured: true,
-    status: "live" as const,
-    accent: "blue" as const,
-  },
-  {
-    id: "roomify",
-    name: "Roomify",
-    description: {
-      en: "AI-powered architectural visualization platform that transforms 2D floor plans into realistic rendered spaces.",
-      es: "Plataforma de visualización arquitectónica con IA que transforma planos 2D en espacios renderizados realistas.",
-    },
-    tags: ["React 19", "TypeScript", "Tailwind", "Docker", "AI"],
-    repoUrl: "https://github.com/Pa004/roomify",
-    featured: true,
-    status: "deployed" as const,
-    accent: "cyan" as const,
-  },
-  {
-    id: "secureauth",
-    name: "SecureAuth MERN",
-    description: {
-      en: "Complete authentication system with JWT, email verification, password recovery and protected routes.",
-      es: "Sistema de autenticación completo con JWT, verificación por email, recuperación de contraseña y rutas protegidas.",
-    },
-    tags: ["MongoDB", "Express", "React", "Node.js", "JWT"],
-    repoUrl: "https://github.com/Pa004/SecureAuth-MERN",
-    featured: false,
-    status: "deployed" as const,
-    accent: "blue" as const,
-  },
-  {
-    id: "monster-university",
-    name: "Monster University",
-    description: {
-      en: "Academic management system built in two versions — Java + SQL Server and C# + MongoDB — demonstrating language versatility.",
-      es: "Sistema de gestión académica en dos versiones — Java + SQL Server y C# + MongoDB — demostrando versatilidad de lenguajes.",
-    },
-    tags: ["Java", "C#", "MongoDB", "SQL Server"],
-    repoUrl: "https://github.com/Pa004/monster-university-java-sqlserver",
-    featured: false,
-    status: "academic" as const,
-    accent: "gray" as const,
-  },
-];
+const projects = projectData.map((p, idx) => ({
+  ...p,
+  accent: p.id === "roomify" ? ("cyan" as const) : p.id === "summer-dent" ? ("blue" as const) : idx === 2 ? ("blue" as const) : ("gray" as const),
+}));
 
 const statusConfig = {
   live: {
@@ -253,8 +204,39 @@ export default function Projects({ lang }: ProjectsProps) {
                       ...glassBlue,
                       borderRadius: "16px",
                       padding: "24px",
+                      overflow: "hidden",
                     }}
                   >
+                    {project.imageUrl && (
+                      <div
+                        style={{
+                          position: "relative",
+                          width: "calc(100% + 48px)",
+                          height: "160px",
+                          margin: "-24px -24px 20px -24px",
+                          overflow: "hidden",
+                        }}
+                      >
+                        <Image
+                          src={project.imageUrl}
+                          alt={project.name}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 500px"
+                          style={{ objectFit: "cover", transition: "transform 0.4s ease" }}
+                        />
+                        <div
+                          style={{
+                            position: "absolute",
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            height: "40px",
+                            background: "linear-gradient(to top, rgba(9,9,11,0.95), transparent)",
+                            pointerEvents: "none",
+                          }}
+                        />
+                      </div>
+                    )}
                     <div
                       style={{
                         position: "absolute",
