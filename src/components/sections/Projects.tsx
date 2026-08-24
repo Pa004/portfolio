@@ -37,20 +37,20 @@ const statusConfig = {
     es: "Desplegado",
     dot: "#3b82f6",
     badge: {
-      background: "rgba(59,130,246,0.1)",
-      color: "#93c5fd",
-      border: "0.5px solid rgba(59,130,246,0.2)",
+      background: "var(--badge-bg)",
+      color: "var(--accent-text)",
+      border: "0.5px solid var(--badge-border)",
     },
     blink: false,
   },
   academic: {
     en: "Academic",
     es: "Académico",
-    dot: "#71717a",
+    dot: "var(--text-muted)",
     badge: {
-      background: "rgba(255,255,255,0.04)",
-      color: "#71717a",
-      border: "0.5px solid rgba(255,255,255,0.08)",
+      background: "var(--surface)",
+      color: "var(--text-muted)",
+      border: "0.5px solid var(--border)",
     },
     blink: false,
   },
@@ -58,9 +58,9 @@ const statusConfig = {
 
 const tagStyles = {
   blue: {
-    background: "rgba(59,130,246,0.1)",
-    color: "#93c5fd",
-    border: "0.5px solid rgba(59,130,246,0.2)",
+    background: "var(--badge-bg)",
+    color: "var(--accent-text)",
+    border: "0.5px solid var(--badge-border)",
   },
   cyan: {
     background: "rgba(6,182,212,0.1)",

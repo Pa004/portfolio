@@ -43,7 +43,7 @@ export default function Footer({ lang }: FooterProps) {
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
           <p style={{ fontSize: "12px", color: "var(--text-muted)" }}>
-            {t.built} <span style={{ color: "#93c5fd" }}>Next.js</span>
+            {t.built} <span style={{ color: "var(--accent-text)" }}>Next.js</span>
             {" · "}
             <span style={{ color: "#67e8f9" }}>Tailwind</span>
             {" · "}

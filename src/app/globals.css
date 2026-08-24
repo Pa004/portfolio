@@ -9,6 +9,10 @@
   --surface: rgba(255, 255, 255, 0.03);
   --surface-hover: rgba(255, 255, 255, 0.06);
   --card-bg: #121216;
+  --accent: #3b82f6;
+  --accent-text: #93c5fd;
+  --badge-bg: rgba(59, 130, 246, 0.08);
+  --badge-border: rgba(59, 130, 246, 0.25);
 }
 
 [data-theme="light"] {
@@ -20,6 +24,10 @@
   --surface: #ffffff;
   --surface-hover: #f1f5f9;
   --card-bg: #ffffff;
+  --accent: #2563eb;
+  --accent-text: #1d4ed8;
+  --badge-bg: #eff6ff;
+  --badge-border: rgba(37, 99, 235, 0.25);
 }
 
 [data-theme="light"] body {

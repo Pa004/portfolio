@@ -197,11 +197,11 @@ export default function About({ lang }: AboutProps) {
                   animation: "blink 2s infinite",
                 }}
               />
-              <span style={{ fontSize: "12px", color: "#93c5fd" }}>
+              <span style={{ fontSize: "12px", color: "var(--accent-text)" }}>
                 {t.status}:
               </span>
               <span
-                style={{ fontSize: "12px", color: "#f4f4f5", fontWeight: 500 }}
+                style={{ fontSize: "12px", color: "var(--text)", fontWeight: 500 }}
               >
                 {t.statusText}
               </span>

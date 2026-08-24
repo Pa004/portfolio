@@ -165,8 +165,8 @@ export default function Hero({ lang = "en" }: HeroProps) {
                 gap: "8px",
                 padding: "6px 12px",
                 borderRadius: "20px",
-                border: "0.5px solid rgba(59,130,246,0.25)",
-                background: "rgba(59,130,246,0.08)",
+                border: "0.5px solid var(--badge-border)",
+                background: "var(--badge-bg)",
                 marginBottom: "24px",
               }}
             >
@@ -175,11 +175,11 @@ export default function Hero({ lang = "en" }: HeroProps) {
                   width: "6px",
                   height: "6px",
                   borderRadius: "50%",
-                  background: "#3b82f6",
+                  background: "var(--accent)",
                   animation: "blink 2s infinite",
                 }}
               />
-              <span style={{ fontSize: "12px", color: "#93c5fd" }}>
+              <span style={{ fontSize: "12px", color: "var(--accent-text)" }}>
                 {t.badge}
               </span>
             </motion.div>

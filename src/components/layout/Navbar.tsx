@@ -154,10 +154,10 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
                   border: "none",
                   fontFamily: "inherit",
                   background:
-                    lang === l ? "rgba(59,130,246,0.2)" : "transparent",
-                  color: lang === l ? "#93c5fd" : "var(--text-muted)",
+                    lang === l ? "var(--badge-bg)" : "transparent",
+                  color: lang === l ? "var(--accent-text)" : "var(--text-muted)",
                   outline:
-                    lang === l ? "0.5px solid rgba(59,130,246,0.3)" : "none",
+                    lang === l ? "0.5px solid var(--badge-border)" : "none",
                   transition: "all 0.2s",
                 }}
               >

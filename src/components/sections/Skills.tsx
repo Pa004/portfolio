@@ -126,9 +126,9 @@ const accentMap = {
   blue: {
     icon: "#3b82f6",
     tag: {
-      background: "rgba(59,130,246,0.1)",
-      color: "#93c5fd",
-      border: "0.5px solid rgba(59,130,246,0.2)",
+      background: "var(--badge-bg)",
+      color: "var(--accent-text)",
+      border: "0.5px solid var(--badge-border)",
     },
   },
   cyan: {
