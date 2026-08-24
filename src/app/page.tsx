@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -22,10 +22,27 @@ const SectionDivider = () => (
 
 export default function Home() {
   const [lang, setLang] = useState<Lang>("en");
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("portfolio-theme") as "dark" | "light" | null;
+      if (saved) return saved;
+    }
+    return "dark";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    localStorage.setItem("portfolio-theme", next);
+  };
 
   return (
-    <main style={{ minHeight: "100vh", background: "#09090b" }}>
-      <Navbar lang={lang} setLang={setLang} />
+    <main data-theme={theme} style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--text)", transition: "background 0.3s, color 0.3s" }}>
+      <Navbar lang={lang} setLang={setLang} theme={theme} toggleTheme={toggleTheme} />
       <Hero lang={lang} />
       <SectionDivider />
       <About lang={lang} />

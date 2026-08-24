@@ -16,9 +16,11 @@ type Lang = "en" | "es";
 interface NavbarProps {
   lang: Lang;
   setLang: (lang: Lang) => void;
+  theme: "dark" | "light";
+  toggleTheme: () => void;
 }
 
-export default function Navbar({ lang, setLang }: NavbarProps) {
+export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -163,6 +165,29 @@ export default function Navbar({ lang, setLang }: NavbarProps) {
               </button>
             ))}
           </div>
+
+          {/* Theme toggle */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "32px",
+              height: "32px",
+              borderRadius: "8px",
+              border: "0.5px solid rgba(255,255,255,0.08)",
+              background: "rgba(255,255,255,0.02)",
+              color: "#a1a1aa",
+              cursor: "pointer",
+              transition: "all 0.2s",
+              fontSize: "14px",
+            }}
+          >
+            {theme === "dark" ? "☀️" : "🌙"}
+          </button>
 
           {/* Hamburger — only on mobile */}
           {isMobile && (
