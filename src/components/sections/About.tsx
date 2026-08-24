@@ -281,26 +281,44 @@ export default function About({ lang }: AboutProps) {
                 {t.interests}
               </p>
               <div
-                style={{ display: "flex", flexDirection: "column", gap: "8px" }}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+                  gap: "10px",
+                }}
               >
                 {interests.map((item, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, x: 16 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: i * 0.06 }}
+                    transition={{ duration: 0.3, delay: i * 0.05 }}
+                    whileHover={{
+                      scale: 1.02,
+                      backgroundColor: "rgba(59, 130, 246, 0.08)",
+                      borderColor: "rgba(59, 130, 246, 0.3)",
+                    }}
                     style={{
                       display: "flex",
                       alignItems: "center",
                       gap: "10px",
-                      padding: "8px 10px",
-                      borderRadius: "8px",
+                      padding: "12px 14px",
+                      borderRadius: "10px",
                       background: "rgba(255,255,255,0.02)",
+                      border: "1px solid rgba(255,255,255,0.06)",
+                      cursor: "default",
+                      transition: "border-color 0.2s ease",
                     }}
                   >
-                    <span style={{ fontSize: "14px" }}>{item.icon}</span>
-                    <span style={{ fontSize: "13px", color: "#a1a1aa" }}>
+                    <span style={{ fontSize: "16px" }}>{item.icon}</span>
+                    <span
+                      style={{
+                        fontSize: "12px",
+                        color: "#d4d4d8",
+                        fontWeight: 500,
+                      }}
+                    >
                       {item[lang]}
                     </span>
                   </motion.div>
