@@ -112,12 +112,12 @@ const accentColors = {
     ring: "0 0 0 4px rgba(6,182,212,0.1)",
     tag: {
       background: "rgba(6,182,212,0.1)",
-      color: "#67e8f9",
+      color: "var(--accent-cyan-text)",
       border: "0.5px solid rgba(6,182,212,0.2)",
     },
     badge: {
       background: "rgba(6,182,212,0.1)",
-      color: "#67e8f9",
+      color: "var(--accent-cyan-text)",
       border: "0.5px solid rgba(6,182,212,0.25)",
     },
     icon: "#06b6d4",
@@ -128,12 +128,12 @@ const accentColors = {
     ring: "0 0 0 4px rgba(167,139,250,0.1)",
     tag: {
       background: "rgba(167,139,250,0.1)",
-      color: "#c4b5fd",
+      color: "var(--accent-violet-text)",
       border: "0.5px solid rgba(167,139,250,0.2)",
     },
     badge: {
       background: "rgba(167,139,250,0.1)",
-      color: "#c4b5fd",
+      color: "var(--accent-violet-text)",
       border: "0.5px solid rgba(167,139,250,0.25)",
     },
     icon: "#a78bfa",
@@ -186,7 +186,7 @@ export default function Education({ lang }: EducationProps) {
                 fontWeight: 600,
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "#3b82f6",
+                color: "var(--accent)",
                 marginBottom: "8px",
               }}
             >
@@ -203,7 +203,7 @@ export default function Education({ lang }: EducationProps) {
               <GradientText>{t.title}</GradientText>
             </h2>
             <p
-              style={{ fontSize: "14px", color: "#71717a", maxWidth: "28rem" }}
+              style={{ fontSize: "14px", color: "var(--text-muted)", maxWidth: "28rem" }}
             >
               {t.subtitle}
             </p>
@@ -308,7 +308,7 @@ export default function Education({ lang }: EducationProps) {
                           style={{
                             fontSize: "15px",
                             fontWeight: 700,
-                            color: "#f4f4f5",
+                            color: "var(--text)",
                             letterSpacing: "-0.02em",
                           }}
                         >
@@ -317,7 +317,7 @@ export default function Education({ lang }: EducationProps) {
                         <p
                           style={{
                             fontSize: "13px",
-                            color: "#a1a1aa",
+                            color: "var(--text-muted)",
                             marginTop: "2px",
                           }}
                         >
@@ -343,7 +343,7 @@ export default function Education({ lang }: EducationProps) {
                         >
                           {item.current ? t.current : t.cert}
                         </span>
-                        <span style={{ fontSize: "11px", color: "#52525b" }}>
+                        <span style={{ fontSize: "11px", color: "var(--text-muted)" }}>
                           {item.period}
                         </span>
                       </div>
@@ -374,7 +374,7 @@ export default function Education({ lang }: EducationProps) {
                           d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                         />
                       </svg>
-                      <span style={{ fontSize: "11px", color: "#52525b" }}>
+                      <span style={{ fontSize: "11px", color: "var(--text-muted)" }}>
                         {item.location}
                       </span>
                     </div>
@@ -382,7 +382,7 @@ export default function Education({ lang }: EducationProps) {
                     <p
                       style={{
                         fontSize: "13px",
-                        color: "#71717a",
+                        color: "var(--text-muted)",
                         lineHeight: 1.7,
                         marginBottom: "16px",
                       }}
@@ -419,7 +419,7 @@ export default function Education({ lang }: EducationProps) {
                           display: "flex",
                           gap: "16px",
                           paddingTop: "16px",
-                          borderTop: "0.5px solid rgba(255,255,255,0.06)",
+                          borderTop: "0.5px solid var(--border)",
                         }}
                       >
                         {item.links.map((link) => (

@@ -135,7 +135,7 @@ const accentMap = {
     icon: "#06b6d4",
     tag: {
       background: "rgba(6,182,212,0.1)",
-      color: "#67e8f9",
+      color: "var(--accent-cyan-text)",
       border: "0.5px solid rgba(6,182,212,0.2)",
     },
   },
@@ -143,16 +143,16 @@ const accentMap = {
     icon: "#a78bfa",
     tag: {
       background: "rgba(167,139,250,0.1)",
-      color: "#c4b5fd",
+      color: "var(--accent-violet-text)",
       border: "0.5px solid rgba(167,139,250,0.2)",
     },
   },
   gray: {
     icon: "#71717a",
     tag: {
-      background: "rgba(255,255,255,0.04)",
-      color: "#71717a",
-      border: "0.5px solid rgba(255,255,255,0.08)",
+      background: "var(--surface-dim)",
+      color: "var(--text-muted)",
+      border: "0.5px solid var(--border-dim)",
     },
   },
 };
@@ -198,7 +198,7 @@ export default function Skills({ lang }: SkillsProps) {
                 fontWeight: 600,
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "#3b82f6",
+                color: "var(--accent)",
                 marginBottom: "8px",
               }}
             >

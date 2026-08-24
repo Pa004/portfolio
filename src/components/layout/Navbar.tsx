@@ -78,7 +78,7 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
             textDecoration: "none",
           }}
         >
-          PD<span style={{ color: "#3b82f6" }}>.</span>
+          PD<span style={{ color: "var(--accent)" }}>.</span>
         </a>
 
         {/* Desktop links — hidden on mobile */}
@@ -197,7 +197,7 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
               style={{
                 background: "none",
                 border: "none",
-                color: "#a1a1aa",
+                color: "var(--text-muted)",
                 cursor: "pointer",
                 padding: "4px",
                 display: "flex",
@@ -232,9 +232,9 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             style={{
-              background: "rgba(9,9,11,0.97)",
+              background: "var(--card-bg)",
               backdropFilter: "blur(12px)",
-              borderBottom: "0.5px solid rgba(255,255,255,0.06)",
+              borderBottom: "0.5px solid var(--border)",
               padding: "20px 24px 24px",
             }}
           >
@@ -255,7 +255,7 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
                     onClick={() => setMenuOpen(false)}
                     style={{
                       fontSize: "15px",
-                      color: "#a1a1aa",
+                      color: "var(--text-muted)",
                       textDecoration: "none",
                       fontWeight: 500,
                     }}

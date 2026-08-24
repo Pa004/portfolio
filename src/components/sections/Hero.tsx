@@ -228,7 +228,7 @@ export default function Hero({ lang = "en" }: HeroProps) {
                 >
                   <GradientText>Domínguez</GradientText>
                 </motion.span>
-                <span style={{ color: "#3b82f6" }}>.</span>
+                <span style={{ color: "var(--accent)" }}>.</span>
               </h1>
             </motion.div>
 
@@ -290,7 +290,7 @@ export default function Hero({ lang = "en" }: HeroProps) {
                 style={{
                   padding: "10px 20px",
                   borderRadius: "8px",
-                  background: "#3b82f6",
+                  background: "var(--accent)",
                   color: "#fff",
                   fontSize: "13px",
                   fontWeight: 500,
@@ -304,8 +304,8 @@ export default function Hero({ lang = "en" }: HeroProps) {
                 style={{
                   padding: "10px 20px",
                   borderRadius: "8px",
-                  border: "0.5px solid rgba(255,255,255,0.1)",
-                  color: "#d4d4d8",
+                  border: "0.5px solid var(--border)",
+                  color: "var(--text-muted)",
                   fontSize: "13px",
                   fontWeight: 500,
                   textDecoration: "none",
@@ -325,7 +325,7 @@ export default function Hero({ lang = "en" }: HeroProps) {
                 alignItems: "center",
                 gap: "8px",
                 marginTop: "48px",
-                color: "#52525b",
+                color: "var(--text-muted)",
               }}
             >
               <svg

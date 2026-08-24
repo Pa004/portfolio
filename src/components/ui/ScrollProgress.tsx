@@ -27,7 +27,7 @@ export default function ScrollProgress() {
     <div style={{
       position: "fixed", top: 0, left: 0, right: 0,
       height: "2px", zIndex: 100,
-      background: "rgba(255,255,255,0.04)",
+      background: "var(--surface-dim)",
     }}>
       <div style={{
         height: "100%",

@@ -27,7 +27,7 @@ const statusConfig = {
     dot: "#22c55e",
     badge: {
       background: "rgba(34,197,94,0.1)",
-      color: "#86efac",
+      color: "var(--accent-green-text)",
       border: "0.5px solid rgba(34,197,94,0.2)",
     },
     blink: true,
@@ -35,7 +35,7 @@ const statusConfig = {
   deployed: {
     en: "Deployed",
     es: "Desplegado",
-    dot: "#3b82f6",
+    dot: "var(--accent)",
     badge: {
       background: "var(--badge-bg)",
       color: "var(--accent-text)",
@@ -64,13 +64,13 @@ const tagStyles = {
   },
   cyan: {
     background: "rgba(6,182,212,0.1)",
-    color: "#67e8f9",
+    color: "var(--accent-cyan-text)",
     border: "0.5px solid rgba(6,182,212,0.2)",
   },
   gray: {
-    background: "rgba(255,255,255,0.04)",
-    color: "#71717a",
-    border: "0.5px solid rgba(255,255,255,0.08)",
+    background: "var(--surface-dim)",
+    color: "var(--text-muted)",
+    border: "0.5px solid var(--border-dim)",
   },
 };
 
@@ -154,7 +154,7 @@ export default function Projects({ lang }: ProjectsProps) {
                 fontWeight: 600,
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "#3b82f6",
+                color: "var(--accent)",
                 marginBottom: "8px",
               }}
             >
@@ -171,7 +171,7 @@ export default function Projects({ lang }: ProjectsProps) {
               <GradientText>{t.title}</GradientText>
             </h2>
             <p
-              style={{ fontSize: "14px", color: "#71717a", maxWidth: "28rem" }}
+              style={{ fontSize: "14px", color: "var(--text-muted)", maxWidth: "28rem" }}
             >
               {t.subtitle}
             </p>
@@ -261,8 +261,8 @@ export default function Projects({ lang }: ProjectsProps) {
                         style={{
                           fontSize: "17px",
                           fontWeight: 700,
-                          color: "#f4f4f5",
-                          letterSpacing: "-0.02em",
+                           color: "var(--text)",
+                           letterSpacing: "-0.02em",
                         }}
                       >
                         {project.name}
@@ -295,7 +295,7 @@ export default function Projects({ lang }: ProjectsProps) {
                     <p
                       style={{
                         fontSize: "13px",
-                        color: "#71717a",
+                        color: "var(--text-muted)",
                         lineHeight: 1.7,
                         marginBottom: "20px",
                       }}
@@ -335,7 +335,7 @@ export default function Projects({ lang }: ProjectsProps) {
                             alignItems: "center",
                             gap: "6px",
                             fontSize: "12px",
-                            color: "#3b82f6",
+                            color: "var(--accent)",
                             textDecoration: "none",
                           }}
                         >
@@ -353,7 +353,7 @@ export default function Projects({ lang }: ProjectsProps) {
                             alignItems: "center",
                             gap: "6px",
                             fontSize: "12px",
-                            color: "#71717a",
+                            color: "var(--text-muted)",
                             textDecoration: "none",
                           }}
                         >
@@ -403,7 +403,7 @@ export default function Projects({ lang }: ProjectsProps) {
                         style={{
                           fontSize: "14px",
                           fontWeight: 700,
-                          color: "#f4f4f5",
+                          color: "var(--text)",
                         }}
                       >
                         {project.name}
@@ -433,7 +433,7 @@ export default function Projects({ lang }: ProjectsProps) {
                     <p
                       style={{
                         fontSize: "12px",
-                        color: "#71717a",
+                        color: "var(--text-muted)",
                         lineHeight: 1.6,
                         marginBottom: "16px",
                       }}
@@ -473,7 +473,7 @@ export default function Projects({ lang }: ProjectsProps) {
                             alignItems: "center",
                             gap: "6px",
                             fontSize: "12px",
-                            color: "#3b82f6",
+                            color: "var(--accent)",
                             textDecoration: "none",
                           }}
                         >
@@ -491,7 +491,7 @@ export default function Projects({ lang }: ProjectsProps) {
                             alignItems: "center",
                             gap: "6px",
                             fontSize: "12px",
-                            color: "#71717a",
+                            color: "var(--text-muted)",
                             textDecoration: "none",
                           }}
                         >

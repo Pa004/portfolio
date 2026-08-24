@@ -45,9 +45,9 @@ export default function Footer({ lang }: FooterProps) {
           <p style={{ fontSize: "12px", color: "var(--text-muted)" }}>
             {t.built} <span style={{ color: "var(--accent-text)" }}>Next.js</span>
             {" · "}
-            <span style={{ color: "#67e8f9" }}>Tailwind</span>
+            <span style={{ color: "var(--accent-cyan-text)" }}>Tailwind</span>
             {" · "}
-            <span style={{ color: "#c4b5fd" }}>Framer Motion</span>
+            <span style={{ color: "var(--accent-violet-text)" }}>Framer Motion</span>
           </p>
           <p style={{ fontSize: "12px", color: "var(--text-muted)" }}>
             © {year} {t.by} · {t.rights}
@@ -113,12 +113,12 @@ export default function Footer({ lang }: FooterProps) {
                 width: "32px",
                 height: "32px",
                 borderRadius: "8px",
-                background: "rgba(255,255,255,0.03)",
-                border: "0.5px solid rgba(255,255,255,0.08)",
+                background: "var(--surface)",
+                border: "0.5px solid var(--border)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: "#a1a1aa",
+                color: "var(--text-muted)",
                 textDecoration: "none",
               }}
             >

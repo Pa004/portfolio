@@ -33,11 +33,11 @@ export default function BackToTop() {
             position: "fixed", bottom: "28px", left: "24px",
             zIndex: 9998,
             width: "40px", height: "40px", borderRadius: "10px",
-            background: "rgba(9,9,11,0.9)",
-            border: "0.5px solid rgba(59,130,246,0.3)",
+            background: "var(--card-bg)",
+            border: "0.5px solid var(--badge-border)",
             backdropFilter: "blur(12px)",
             display: "flex", alignItems: "center", justifyContent: "center",
-            cursor: "pointer", color: "#3b82f6",
+            cursor: "pointer", color: "var(--accent)",
             boxShadow: "0 0 16px rgba(59,130,246,0.1)",
           }}
         >
