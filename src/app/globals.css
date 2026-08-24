@@ -15,10 +15,10 @@
   color-scheme: light;
   --bg: #f8fafc;
   --text: #0f172a;
-  --text-muted: #475569;
-  --border: rgba(15, 23, 42, 0.12);
-  --surface: rgba(0, 0, 0, 0.02);
-  --surface-hover: rgba(0, 0, 0, 0.05);
+  --text-muted: #334155;
+  --border: rgba(15, 23, 42, 0.18);
+  --surface: #ffffff;
+  --surface-hover: #f1f5f9;
   --card-bg: #ffffff;
 }
 
@@ -28,7 +28,7 @@
 }
 
 [data-theme="light"] ::-webkit-scrollbar-track { background: #f8fafc; }
-[data-theme="light"] ::selection { background: rgba(59, 130, 246, 0.25); color: #0f172a; }
+[data-theme="light"] ::selection { background: rgba(59, 130, 246, 0.3); color: #0f172a; }
 
 @keyframes blink {
   0%, 100% { opacity: 1; }

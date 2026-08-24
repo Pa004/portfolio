@@ -1,6 +1,7 @@
 export const glass = {
   background: "var(--surface)",
-  border: "0.5px solid var(--border)",
+  border: "1px solid var(--border)",
+  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.04)",
   backdropFilter: "blur(12px)",
   WebkitBackdropFilter: "blur(12px)",
 } as React.CSSProperties;
