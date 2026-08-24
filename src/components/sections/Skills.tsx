@@ -215,7 +215,7 @@ export default function Skills({ lang }: SkillsProps) {
               <GradientText>{t.title}</GradientText>
             </h2>
             <p
-              style={{ fontSize: "14px", color: "#71717a", maxWidth: "28rem" }}
+              style={{ fontSize: "14px", color: "var(--text-muted)", maxWidth: "28rem" }}
             >
               {t.subtitle}
             </p>
@@ -247,7 +247,7 @@ export default function Skills({ lang }: SkillsProps) {
                 <TiltCard
                   style={{
                     ...glass,
-                    borderColor: isLarge ? accent.icon : "rgba(255,255,255,0.08)",
+                    borderColor: isLarge ? accent.icon : "var(--border)",
                     borderRadius: "12px",
                     padding: "20px",
                     height: "100%",
@@ -268,7 +268,7 @@ export default function Skills({ lang }: SkillsProps) {
                       style={{
                         fontSize: "12px",
                         fontWeight: 600,
-                        color: "#d4d4d8",
+                        color: "var(--text)",
                         letterSpacing: "0.05em",
                       }}
                     >

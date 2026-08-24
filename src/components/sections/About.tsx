@@ -139,7 +139,7 @@ export default function About({ lang }: AboutProps) {
             {[t.bio1, t.bio2, t.bio3].map((para, i) => (
               <p
                 key={i}
-                style={{ fontSize: "14px", color: "#a1a1aa", lineHeight: 1.8 }}
+                style={{ fontSize: "14px", color: "var(--text-muted)", lineHeight: 1.8 }}
               >
                 {para}
               </p>
@@ -167,10 +167,10 @@ export default function About({ lang }: AboutProps) {
                     borderRadius: "8px",
                     ...glass,
                     fontSize: "12px",
-                    color: "#a1a1aa",
+                    color: "var(--text-muted)",
                   }}
                 >
-                  <span>{item.icon}</span>
+                  <span aria-hidden="true">{item.icon}</span>
                   <span>{item.text}</span>
                 </div>
               ))}
@@ -251,7 +251,7 @@ export default function About({ lang }: AboutProps) {
                   <div
                     style={{
                       fontSize: "11px",
-                      color: "#71717a",
+                      color: "var(--text-muted)",
                       marginTop: "4px",
                     }}
                   >
@@ -274,7 +274,7 @@ export default function About({ lang }: AboutProps) {
                   fontWeight: 600,
                   letterSpacing: "0.15em",
                   textTransform: "uppercase",
-                  color: "#52525b",
+                  color: "var(--text-muted)",
                   marginBottom: "14px",
                 }}
               >
@@ -305,17 +305,17 @@ export default function About({ lang }: AboutProps) {
                       gap: "10px",
                       padding: "12px 14px",
                       borderRadius: "10px",
-                      background: "rgba(255,255,255,0.02)",
-                      border: "1px solid rgba(255,255,255,0.06)",
+                      background: "var(--surface)",
+                      border: "1px solid var(--border)",
                       cursor: "default",
                       transition: "border-color 0.2s ease",
                     }}
                   >
-                    <span style={{ fontSize: "16px" }}>{item.icon}</span>
+                    <span style={{ fontSize: "16px" }} aria-hidden="true">{item.icon}</span>
                     <span
                       style={{
                         fontSize: "12px",
-                        color: "#d4d4d8",
+                        color: "var(--text)",
                         fontWeight: 500,
                       }}
                     >

@@ -6,6 +6,9 @@
   --text: #f4f4f5;
   --text-muted: #a1a1aa;
   --border: rgba(255, 255, 255, 0.08);
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-hover: rgba(255, 255, 255, 0.06);
+  --card-bg: #121216;
 }
 
 [data-theme="light"] {
@@ -14,6 +17,9 @@
   --text: #0f172a;
   --text-muted: #475569;
   --border: rgba(15, 23, 42, 0.12);
+  --surface: rgba(0, 0, 0, 0.02);
+  --surface-hover: rgba(0, 0, 0, 0.05);
+  --card-bg: #ffffff;
 }
 
 [data-theme="light"] body {

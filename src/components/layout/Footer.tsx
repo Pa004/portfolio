@@ -26,7 +26,7 @@ export default function Footer({ lang }: FooterProps) {
   return (
     <footer
       style={{
-        borderTop: "0.5px solid rgba(255,255,255,0.06)",
+        borderTop: "0.5px solid var(--border)",
         padding: "32px 24px",
       }}
     >
@@ -42,14 +42,14 @@ export default function Footer({ lang }: FooterProps) {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-          <p style={{ fontSize: "12px", color: "#a1a1aa" }}>
+          <p style={{ fontSize: "12px", color: "var(--text-muted)" }}>
             {t.built} <span style={{ color: "#93c5fd" }}>Next.js</span>
             {" · "}
             <span style={{ color: "#67e8f9" }}>Tailwind</span>
             {" · "}
             <span style={{ color: "#c4b5fd" }}>Framer Motion</span>
           </p>
-          <p style={{ fontSize: "12px", color: "#8b8b96" }}>
+          <p style={{ fontSize: "12px", color: "var(--text-muted)" }}>
             © {year} {t.by} · {t.rights}
           </p>
         </div>

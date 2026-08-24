@@ -51,9 +51,9 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
         right: 0,
         zIndex: 50,
         transition: "all 0.3s",
-        background: scrolled || menuOpen ? "rgba(9,9,11,0.9)" : "transparent",
+        background: scrolled || menuOpen ? (theme === "light" ? "rgba(248,250,252,0.9)" : "rgba(9,9,11,0.9)") : "transparent",
         backdropFilter: scrolled || menuOpen ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "0.5px solid rgba(255,255,255,0.06)" : "none",
+        borderBottom: scrolled ? "0.5px solid var(--border)" : "none",
       }}
     >
       <nav
@@ -74,7 +74,7 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
             fontSize: "15px",
             fontWeight: 700,
             letterSpacing: "-0.02em",
-            color: "#f4f4f5",
+            color: "var(--text)",
             textDecoration: "none",
           }}
         >
@@ -99,7 +99,7 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
                   href={link.href}
                   style={{
                     fontSize: "13px",
-                    color: "#a1a1aa",
+                    color: "var(--text-muted)",
                     textDecoration: "none",
                     letterSpacing: "0.02em",
                     position: "relative",
@@ -135,8 +135,8 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
               gap: "4px",
               padding: "4px",
               borderRadius: "8px",
-              border: "0.5px solid rgba(255,255,255,0.08)",
-              background: "rgba(255,255,255,0.02)",
+              border: "0.5px solid var(--border)",
+              background: "var(--surface)",
             }}
           >
             {(["en", "es"] as Lang[]).map((l) => (
@@ -155,7 +155,7 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
                   fontFamily: "inherit",
                   background:
                     lang === l ? "rgba(59,130,246,0.2)" : "transparent",
-                  color: lang === l ? "#93c5fd" : "#71717a",
+                  color: lang === l ? "#93c5fd" : "var(--text-muted)",
                   outline:
                     lang === l ? "0.5px solid rgba(59,130,246,0.3)" : "none",
                   transition: "all 0.2s",
@@ -178,9 +178,9 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
               width: "32px",
               height: "32px",
               borderRadius: "8px",
-              border: "0.5px solid rgba(255,255,255,0.08)",
-              background: "rgba(255,255,255,0.02)",
-              color: "#a1a1aa",
+              border: "0.5px solid var(--border)",
+              background: "var(--surface)",
+              color: "var(--text-muted)",
               cursor: "pointer",
               transition: "all 0.2s",
               fontSize: "14px",

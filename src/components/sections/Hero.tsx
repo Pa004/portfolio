@@ -193,7 +193,7 @@ export default function Hero({ lang = "en" }: HeroProps) {
               <p
                 style={{
                   fontSize: "14px",
-                  color: "#71717a",
+                  color: "var(--text-muted)",
                   marginBottom: "4px",
                 }}
               >
@@ -204,7 +204,7 @@ export default function Hero({ lang = "en" }: HeroProps) {
                   fontSize: "clamp(48px, 7vw, 72px)",
                   fontWeight: 900,
                   letterSpacing: "-0.05em",
-                  color: "#f4f4f5",
+                  color: "var(--text)",
                   lineHeight: 1,
                   marginBottom: "12px",
                 }}
@@ -255,7 +255,7 @@ export default function Hero({ lang = "en" }: HeroProps) {
               variants={fadeUp}
               style={{
                 fontSize: "13px",
-                color: "#71717a",
+                color: "var(--text-muted)",
                 marginBottom: "20px",
               }}
             >
@@ -269,7 +269,7 @@ export default function Hero({ lang = "en" }: HeroProps) {
               variants={fadeUp}
               style={{
                 fontSize: "14px",
-                color: "#a1a1aa",
+                color: "var(--text-muted)",
                 lineHeight: 1.7,
                 marginBottom: "32px",
                 maxWidth: "440px",

@@ -1,13 +1,13 @@
 export const glass = {
-  background: "rgba(255,255,255,0.03)",
-  border: "0.5px solid rgba(255,255,255,0.08)",
+  background: "var(--surface)",
+  border: "0.5px solid var(--border)",
   backdropFilter: "blur(12px)",
   WebkitBackdropFilter: "blur(12px)",
 } as React.CSSProperties;
 
 export const glassBlue = {
-  background: "rgba(59,130,246,0.04)",
-  border: "0.5px solid rgba(59,130,246,0.2)",
+  background: "rgba(59,130,246,0.06)",
+  border: "0.5px solid rgba(59,130,246,0.25)",
   backdropFilter: "blur(12px)",
   WebkitBackdropFilter: "blur(12px)",
 } as React.CSSProperties;
