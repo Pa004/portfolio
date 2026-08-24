@@ -50,24 +50,24 @@ const interests = [
 
 const statsData = [
   {
-    value: 90,
+    value: 20,
     suffix: "+",
-    label: { en: "Patients managed", es: "Pacientes gestionados" },
+    label: { en: "GitHub repositories", es: "Repositorios GitHub" },
   },
   {
-    value: 137,
+    value: 4,
     suffix: "+",
-    label: { en: "Appointments handled", es: "Citas gestionadas" },
+    label: { en: "Full-Stack & Mobile apps", es: "Sistemas Full-Stack y Móviles" },
   },
   {
-    value: 13,
-    suffix: "/13",
-    label: { en: "Requirements met", es: "Requisitos cumplidos" },
+    value: 10,
+    suffix: "+",
+    label: { en: "Tech stacks & tools", es: "Tecnologías y herramientas" },
   },
   {
-    value: 100,
-    suffix: "%",
-    label: { en: "Test pass rate", es: "Tests aprobados" },
+    value: 1,
+    suffix: "",
+    label: { en: "App in production", es: "App en producción" },
   },
 ];
 
