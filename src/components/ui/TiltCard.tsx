@@ -57,7 +57,7 @@ export default function TiltCard({ children, style }: TiltCardProps) {
         position: "absolute",
         width: "200px", height: "200px",
         borderRadius: "50%",
-        background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(var(--accent-rgb), 0.12) 0%, transparent 70%)",
         transform: "translate(-50%, -50%)",
         pointerEvents: "none",
         opacity: 0,

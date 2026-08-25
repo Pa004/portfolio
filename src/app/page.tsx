@@ -15,7 +15,7 @@ type Lang = "en" | "es";
 const SectionDivider = () => (
   <div style={{
     height: "1px",
-    background: "linear-gradient(to right, transparent, rgba(59,130,246,0.15), transparent)",
+    background: "linear-gradient(to right, transparent, rgba(var(--accent-rgb), 0.15), transparent)",
     margin: "0 24px"
   }} />
 );

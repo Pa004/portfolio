@@ -38,7 +38,7 @@ export default function BackToTop() {
             backdropFilter: "blur(12px)",
             display: "flex", alignItems: "center", justifyContent: "center",
             cursor: "pointer", color: "var(--accent)",
-            boxShadow: "0 0 16px rgba(59,130,246,0.1)",
+            boxShadow: "0 0 16px rgba(var(--accent-rgb), 0.1)",
           }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

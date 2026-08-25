@@ -24,7 +24,7 @@ const statusConfig = {
   live: {
     en: "Live",
     es: "En vivo",
-    dot: "#22c55e",
+    dot: "var(--accent-green-icon)",
     badge: {
       background: "rgba(34,197,94,0.1)",
       color: "var(--accent-green-text)",
@@ -63,9 +63,9 @@ const tagStyles = {
     border: "0.5px solid var(--badge-border)",
   },
   cyan: {
-    background: "rgba(6,182,212,0.1)",
+    background: "rgba(var(--accent-cyan-rgb), 0.1)",
     color: "var(--accent-cyan-text)",
-    border: "0.5px solid rgba(6,182,212,0.2)",
+    border: "0.5px solid rgba(var(--accent-cyan-rgb), 0.2)",
   },
   gray: {
     background: "var(--surface-dim)",
@@ -245,7 +245,7 @@ export default function Projects({ lang }: ProjectsProps) {
                         width: "160px",
                         height: "160px",
                         background:
-                          "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)",
+                          "radial-gradient(circle, rgba(var(--accent-rgb), 0.06) 0%, transparent 70%)",
                         pointerEvents: "none",
                       }}
                     />

@@ -134,17 +134,17 @@ const accentMap = {
   cyan: {
     icon: "var(--accent-cyan-icon)",
     tag: {
-      background: "rgba(6,182,212,0.1)",
+      background: "rgba(var(--accent-cyan-rgb), 0.1)",
       color: "var(--accent-cyan-text)",
-      border: "0.5px solid rgba(6,182,212,0.2)",
+      border: "0.5px solid rgba(var(--accent-cyan-rgb), 0.2)",
     },
   },
   purple: {
     icon: "var(--accent-violet-icon)",
     tag: {
-      background: "rgba(167,139,250,0.1)",
+      background: "rgba(var(--accent-violet-rgb), 0.1)",
       color: "var(--accent-violet-text)",
-      border: "0.5px solid rgba(167,139,250,0.2)",
+      border: "0.5px solid rgba(var(--accent-violet-rgb), 0.2)",
     },
   },
   gray: {

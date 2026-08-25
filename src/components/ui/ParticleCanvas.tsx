@@ -43,6 +43,10 @@ export default function ParticleCanvas() {
       const W = canvas.width;
       const H = canvas.height;
       ctx.clearRect(0, 0, W, H);
+      const accentRgb =
+        getComputedStyle(document.documentElement)
+          .getPropertyValue("--accent-rgb")
+          .trim() || "59,130,246";
 
       particles.forEach((p) => {
         p.x += p.vx;
@@ -52,7 +56,7 @@ export default function ParticleCanvas() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(59,130,246,0.55)";
+        ctx.fillStyle = `rgba(${accentRgb},0.55)`;
         ctx.fill();
       });
 
@@ -65,7 +69,7 @@ export default function ParticleCanvas() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(59,130,246,${0.18 * (1 - dist / 90)})`;
+            ctx.strokeStyle = `rgba(${accentRgb},${0.18 * (1 - dist / 90)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
