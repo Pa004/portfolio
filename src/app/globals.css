@@ -29,6 +29,16 @@
   --canvas-alpha-scale: 1;
   --tag-border-alpha: 0.2;
   --tag-border-alpha-strong: 0.25;
+  --terminal-bg: rgba(9, 9, 11, 0.92);
+  --terminal-border: rgba(59, 130, 246, 0.25);
+  --terminal-shadow: 0 0 40px rgba(59, 130, 246, 0.08), 0 20px 60px rgba(0, 0, 0, 0.5);
+  --terminal-titlebar-bg: rgba(255, 255, 255, 0.03);
+  --terminal-titlebar-border: rgba(255, 255, 255, 0.06);
+  --terminal-title-text: #52525b;
+  --terminal-line-number: #3f3f46;
+  --terminal-comment: #52525b;
+  --terminal-badge-bg: rgba(9, 9, 11, 0.9);
+  --accent-amber-icon: #fbbf24;
 }
 
 [data-theme="light"] {
@@ -50,11 +60,16 @@
   --surface-dim: rgba(15, 23, 42, 0.04);
   --border-dim: rgba(15, 23, 42, 0.2);
   --icon-github: #24292e;
-  --terminal-bg: #09090b;
-  --terminal-text: #f4f4f5;
-  --terminal-muted: #a1a1aa;
-  --terminal-line-number: #71717a;
-  --terminal-comment: #52525b;
+  --terminal-bg: rgba(255, 255, 255, 0.92);
+  --terminal-border: rgba(67, 56, 202, 0.3);
+  --terminal-shadow: 0 0 40px rgba(67, 56, 202, 0.07), 0 20px 60px rgba(15, 23, 42, 0.14);
+  --terminal-titlebar-bg: rgba(15, 23, 42, 0.04);
+  --terminal-titlebar-border: rgba(15, 23, 42, 0.08);
+  --terminal-title-text: #64748b;
+  --terminal-line-number: #94a3b8;
+  --terminal-comment: #64748b;
+  --terminal-badge-bg: rgba(255, 255, 255, 0.85);
+  --accent-amber-icon: #b45309;
   --accent-btn-bg: #4338ca;
   --accent-btn-text: #ffffff;
   --accent-cyan-icon: #0f766e;
