@@ -61,6 +61,8 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
 
     const paint = () => {
       ctx.clearRect(0, 0, W(), H());
+      const aScale =
+        parseFloat(cssVar("--canvas-alpha-scale")) || 1;
 
       if (variant === "grid") {
         const size = 40;
@@ -70,13 +72,13 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
           for (let y = 0; y < H(); y += size) {
             const dist = Math.sqrt((x - W() / 2) ** 2 + (y - H() / 2) ** 2);
             const pulse = Math.sin(dist * 0.015 - t) * 0.5 + 0.5;
-            ctx.strokeStyle = `rgba(${accentRgb},${pulse * 0.06})`;
+            ctx.strokeStyle = `rgba(${accentRgb},${pulse * 0.06 * aScale})`;
             ctx.lineWidth = 0.5;
             ctx.strokeRect(x, y, size, size);
             if (pulse > 0.7) {
               ctx.beginPath();
               ctx.arc(x, y, 1.2, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(${accentRgb},${pulse * 0.4})`;
+              ctx.fillStyle = `rgba(${accentRgb},${pulse * 0.4 * aScale})`;
               ctx.fill();
             }
           }
@@ -90,7 +92,7 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
           const y = (orb.y + Math.cos(t * orb.speed + i) * 0.1) * H();
           const rgb = hexToRgb(cssVar(orb.colorVar) || "#3b82f6");
           const grad = ctx.createRadialGradient(x, y, 0, x, y, orb.r);
-          grad.addColorStop(0, `rgba(${rgb},0.08)`);
+          grad.addColorStop(0, `rgba(${rgb},${0.08 * aScale})`);
           grad.addColorStop(1, `rgba(${rgb},0)`);
           ctx.beginPath();
           ctx.arc(x, y, orb.r, 0, Math.PI * 2);
@@ -100,7 +102,7 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
 
         const size = 48;
         const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
-        ctx.strokeStyle = `rgba(${accentRgb},0.03)`;
+        ctx.strokeStyle = `rgba(${accentRgb},${0.03 * aScale})`;
         ctx.lineWidth = 0.5;
         for (let x = 0; x < W(); x += size) {
           ctx.beginPath();
@@ -125,7 +127,7 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
           if (d.y < 0 || d.y > H()) d.vy *= -1;
           ctx.beginPath();
           ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${cyanRgb},0.35)`;
+          ctx.fillStyle = `rgba(${cyanRgb},${0.35 * aScale})`;
           ctx.fill();
         });
 
@@ -138,7 +140,7 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
               ctx.beginPath();
               ctx.moveTo(dots[i].x, dots[i].y);
               ctx.lineTo(dots[j].x, dots[j].y);
-              ctx.strokeStyle = `rgba(${cyanRgb},${0.12 * (1 - dist / 100)})`;
+              ctx.strokeStyle = `rgba(${cyanRgb},${0.12 * aScale * (1 - dist / 100)})`;
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }
@@ -152,9 +154,9 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
         const cyanRgb = hexToRgb(cssVar("--accent-cyan-icon") || "#06b6d4");
         const violetRgb = hexToRgb(cssVar("--accent-violet-icon") || "#a78bfa");
         const waves = [
-          { amp: 30, freq: 0.008, speed: 1.0, color: accentRgb, alpha: 0.04, yOffset: 0.3 },
-          { amp: 20, freq: 0.012, speed: 1.5, color: cyanRgb, alpha: 0.03, yOffset: 0.5 },
-          { amp: 40, freq: 0.006, speed: 0.8, color: violetRgb, alpha: 0.03, yOffset: 0.7 },
+          { amp: 30, freq: 0.008, speed: 1.0, color: accentRgb, alpha: 0.04 * aScale, yOffset: 0.3 },
+          { amp: 20, freq: 0.012, speed: 1.5, color: cyanRgb, alpha: 0.03 * aScale, yOffset: 0.5 },
+          { amp: 40, freq: 0.006, speed: 0.8, color: violetRgb, alpha: 0.03 * aScale, yOffset: 0.7 },
         ];
 
         waves.forEach((wave) => {
@@ -175,7 +177,7 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
         ctx.beginPath();
         ctx.moveTo(0, scanY);
         ctx.lineTo(W(), scanY);
-        ctx.strokeStyle = `rgba(${accentRgb},0.04)`;
+        ctx.strokeStyle = `rgba(${accentRgb},${0.04 * aScale})`;
         ctx.lineWidth = 1;
         ctx.stroke();
       }

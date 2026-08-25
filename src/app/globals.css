@@ -25,6 +25,7 @@
   --accent-rgb: 59,130,246;
   --accent-cyan-rgb: 6,182,212;
   --accent-violet-rgb: 167,139,250;
+  --canvas-alpha-scale: 1;
 }
 
 [data-theme="light"] {
@@ -58,11 +59,12 @@
   --accent-green-icon: #166534;
   --glass-blue-bg: rgba(67, 56, 202, 0.04);
   --glass-blue-border: rgba(67, 56, 202, 0.12);
-  --grid-line-color: rgba(67, 56, 202, 0.06);
+  --grid-line-color: rgba(67, 56, 202, 0.12);
   --accent-cyan-dot: #0f766e;
   --accent-rgb: 67,56,202;
   --accent-cyan-rgb: 15,118,110;
   --accent-violet-rgb: 134,25,143;
+  --canvas-alpha-scale: 2.5;
 }
 
 [data-theme="light"] body {
