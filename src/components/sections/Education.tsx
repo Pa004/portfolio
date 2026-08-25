@@ -113,12 +113,12 @@ const accentColors = {
     tag: {
       background: "rgba(var(--accent-cyan-rgb), 0.1)",
       color: "var(--accent-cyan-text)",
-      border: "0.5px solid rgba(var(--accent-cyan-rgb), 0.2)",
+      border: "0.5px solid rgba(var(--accent-cyan-rgb), var(--tag-border-alpha))",
     },
     badge: {
       background: "rgba(var(--accent-cyan-rgb), 0.1)",
       color: "var(--accent-cyan-text)",
-      border: "0.5px solid rgba(var(--accent-cyan-rgb), 0.25)",
+      border: "0.5px solid rgba(var(--accent-cyan-rgb), var(--tag-border-alpha-strong))",
     },
     icon: "var(--accent-cyan-icon)",
   },
@@ -129,12 +129,12 @@ const accentColors = {
     tag: {
       background: "rgba(var(--accent-violet-rgb), 0.1)",
       color: "var(--accent-violet-text)",
-      border: "0.5px solid rgba(var(--accent-violet-rgb), 0.2)",
+      border: "0.5px solid rgba(var(--accent-violet-rgb), var(--tag-border-alpha))",
     },
     badge: {
       background: "rgba(var(--accent-violet-rgb), 0.1)",
       color: "var(--accent-violet-text)",
-      border: "0.5px solid rgba(var(--accent-violet-rgb), 0.25)",
+      border: "0.5px solid rgba(var(--accent-violet-rgb), var(--tag-border-alpha-strong))",
     },
     icon: "var(--accent-violet-icon)",
   },

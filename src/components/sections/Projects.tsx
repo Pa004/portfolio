@@ -26,9 +26,9 @@ const statusConfig = {
     es: "En vivo",
     dot: "var(--accent-green-icon)",
     badge: {
-      background: "rgba(34,197,94,0.1)",
+      background: "rgba(var(--accent-green-rgb), 0.1)",
       color: "var(--accent-green-text)",
-      border: "0.5px solid rgba(34,197,94,0.2)",
+      border: "0.5px solid rgba(var(--accent-green-rgb), var(--tag-border-alpha))",
     },
     blink: true,
   },
@@ -65,7 +65,7 @@ const tagStyles = {
   cyan: {
     background: "rgba(var(--accent-cyan-rgb), 0.1)",
     color: "var(--accent-cyan-text)",
-    border: "0.5px solid rgba(var(--accent-cyan-rgb), 0.2)",
+    border: "0.5px solid rgba(var(--accent-cyan-rgb), var(--tag-border-alpha))",
   },
   gray: {
     background: "var(--surface-dim)",
