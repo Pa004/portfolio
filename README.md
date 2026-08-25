@@ -18,37 +18,42 @@
 ## ✨ Features
 
 ### Visual & UX
-- 🎯 **Custom cursor** — dot + lagged ring with hover/click states
-- 📊 **Scroll progress bar** — gradient indicator at top of page
-- 🌊 **Smooth scroll** — cinematic feel powered by Lenis
-- ✨ **Section reveal animations** — blur + fade on viewport entry (Framer Motion)
-- 🃏 **3D card tilt** — perspective tilt with glow follow on hover
-- 🌈 **Gradient text** — blue→cyan gradient on all main headings
+- 🌓 **Dark / Light mode** — theme toggle with `localStorage` persistence and WCAG 2.2 verified contrast (adaptive indigo palette in light mode)
+- 🔦 **Interactive spotlight** — cursor-following radial glow across the Hero section
+- 🎯 **Custom cursor** — dot + lagged ring with dynamic hover and click states
+- 📊 **Scroll progress bar** — top-of-page gradient indicator
+- 🌊 **Smooth scroll** — cinematic inertia powered by Lenis
+- ✨ **Section reveal animations** — staggered blur + fade on viewport entry (Framer Motion)
+- 🃏 **3D card tilt** — perspective tilt with glow follow on hover (TiltCard)
+- 🍱 **Bento Grid layouts** — asymmetric card distribution in Skills and About areas of interest
+- 🌈 **Gradient typography** — high-contrast gradient headings
 - 🔲 **Noise texture overlay** — subtle film-grain depth effect
-- ⬆️ **Back to top button** — appears after 400px scroll
+- ⬆️ **Back to top button** — floating button appearing after 400px scroll
+- ♿ **Reduced motion support** — full compliance with `prefers-reduced-motion` settings
 
 ### Sections
-- 🦸 **Hero** — name, typewriter roles, terminal code block, animated particle background
-- 👤 **About** — bio, location pills, animated counter stats, areas of interest
-- 🛠️ **Skills** — 7 tech categories with tilt cards and colored tags
-- 🚀 **Projects** — 4 projects (2 featured, 2 secondary) with Live/Deployed/Academic badges
-- 🎓 **Education** — animated timeline with ESPE degree + DataCamp certification
-- 📬 **Contact** — email copy-to-clipboard with toast, social links
+- 🦸 **Hero** — name with staggered word-by-word blur reveal, typewriter roles, interactive spotlight, theme-adaptive terminal code block with technology marquee carousel, and particle network canvas
+- 👤 **About** — bio, location badges, real-world project & repository metrics counter, and interactive Bento Grid for areas of interest
+- 🛠️ **Skills** — asymmetric Bento Grid highlighting Frontend and Backend with specialized category tags
+- 🚀 **Projects** — featured and secondary cards with previews, screenshots, live links, repository access, and status badges
+- 🎓 **Education** — timeline covering ESPE Software Engineering degree and DataCamp certifications
+- 📬 **Contact** — email copy-to-clipboard with Sonner toast notifications and verified social links
 
 ### Animated backgrounds (per section)
 | Section | Background |
 |---|---|
-| Hero | Particle network |
-| About / Skills | Pulsing grid blueprint |
-| Projects | Floating color orbs |
-| Education | Connected dot particles |
-| Contact | Animated wave layers |
+| Hero | Particle network canvas + Cursor spotlight |
+| About / Skills | Pulsing blueprint grid |
+| Projects | Floating ambient color orbs |
+| Education | Connected particle network |
+| Contact | Animated layered wave flows |
 
 ### Extras
-- 🌍 **Bilingual** — English / Spanish toggle (EN/ES) with full content switch
-- 🖥️ **Loading screen** — terminal-style progress animation on first load
-- 🐣 **Console easter egg** — ASCII art + contact info in DevTools (F12)
-- 🖼️ **OG Image** — auto-generated preview when sharing the link
+- 🌍 **Bilingual support** — English / Spanish (EN/ES) toggle with full content switch
+- 🖥️ **Loading screen** — terminal-style boot progress animation on initial visit
+- 🚫 **Custom 404 page** — interactive terminal-themed error route (`/not-found`)
+- 🐣 **Console easter egg** — ASCII art greeting and contact details in DevTools (F12)
+- 🖼️ **Dynamic OG Image** — automatic metadata preview card generation
 
 ---
 
@@ -57,12 +62,15 @@
 | Category | Technology |
 |---|---|
 | Framework | Next.js 16 (App Router) |
-| Language | TypeScript |
-| Styling | Tailwind CSS v4 + inline styles |
+| Language | TypeScript 5 |
+| Styling | Tailwind CSS v4 + Adaptive CSS Variables |
+| Theming | Next-Themes (Dark / Light) |
 | Animations | Framer Motion + GSAP |
 | Smooth scroll | Lenis |
+| Notifications | Sonner |
+| Icons | Tabler Icons React + Lucide Icons |
 | Fonts | Geist Sans + Geist Mono |
-| Deploy | Vercel |
+| Deployment | Vercel |
 
 ---
 
@@ -71,44 +79,47 @@
 ```
 src/
 ├── app/
-│   ├── layout.tsx              # Root layout — global components
-│   ├── page.tsx                # Main page — section composition
-│   ├── globals.css             # Global styles + Tailwind v4 theme
-│   └── opengraph-image.tsx     # Auto-generated OG image
+│   ├── layout.tsx              # Root layout — theme provider, toaster, global overlays
+│   ├── page.tsx                # Main page — section composition & dividers
+│   ├── not-found.tsx           # Custom 404 terminal page
+│   ├── globals.css             # Theme tokens (light/dark) + Tailwind v4 configuration
+│   ├── opengraph-image.tsx     # Dynamic OG image generator
+│   └── favicon.ico             # App icon
 ├── components/
 │   ├── layout/
-│   │   ├── Navbar.tsx          # Fixed navbar with EN/ES toggle + mobile menu
-│   │   └── Footer.tsx          # Footer with social links
+│   │   ├── Navbar.tsx          # Fixed navbar with theme & EN/ES toggles + mobile menu
+│   │   └── Footer.tsx          # Footer with social links & copyright
 │   ├── sections/
-│   │   ├── Hero.tsx            # Hero with terminal + particles
-│   │   ├── About.tsx           # Bio + stats + interests
-│   │   ├── Skills.tsx          # Tech skills grid
-│   │   ├── Projects.tsx        # Featured + secondary project cards
-│   │   ├── Education.tsx       # Timeline education + certs
-│   │   └── Contact.tsx         # Email + social links
+│   │   ├── Hero.tsx            # Hero with spotlight, typewriter & terminal
+│   │   ├── About.tsx           # Bio, project metrics & interests bento grid
+│   │   ├── Skills.tsx          # Asymmetric bento grid of tech capabilities
+│   │   ├── Projects.tsx        # Featured project cards with screenshots & links
+│   │   ├── Education.tsx       # Degree & certifications timeline
+│   │   └── Contact.tsx         # Email copy & direct social channels
 │   └── ui/
-│       ├── AvatarIllustration.tsx  # Terminal code block + badge carousel
-│       ├── BackToTop.tsx           # Floating back to top button
-│       ├── ConsoleEasterEgg.tsx    # DevTools ASCII art
+│       ├── AvatarIllustration.tsx  # Hero terminal code block + badge marquee carousel
+│       ├── BackToTop.tsx           # Floating back-to-top button
+│       ├── ConsoleEasterEgg.tsx    # DevTools ASCII art message
 │       ├── CounterStat.tsx         # Animated number counter
-│       ├── CustomCursor.tsx        # Custom dot + ring cursor
-│       ├── GradientText.tsx        # Blue→cyan gradient text wrapper
+│       ├── CustomCursor.tsx        # Custom dot + ring interactive cursor
+│       ├── GradientText.tsx        # Gradient text wrapper
 │       ├── LoadingScreen.tsx       # First-load terminal animation
 │       ├── NoiseOverlay.tsx        # Film-grain texture overlay
 │       ├── ParticleCanvas.tsx      # Hero particle network canvas
-│       ├── RevealSection.tsx       # Blur + fade viewport reveal
-│       ├── ScrollProgress.tsx      # Top progress bar
-│       ├── SectionBackground.tsx   # Per-section animated backgrounds
+│       ├── RevealSection.tsx       # Viewport entry reveal wrapper
+│       ├── ScrollProgress.tsx      # Top scroll progress indicator
+│       ├── SectionBackground.tsx   # Per-section animated canvas backgrounds
 │       ├── SmoothScroll.tsx        # Lenis smooth scroll provider
 │       ├── TiltCard.tsx            # 3D perspective tilt card
-│       ├── Toast.tsx               # Notification toast
-│       └── TypeWriter.tsx          # Typewriter role animation
+│       └── TypeWriter.tsx          # Typewriter role cycling animation
+├── hooks/
+│   └── useReducedMotion.ts     # Hook to respect OS prefers-reduced-motion
 ├── lib/
-│   ├── content.ts              # All project data, links and skills
+│   ├── content.ts              # Data source for projects, skills, education & links
 │   ├── lenis.ts                # Lenis smooth scroll configuration
-│   └── styles.ts               # Shared inline style objects (glass, gridBg)
+│   └── styles.ts               # Shared adaptive inline style objects
 └── types/
-    └── index.ts                # Shared TypeScript types
+    └── index.ts                # Shared TypeScript definitions
 ```
 
 ---
