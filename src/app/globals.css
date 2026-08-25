@@ -36,19 +36,19 @@
   --bg: #f8fafc;
   --text: #0f172a;
   --text-muted: #334155;
-  --border: rgba(15, 23, 42, 0.3);
+  --border: rgba(15, 23, 42, 0.42);
   --surface: #ffffff;
   --surface-hover: #f1f5f9;
   --card-bg: #ffffff;
   --accent: #4338ca;
   --accent-text: #3730a3;
   --badge-bg: #eef2ff;
-  --badge-border: rgba(67, 56, 202, 0.4);
+  --badge-border: rgba(67, 56, 202, 0.52);
   --accent-cyan-text: #155e75;
   --accent-violet-text: #701a75;
   --accent-green-text: #166534;
   --surface-dim: rgba(15, 23, 42, 0.04);
-  --border-dim: rgba(15, 23, 42, 0.14);
+  --border-dim: rgba(15, 23, 42, 0.2);
   --icon-github: #24292e;
   --terminal-bg: #09090b;
   --terminal-text: #f4f4f5;
@@ -61,7 +61,7 @@
   --accent-violet-icon: #86198f;
   --accent-green-icon: #166534;
   --glass-blue-bg: rgba(67, 56, 202, 0.04);
-  --glass-blue-border: rgba(67, 56, 202, 0.22);
+  --glass-blue-border: rgba(67, 56, 202, 0.34);
   --grid-line-color: rgba(67, 56, 202, 0.12);
   --accent-cyan-dot: #0f766e;
   --accent-rgb: 67,56,202;
@@ -69,8 +69,8 @@
   --accent-violet-rgb: 134,25,143;
   --accent-green-rgb: 22,101,52;
   --canvas-alpha-scale: 2.5;
-  --tag-border-alpha: 0.32;
-  --tag-border-alpha-strong: 0.4;
+  --tag-border-alpha: 0.45;
+  --tag-border-alpha-strong: 0.55;
 }
 
 [data-theme="light"] body {
