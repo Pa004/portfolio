@@ -110,7 +110,7 @@ export default function Contact({ lang }: ContactProps) {
           right: 0,
           height: "1px",
           background:
-            "linear-gradient(to right, transparent, rgba(59,130,246,0.2), transparent)",
+            "linear-gradient(to right, transparent, var(--accent), transparent)",
         }}
       />
       <div
@@ -182,7 +182,7 @@ export default function Contact({ lang }: ContactProps) {
                 width: "160px",
                 height: "160px",
                 background:
-                  "radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)",
+                  "radial-gradient(circle, var(--glass-blue-bg) 0%, transparent 70%)",
                 pointerEvents: "none",
               }}
             />
@@ -253,8 +253,8 @@ export default function Contact({ lang }: ContactProps) {
                 width: "fit-content",
                 padding: "6px 10px",
                 borderRadius: "6px",
-                background: "rgba(59,130,246,0.06)",
-                border: "0.5px solid rgba(59,130,246,0.15)",
+                background: "var(--glass-blue-bg)",
+                border: "0.5px solid var(--glass-blue-border)",
               }}
             >
               {links.email}
@@ -283,7 +283,7 @@ export default function Contact({ lang }: ContactProps) {
                 padding: "10px 20px",
                 borderRadius: "8px",
                 background: "var(--accent)",
-                color: "#fff",
+                  color: "var(--accent-btn-text)",
                 fontSize: "13px",
                 fontWeight: 500,
                 textDecoration: "none",

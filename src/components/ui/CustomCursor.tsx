@@ -92,12 +92,12 @@ export default function CustomCursor() {
           marginLeft: `-${dotSize / 2}px`,
           marginTop:  `-${dotSize / 2}px`,
           borderRadius: "50%",
-          background: isHovering ? "#06b6d4" : "#3b82f6",
+          background: isHovering ? "var(--accent-cyan-icon)" : "var(--accent)",
           pointerEvents: "none",
           zIndex: 9999,
           opacity: visible ? 1 : 0,
           transition: "opacity 0.3s, background 0.2s, width 0.15s, height 0.15s",
-          boxShadow: `0 0 6px ${isHovering ? "#06b6d4" : "#3b82f6"}`,
+          boxShadow: `0 0 6px ${isHovering ? "var(--accent-cyan-icon)" : "var(--accent)"}`,
           transform: isClicking ? "scale(0.6)" : "scale(1)",
         }}
       />
@@ -114,7 +114,7 @@ export default function CustomCursor() {
           marginLeft: `-${ringSize / 2}px`,
           marginTop:  `-${ringSize / 2}px`,
           borderRadius: "50%",
-          border: `1.5px solid ${isHovering ? "rgba(6,182,212,0.6)" : "rgba(59,130,246,0.4)"}`,
+          border: `1.5px solid ${isHovering ? "var(--accent-cyan-icon)" : "var(--accent)"}`,
           pointerEvents: "none",
           zIndex: 9998,
           opacity: visible ? 1 : 0,

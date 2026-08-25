@@ -8,6 +8,16 @@ interface SectionBackgroundProps {
   variant: Variant;
 }
 
+function hexToRgb(hex: string): string {
+  const h = hex.replace("#", "");
+  const n = parseInt(h.length === 3 ? h.split("").map(c => c + c).join("") : h, 16);
+  return `${(n >> 16) & 255},${(n >> 8) & 255},${n & 255}`;
+}
+
+function cssVar(name: string): string {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
 export default function SectionBackground({ variant }: SectionBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -42,10 +52,10 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
     const orbs =
       variant === "orbs"
         ? [
-            { x: 0.2, y: 0.3, r: 200, color: "59,130,246", speed: 0.0008 },
-            { x: 0.8, y: 0.6, r: 180, color: "6,182,212",  speed: 0.0012 },
-            { x: 0.5, y: 0.8, r: 150, color: "167,139,250",speed: 0.001  },
-            { x: 0.1, y: 0.7, r: 120, color: "59,130,246", speed: 0.0015 },
+            { x: 0.2, y: 0.3, r: 200, colorVar: "--accent", speed: 0.0008 },
+            { x: 0.8, y: 0.6, r: 180, colorVar: "--accent-cyan-icon", speed: 0.0012 },
+            { x: 0.5, y: 0.8, r: 150, colorVar: "--accent-violet-icon", speed: 0.001 },
+            { x: 0.1, y: 0.7, r: 120, colorVar: "--accent", speed: 0.0015 },
           ]
         : [];
 
@@ -55,17 +65,18 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
       if (variant === "grid") {
         const size = 40;
         t += 0.008;
+        const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
         for (let x = 0; x < W(); x += size) {
           for (let y = 0; y < H(); y += size) {
             const dist = Math.sqrt((x - W() / 2) ** 2 + (y - H() / 2) ** 2);
             const pulse = Math.sin(dist * 0.015 - t) * 0.5 + 0.5;
-            ctx.strokeStyle = `rgba(59,130,246,${pulse * 0.06})`;
+            ctx.strokeStyle = `rgba(${accentRgb},${pulse * 0.06})`;
             ctx.lineWidth = 0.5;
             ctx.strokeRect(x, y, size, size);
             if (pulse > 0.7) {
               ctx.beginPath();
               ctx.arc(x, y, 1.2, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(59,130,246,${pulse * 0.4})`;
+              ctx.fillStyle = `rgba(${accentRgb},${pulse * 0.4})`;
               ctx.fill();
             }
           }
@@ -77,9 +88,10 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
         orbs.forEach((orb, i) => {
           const x = (orb.x + Math.sin(t * orb.speed + i) * 0.15) * W();
           const y = (orb.y + Math.cos(t * orb.speed + i) * 0.1) * H();
+          const rgb = hexToRgb(cssVar(orb.colorVar) || "#3b82f6");
           const grad = ctx.createRadialGradient(x, y, 0, x, y, orb.r);
-          grad.addColorStop(0, `rgba(${orb.color},0.08)`);
-          grad.addColorStop(1, `rgba(${orb.color},0)`);
+          grad.addColorStop(0, `rgba(${rgb},0.08)`);
+          grad.addColorStop(1, `rgba(${rgb},0)`);
           ctx.beginPath();
           ctx.arc(x, y, orb.r, 0, Math.PI * 2);
           ctx.fillStyle = grad;
@@ -87,7 +99,8 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
         });
 
         const size = 48;
-        ctx.strokeStyle = "rgba(59,130,246,0.03)";
+        const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
+        ctx.strokeStyle = `rgba(${accentRgb},0.03)`;
         ctx.lineWidth = 0.5;
         for (let x = 0; x < W(); x += size) {
           ctx.beginPath();
@@ -104,6 +117,7 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
       }
 
       if (variant === "dots") {
+        const cyanRgb = hexToRgb(cssVar("--accent-cyan-icon") || "#06b6d4");
         dots.forEach((d) => {
           d.x += d.vx;
           d.y += d.vy;
@@ -111,7 +125,7 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
           if (d.y < 0 || d.y > H()) d.vy *= -1;
           ctx.beginPath();
           ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(6,182,212,0.35)";
+          ctx.fillStyle = `rgba(${cyanRgb},0.35)`;
           ctx.fill();
         });
 
@@ -124,7 +138,7 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
               ctx.beginPath();
               ctx.moveTo(dots[i].x, dots[i].y);
               ctx.lineTo(dots[j].x, dots[j].y);
-              ctx.strokeStyle = `rgba(6,182,212,${0.12 * (1 - dist / 100)})`;
+              ctx.strokeStyle = `rgba(${cyanRgb},${0.12 * (1 - dist / 100)})`;
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }
@@ -134,10 +148,13 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
 
       if (variant === "waves") {
         t += 0.015;
+        const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
+        const cyanRgb = hexToRgb(cssVar("--accent-cyan-icon") || "#06b6d4");
+        const violetRgb = hexToRgb(cssVar("--accent-violet-icon") || "#a78bfa");
         const waves = [
-          { amp: 30, freq: 0.008, speed: 1.0, color: "59,130,246", alpha: 0.04, yOffset: 0.3 },
-          { amp: 20, freq: 0.012, speed: 1.5, color: "6,182,212",  alpha: 0.03, yOffset: 0.5 },
-          { amp: 40, freq: 0.006, speed: 0.8, color: "167,139,250",alpha: 0.03, yOffset: 0.7 },
+          { amp: 30, freq: 0.008, speed: 1.0, color: accentRgb, alpha: 0.04, yOffset: 0.3 },
+          { amp: 20, freq: 0.012, speed: 1.5, color: cyanRgb, alpha: 0.03, yOffset: 0.5 },
+          { amp: 40, freq: 0.006, speed: 0.8, color: violetRgb, alpha: 0.03, yOffset: 0.7 },
         ];
 
         waves.forEach((wave) => {
@@ -158,7 +175,7 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
         ctx.beginPath();
         ctx.moveTo(0, scanY);
         ctx.lineTo(W(), scanY);
-        ctx.strokeStyle = "rgba(59,130,246,0.04)";
+        ctx.strokeStyle = `rgba(${accentRgb},0.04)`;
         ctx.lineWidth = 1;
         ctx.stroke();
       }

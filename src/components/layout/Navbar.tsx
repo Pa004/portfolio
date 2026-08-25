@@ -115,7 +115,7 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
                       left: "50%",
                       width: 0,
                       height: "1px",
-                      background: "#3b82f6",
+                      background: "var(--accent)",
                       transition: "width 0.25s ease, left 0.25s ease",
                     }}
                   />

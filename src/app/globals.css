@@ -13,6 +13,15 @@
   --accent-text: #93c5fd;
   --badge-bg: rgba(59, 130, 246, 0.08);
   --badge-border: rgba(59, 130, 246, 0.25);
+  --accent-btn-bg: #3b82f6;
+  --accent-btn-text: #ffffff;
+  --accent-cyan-icon: #06b6d4;
+  --accent-violet-icon: #a78bfa;
+  --accent-green-icon: #22c55e;
+  --glass-blue-bg: rgba(59, 130, 246, 0.06);
+  --glass-blue-border: rgba(59, 130, 246, 0.25);
+  --grid-line-color: rgba(59, 130, 246, 0.04);
+  --accent-cyan-dot: #06b6d4;
 }
 
 [data-theme="light"] {
@@ -39,6 +48,15 @@
   --terminal-muted: #a1a1aa;
   --terminal-line-number: #71717a;
   --terminal-comment: #52525b;
+  --accent-btn-bg: #1e40af;
+  --accent-btn-text: #ffffff;
+  --accent-cyan-icon: #0e7490;
+  --accent-violet-icon: #6d28d9;
+  --accent-green-icon: #15803d;
+  --glass-blue-bg: rgba(37, 99, 235, 0.04);
+  --glass-blue-border: rgba(37, 99, 235, 0.12);
+  --grid-line-color: rgba(37, 99, 235, 0.06);
+  --accent-cyan-dot: #0891b2;
 }
 
 [data-theme="light"] body {

@@ -124,7 +124,7 @@ const iconMap: Record<string, ReactNode> = {
 
 const accentMap = {
   blue: {
-    icon: "#3b82f6",
+    icon: "var(--accent)",
     tag: {
       background: "var(--badge-bg)",
       color: "var(--accent-text)",
@@ -132,7 +132,7 @@ const accentMap = {
     },
   },
   cyan: {
-    icon: "#06b6d4",
+    icon: "var(--accent-cyan-icon)",
     tag: {
       background: "rgba(6,182,212,0.1)",
       color: "var(--accent-cyan-text)",
@@ -140,7 +140,7 @@ const accentMap = {
     },
   },
   purple: {
-    icon: "#a78bfa",
+    icon: "var(--accent-violet-icon)",
     tag: {
       background: "rgba(167,139,250,0.1)",
       color: "var(--accent-violet-text)",
@@ -148,7 +148,7 @@ const accentMap = {
     },
   },
   gray: {
-    icon: "#71717a",
+    icon: "var(--text-muted)",
     tag: {
       background: "var(--surface-dim)",
       color: "var(--text-muted)",

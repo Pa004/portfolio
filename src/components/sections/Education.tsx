@@ -91,9 +91,9 @@ const educationItems = [
 
 const accentColors = {
   blue: {
-    borderLeft: "2px solid rgba(59,130,246,0.4)",
-    dot: "#3b82f6",
-    ring: "0 0 0 4px rgba(59,130,246,0.1)",
+    borderLeft: "2px solid var(--accent)",
+    dot: "var(--accent)",
+    ring: "0 0 0 4px var(--glass-blue-bg)",
     tag: {
       background: "var(--badge-bg)",
       color: "var(--accent-text)",
@@ -104,12 +104,12 @@ const accentColors = {
       color: "var(--accent-text)",
       border: "0.5px solid var(--badge-border)",
     },
-    icon: "#3b82f6",
+    icon: "var(--accent)",
   },
   cyan: {
-    borderLeft: "2px solid rgba(6,182,212,0.4)",
-    dot: "#06b6d4",
-    ring: "0 0 0 4px rgba(6,182,212,0.1)",
+    borderLeft: "2px solid var(--accent-cyan-icon)",
+    dot: "var(--accent-cyan-icon)",
+    ring: "0 0 0 4px var(--glass-blue-bg)",
     tag: {
       background: "rgba(6,182,212,0.1)",
       color: "var(--accent-cyan-text)",
@@ -120,12 +120,12 @@ const accentColors = {
       color: "var(--accent-cyan-text)",
       border: "0.5px solid rgba(6,182,212,0.25)",
     },
-    icon: "#06b6d4",
+    icon: "var(--accent-cyan-icon)",
   },
   purple: {
-    borderLeft: "2px solid rgba(167,139,250,0.4)",
-    dot: "#a78bfa",
-    ring: "0 0 0 4px rgba(167,139,250,0.1)",
+    borderLeft: "2px solid var(--accent-violet-icon)",
+    dot: "var(--accent-violet-icon)",
+    ring: "0 0 0 4px var(--glass-blue-bg)",
     tag: {
       background: "rgba(167,139,250,0.1)",
       color: "var(--accent-violet-text)",
@@ -136,7 +136,7 @@ const accentColors = {
       color: "var(--accent-violet-text)",
       border: "0.5px solid rgba(167,139,250,0.25)",
     },
-    icon: "#a78bfa",
+    icon: "var(--accent-violet-icon)",
   },
 };
 
@@ -219,7 +219,7 @@ export default function Education({ lang }: EducationProps) {
               bottom: "8px",
               width: "1px",
               background:
-                "linear-gradient(to bottom, rgba(59,130,246,0.4), rgba(6,182,212,0.1), transparent)",
+                "linear-gradient(to bottom, var(--accent), var(--accent-cyan-icon), transparent)",
             }}
           />
           <div

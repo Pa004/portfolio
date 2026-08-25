@@ -100,7 +100,7 @@ export default function About({ lang }: AboutProps) {
                 fontWeight: 600,
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "#3b82f6",
+                color: "var(--accent)",
                 marginBottom: "8px",
               }}
             >
@@ -193,7 +193,7 @@ export default function About({ lang }: AboutProps) {
                   width: "7px",
                   height: "7px",
                   borderRadius: "50%",
-                  background: "#22c55e",
+                  background: "var(--accent-green-icon)",
                   animation: "blink 2s infinite",
                 }}
               />
@@ -241,7 +241,7 @@ export default function About({ lang }: AboutProps) {
                       fontSize: "28px",
                       fontWeight: 800,
                       letterSpacing: "-0.03em",
-                      background: "linear-gradient(135deg, #3b82f6, #06b6d4)",
+                      background: "linear-gradient(135deg, var(--accent), var(--accent-cyan-icon))",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                     }}
@@ -296,8 +296,8 @@ export default function About({ lang }: AboutProps) {
                     transition={{ duration: 0.3, delay: i * 0.05 }}
                     whileHover={{
                       scale: 1.02,
-                      backgroundColor: "rgba(59, 130, 246, 0.08)",
-                      borderColor: "rgba(59, 130, 246, 0.3)",
+                      backgroundColor: "var(--glass-blue-bg)",
+                      borderColor: "var(--glass-blue-border)",
                     }}
                     style={{
                       display: "flex",

@@ -9,8 +9,8 @@ interface GradientTextProps {
 
 export default function GradientText({
   children,
-  from = "#3b82f6",
-  to   = "#06b6d4",
+    from = "var(--accent)",
+    to = "var(--accent-cyan-icon)",
   style,
 }: GradientTextProps) {
   return (
