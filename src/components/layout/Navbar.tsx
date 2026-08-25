@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -13,6 +13,10 @@ const navLinks = [
 
 type Lang = "en" | "es";
 
+const noopSubscribe = () => () => {};
+const getMounted = () => true;
+const getServerMounted = () => false;
+
 interface NavbarProps {
   lang: Lang;
   setLang: (lang: Lang) => void;
@@ -24,6 +28,7 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const mounted = useSyncExternalStore(noopSubscribe, getMounted, getServerMounted);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -186,7 +191,7 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
               fontSize: "14px",
             }}
           >
-            {theme === "dark" ? "☀️" : "🌙"}
+            {mounted ? (theme === "dark" ? "☀️" : "🌙") : null}
           </button>
 
           {/* Hamburger — only on mobile */}

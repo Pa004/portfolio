@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useSyncExternalStore } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -11,6 +11,20 @@ import Education from "@/components/sections/Education";
 import Contact from "@/components/sections/Contact";
 
 type Lang = "en" | "es";
+type Theme = "dark" | "light";
+
+const THEME_EVENT = "theme-change";
+
+function subscribeTheme(onChange: () => void) {
+  window.addEventListener(THEME_EVENT, onChange);
+  return () => window.removeEventListener(THEME_EVENT, onChange);
+}
+
+function getThemeSnapshot(): Theme {
+  return localStorage.getItem("portfolio-theme") === "light" ? "light" : "dark";
+}
+
+const getServerTheme = (): Theme => "dark";
 
 const SectionDivider = () => (
   <div style={{
@@ -22,22 +36,13 @@ const SectionDivider = () => (
 
 export default function Home() {
   const [lang, setLang] = useState<Lang>("en");
-  const [theme, setTheme] = useState<"dark" | "light">(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("portfolio-theme") as "dark" | "light" | null;
-      if (saved) return saved;
-    }
-    return "dark";
-  });
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
+  const theme = useSyncExternalStore(subscribeTheme, getThemeSnapshot, getServerTheme);
 
   const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
+    const next: Theme = theme === "dark" ? "light" : "dark";
     localStorage.setItem("portfolio-theme", next);
+    document.documentElement.setAttribute("data-theme", next);
+    window.dispatchEvent(new Event(THEME_EVENT));
   };
 
   return (
