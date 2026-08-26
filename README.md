@@ -124,6 +124,37 @@ src/
 
 ---
 
+## 🧠 Architecture Notes
+
+### Inline styles over Tailwind classes
+Tailwind v4 custom classes don't process reliably in this codebase. All component styles use **inline `style={{}}` props**. Shared style objects live in `src/lib/styles.ts`:
+
+```tsx
+import { glass, gridBg } from "@/lib/styles";
+
+<div style={{ ...glass, padding: "24px" }}>
+```
+
+Do NOT use `className` with custom Tailwind utilities on components. Only use Tailwind for standard utilities (flex, p, gap, etc.) when inline is impractical.
+
+### Theming system (dark / light)
+Theme tokens are defined as CSS custom properties in `globals.css` under `:root` (dark defaults) and `[data-theme="light"]` (light overrides). ~40 tokens cover backgrounds, text, accents, borders, and terminal colors. Components consume them via `var(--token-name)`.
+
+- `next-themes` manages the toggle; `localStorage` persists the choice
+- Tokens with `--accent-*-rgb` suffix (raw numbers) exist for canvas/composition: use `rgb(var(--accent-rgb) / alpha)` in styles
+- To add a new themed element: define tokens in both `:root` and `[data-theme="light"]`, then reference via `var()`
+
+### Bilingual pattern (`lang` prop)
+Every section component accepts `lang: "en" | "es"` and exports bilingual `content` objects internally. The toggle lives in `Navbar.tsx` and passes `lang` to all sections. To add content: duplicate the entry in both `en` and `es` blocks.
+
+### Canvas lifecycle & performance
+`ParticleCanvas` and `SectionBackground` pause rendering when offscreen via Framer Motion's `useInView`. The `useReducedMotion` hook (`src/hooks/useReducedMotion.ts`) disables or simplifies animations when the OS setting requests it. When adding new canvas elements, wrap them with the same `isInView` guard and respect `useReducedMotion`.
+
+### Data shape (`src/lib/content.ts`)
+Single source of truth for: project cards (title, description, links, badges, screenshots), skills categories (name, icon, items), education entries, and social links. Sections import from here — avoid hardcoding data in components.
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
