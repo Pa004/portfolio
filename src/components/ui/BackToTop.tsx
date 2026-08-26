@@ -30,7 +30,7 @@ export default function BackToTop() {
           onClick={scrollToTop}
           aria-label="Back to top"
           style={{
-            position: "fixed", bottom: "28px", left: "24px",
+            position: "fixed", bottom: "28px", right: "24px",
             zIndex: 9998,
             width: "40px", height: "40px", borderRadius: "10px",
             background: "var(--card-bg)",

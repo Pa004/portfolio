@@ -27,8 +27,7 @@ export default function CustomCursor() {
     const animate = () => {
       ringX += (mouseX - ringX) * 0.12;
       ringY += (mouseY - ringY) * 0.12;
-      ring.style.left = `${ringX}px`;
-      ring.style.top  = `${ringY}px`;
+      ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
       animId = requestAnimationFrame(animate);
     };
 
@@ -41,8 +40,7 @@ export default function CustomCursor() {
       mouseX = e.clientX;
       mouseY = e.clientY;
       if (!isVisible) { isVisible = true; setVisible(true); }
-      dot.style.left = `${mouseX}px`;
-      dot.style.top  = `${mouseY}px`;
+      dot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
       startRaf();
     };
 
@@ -94,6 +92,7 @@ export default function CustomCursor() {
           borderRadius: "50%",
           background: isHovering ? "var(--accent-cyan-icon)" : "var(--accent)",
           pointerEvents: "none",
+          willChange: "transform",
           zIndex: 9999,
           opacity: visible ? 1 : 0,
           transition: "opacity 0.3s, background 0.2s, width 0.15s, height 0.15s",
@@ -116,6 +115,7 @@ export default function CustomCursor() {
           borderRadius: "50%",
           border: `1.5px solid ${isHovering ? "var(--accent-cyan-icon)" : "var(--accent)"}`,
           pointerEvents: "none",
+          willChange: "transform",
           zIndex: 9998,
           opacity: visible ? 1 : 0,
           transition: "opacity 0.3s, border-color 0.2s, width 0.2s, height 0.2s, margin 0.2s",

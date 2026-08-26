@@ -7,6 +7,7 @@ import SectionBackground from "@/components/ui/SectionBackground";
 import RevealSection from "@/components/ui/RevealSection";
 import TiltCard from "@/components/ui/TiltCard";
 import GradientText from "@/components/ui/GradientText";
+import SectionHeader from "@/components/ui/SectionHeader";
 import { skills as skillData } from "@/lib/content";
 
 type Lang = "en" | "es";
@@ -191,37 +192,12 @@ export default function Skills({ lang }: SkillsProps) {
           zIndex: 1,
         }}
       >
-        <RevealSection>
-          <div style={{ marginBottom: "56px" }}>
-            <p
-              style={{
-                fontSize: "11px",
-                fontWeight: 600,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "var(--accent)",
-                marginBottom: "8px",
-              }}
-            >
-              {t.label}
-            </p>
-            <h2
-              style={{
-                fontSize: "clamp(28px,4vw,36px)",
-                fontWeight: 700,
-                letterSpacing: "-0.03em",
-                marginBottom: "12px",
-              }}
-            >
-              <GradientText>{t.title}</GradientText>
-            </h2>
-            <p
-              style={{ fontSize: "14px", color: "var(--text-muted)", maxWidth: "28rem" }}
-            >
-              {t.subtitle}
-            </p>
-          </div>
-        </RevealSection>
+        <SectionHeader
+          lang={lang}
+          label={t.label}
+          title={t.title}
+          subtitle={t.subtitle}
+        />
 
         <div
           className="skills-grid"

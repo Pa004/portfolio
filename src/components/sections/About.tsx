@@ -6,6 +6,7 @@ import RevealSection from "@/components/ui/RevealSection";
 import SectionBackground from "@/components/ui/SectionBackground";
 import CounterStat from "@/components/ui/CounterStat";
 import GradientText from "@/components/ui/GradientText";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 type Lang = "en" | "es";
 interface AboutProps {
@@ -93,34 +94,11 @@ export default function About({ lang }: AboutProps) {
           zIndex: 1,
         }}
       >
-        <RevealSection>
-          <div style={{ marginBottom: "56px" }}>
-            <p
-              style={{
-                fontSize: "11px",
-                fontWeight: 600,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "var(--accent)",
-                marginBottom: "8px",
-              }}
-            >
-              {t.label}
-            </p>
-            <h2
-              style={{
-                fontSize: "clamp(28px,4vw,36px)",
-                fontWeight: 700,
-                letterSpacing: "-0.03em",
-                marginBottom: "12px",
-              }}
-            >
-              <GradientText>
-                {lang === "en" ? "Who I am" : "Quién soy"}
-              </GradientText>
-            </h2>
-          </div>
-        </RevealSection>
+        <SectionHeader
+          lang={lang}
+          label={t.label}
+          title={lang === "en" ? "Who I am" : "Quién soy"}
+        />
 
         <div
           style={{

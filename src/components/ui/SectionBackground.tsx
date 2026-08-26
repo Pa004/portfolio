@@ -26,12 +26,18 @@ function dist(x1: number, y1: number, x2: number, y2: number): number {
 
 export default function SectionBackground({ variant, section }: SectionBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: -1, y: -1 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    let ctx: CanvasRenderingContext2D | null = null;
+    try {
+      ctx = canvas.getContext("2d");
+    } catch {
+      return;
+    }
     if (!ctx) return;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -76,7 +82,7 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
         : [];
 
     const paint = () => {
-      ctx.clearRect(0, 0, W(), H());
+      ctx!.clearRect(0, 0, W(), H());
       const aScale = parseFloat(cssVar("--canvas-alpha-scale")) || 1;
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
@@ -106,15 +112,15 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
               }
             }
 
-            ctx.strokeStyle = `rgba(${accentRgb},${Math.min(pulse, 1) * 0.06 * aScale})`;
-            ctx.lineWidth = 0.5;
-            ctx.strokeRect(x, y, size, size);
+            ctx!.strokeStyle = `rgba(${accentRgb},${Math.min(pulse, 1) * 0.06 * aScale})`;
+            ctx!.lineWidth = 0.5;
+            ctx!.strokeRect(x, y, size, size);
 
             if (pulse > 0.7) {
-              ctx.beginPath();
-              ctx.arc(x, y, 1.2, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(${accentRgb},${Math.min(pulse, 1) * 0.4 * aScale})`;
-              ctx.fill();
+              ctx!.beginPath();
+              ctx!.arc(x, y, 1.2, 0, Math.PI * 2);
+              ctx!.fillStyle = `rgba(${accentRgb},${Math.min(pulse, 1) * 0.4 * aScale})`;
+              ctx!.fill();
             }
           }
         }
@@ -143,30 +149,30 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
             : orb.baseR;
 
           const rgb = hexToRgb(cssVar(orb.colorVar) || "#3b82f6");
-          const grad = ctx.createRadialGradient(x, y, 0, x, y, pulseR);
+          const grad = ctx!.createRadialGradient(x, y, 0, x, y, pulseR);
           grad.addColorStop(0, `rgba(${rgb},${0.08 * aScale})`);
           grad.addColorStop(1, `rgba(${rgb},0)`);
-          ctx.beginPath();
-          ctx.arc(x, y, pulseR, 0, Math.PI * 2);
-          ctx.fillStyle = grad;
-          ctx.fill();
+          ctx!.beginPath();
+          ctx!.arc(x, y, pulseR, 0, Math.PI * 2);
+          ctx!.fillStyle = grad;
+          ctx!.fill();
         });
 
         const size = 48;
         const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
-        ctx.strokeStyle = `rgba(${accentRgb},${0.03 * aScale})`;
-        ctx.lineWidth = 0.5;
+        ctx!.strokeStyle = `rgba(${accentRgb},${0.03 * aScale})`;
+        ctx!.lineWidth = 0.5;
         for (let x = 0; x < W(); x += size) {
-          ctx.beginPath();
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x, H());
-          ctx.stroke();
+          ctx!.beginPath();
+          ctx!.moveTo(x, 0);
+          ctx!.lineTo(x, H());
+          ctx!.stroke();
         }
         for (let y = 0; y < H(); y += size) {
-          ctx.beginPath();
-          ctx.moveTo(0, y);
-          ctx.lineTo(W(), y);
-          ctx.stroke();
+          ctx!.beginPath();
+          ctx!.moveTo(0, y);
+          ctx!.lineTo(W(), y);
+          ctx!.stroke();
         }
       }
 
@@ -196,10 +202,10 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
             }
           }
 
-          ctx.beginPath();
-          ctx.arc(d.x, d.y, drawR, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${cyanRgb},${0.35 * aScale})`;
-          ctx.fill();
+          ctx!.beginPath();
+          ctx!.arc(d.x, d.y, drawR, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(${cyanRgb},${0.35 * aScale})`;
+          ctx!.fill();
         });
 
         for (let i = 0; i < dots.length; i++) {
@@ -209,12 +215,12 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
             const d = Math.sqrt(dx * dx + dy * dy);
             if (d < 100) {
               const t2 = 1 - d / 100;
-              ctx.beginPath();
-              ctx.moveTo(dots[i].x, dots[i].y);
-              ctx.lineTo(dots[j].x, dots[j].y);
-              ctx.strokeStyle = `rgba(${cyanRgb},${(0.08 + t2 * 0.15) * aScale})`;
-              ctx.lineWidth = 0.3 + t2 * 1.2;
-              ctx.stroke();
+              ctx!.beginPath();
+              ctx!.moveTo(dots[i].x, dots[i].y);
+              ctx!.lineTo(dots[j].x, dots[j].y);
+              ctx!.strokeStyle = `rgba(${cyanRgb},${(0.08 + t2 * 0.15) * aScale})`;
+              ctx!.lineWidth = 0.3 + t2 * 1.2;
+              ctx!.stroke();
             }
           }
         }
@@ -232,26 +238,26 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
         ];
 
         waves.forEach((wave) => {
-          ctx.beginPath();
-          ctx.moveTo(0, H() * wave.yOffset);
+          ctx!.beginPath();
+          ctx!.moveTo(0, H() * wave.yOffset);
           for (let x = 0; x <= W(); x += 2) {
             const y = H() * wave.yOffset + Math.sin(x * wave.freq + t * wave.speed) * wave.amp;
-            ctx.lineTo(x, y);
+            ctx!.lineTo(x, y);
           }
-          ctx.lineTo(W(), H());
-          ctx.lineTo(0, H());
-          ctx.closePath();
-          ctx.fillStyle = `rgba(${wave.color},${wave.alpha})`;
-          ctx.fill();
+          ctx!.lineTo(W(), H());
+          ctx!.lineTo(0, H());
+          ctx!.closePath();
+          ctx!.fillStyle = `rgba(${wave.color},${wave.alpha})`;
+          ctx!.fill();
         });
 
         const scanY = ((Math.sin(t * 0.3) + 1) / 2) * H();
-        ctx.beginPath();
-        ctx.moveTo(0, scanY);
-        ctx.lineTo(W(), scanY);
-        ctx.strokeStyle = `rgba(${accentRgb},${0.04 * aScale})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
+        ctx!.beginPath();
+        ctx!.moveTo(0, scanY);
+        ctx!.lineTo(W(), scanY);
+        ctx!.strokeStyle = `rgba(${accentRgb},${0.04 * aScale})`;
+        ctx!.lineWidth = 1;
+        ctx!.stroke();
       }
     };
 
@@ -278,7 +284,8 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
     );
     observer.observe(canvas);
 
-    window.addEventListener("resize", setSize);
+    const resizeObserver = new ResizeObserver(() => setSize());
+    resizeObserver.observe(canvas);
 
     if (prefersReduced) paint();
     else if (animId === null) loop();
@@ -286,28 +293,37 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
     return () => {
       stop();
       observer.disconnect();
-      window.removeEventListener("resize", setSize);
+      resizeObserver.disconnect();
     };
   }, [variant, section]);
 
+  useEffect(() => {
+    const container = containerRef.current;
+    const canvas = canvasRef.current;
+    if (!container || !canvas || !section) return;
+
+    const onMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current = {
+        x: (e.clientX - rect.left) * (canvas.width / rect.width),
+        y: (e.clientY - rect.top) * (canvas.height / rect.height),
+      };
+    };
+    const onLeave = () => { mouseRef.current = { x: -1, y: -1 }; };
+
+    container.addEventListener("mousemove", onMove);
+    container.addEventListener("mouseleave", onLeave);
+
+    return () => {
+      container.removeEventListener("mousemove", onMove);
+      container.removeEventListener("mouseleave", onLeave);
+    };
+  }, [section]);
+
   return (
     <div
+      ref={containerRef}
       style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-      ref={(el) => {
-        if (!el) return;
-        const canvas = canvasRef.current;
-        if (!canvas || !section) return;
-        const onMove = (e: MouseEvent) => {
-          const rect = canvas.getBoundingClientRect();
-          mouseRef.current = {
-            x: (e.clientX - rect.left) * (canvas.width / rect.width),
-            y: (e.clientY - rect.top) * (canvas.height / rect.height),
-          };
-        };
-        const onLeave = () => { mouseRef.current = { x: -1, y: -1 }; };
-        el.addEventListener("mousemove", onMove);
-        el.addEventListener("mouseleave", onLeave);
-      }}
     >
       <canvas
         ref={canvasRef}

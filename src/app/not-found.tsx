@@ -11,7 +11,7 @@ export default function NotFound() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#09090b",
+        background: "var(--bg)",
         padding: "24px",
         ...gridBg,
       }}
@@ -20,8 +20,8 @@ export default function NotFound() {
         style={{
           width: "100%",
           maxWidth: "520px",
-          background: "rgba(255,255,255,0.03)",
-          border: "0.5px solid rgba(255,255,255,0.08)",
+          background: "var(--surface)",
+          border: "0.5px solid var(--border)",
           backdropFilter: "blur(12px)",
           borderRadius: "16px",
           overflow: "hidden",
@@ -34,30 +34,30 @@ export default function NotFound() {
             alignItems: "center",
             gap: "8px",
             padding: "12px 16px",
-            background: "rgba(255,255,255,0.02)",
-            borderBottom: "0.5px solid rgba(255,255,255,0.06)",
+            background: "var(--surface)",
+            borderBottom: "0.5px solid var(--border)",
           }}
         >
           <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ef4444" }} />
           <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#f59e0b" }} />
           <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#22c55e" }} />
-          <span style={{ fontSize: "12px", color: "#71717a", marginLeft: "8px", fontFamily: "monospace" }}>
+          <span style={{ fontSize: "12px", color: "var(--text-muted)", marginLeft: "8px", fontFamily: "monospace" }}>
             bash — 404
           </span>
         </div>
 
         {/* Terminal body */}
         <div style={{ padding: "24px", fontFamily: "monospace", fontSize: "13px" }}>
-          <p style={{ color: "#a1a1aa", marginBottom: "8px" }}>
-            <span style={{ color: "#3b82f6" }}>❯</span> cd /this/route
+          <p style={{ color: "var(--text-muted)", marginBottom: "8px" }}>
+            <span style={{ color: "var(--accent)" }}>❯</span> cd /this/route
           </p>
           <p style={{ color: "#ef4444", marginBottom: "16px" }}>
             bash: cd: /this/route: No such file or directory
           </p>
-          <p style={{ color: "#f4f4f5", fontWeight: 700, marginBottom: "8px" }}>
+          <p style={{ color: "var(--text)", fontWeight: 700, marginBottom: "8px" }}>
             $ Error 404 — Page not found
           </p>
-          <p style={{ color: "#71717a", marginBottom: "24px", lineHeight: 1.6 }}>
+          <p style={{ color: "var(--text-muted)", marginBottom: "24px", lineHeight: 1.6 }}>
             {/* The route you&apos;re looking for doesn&apos;t exist or has been moved. */}
           </p>
 
@@ -69,15 +69,15 @@ export default function NotFound() {
               gap: "8px",
               padding: "10px 20px",
               borderRadius: "8px",
-              background: "#3b82f6",
-              color: "#fff",
+              background: "var(--accent)",
+              color: "var(--accent-btn-text)",
               textDecoration: "none",
               fontSize: "13px",
               fontWeight: 500,
               fontFamily: "inherit",
             }}
           >
-            <span style={{ color: "#93c5fd" }}>❯</span> cd /home
+            <span style={{ color: "var(--accent-text)" }}>❯</span> cd /home
           </Link>
         </div>
       </div>

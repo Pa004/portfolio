@@ -6,11 +6,16 @@
   --text: #f4f4f5;
   --text-muted: #a1a1aa;
   --border: rgba(255, 255, 255, 0.08);
+  --border-dim: rgba(255, 255, 255, 0.12);
   --surface: rgba(255, 255, 255, 0.03);
+  --surface-dim: rgba(255, 255, 255, 0.02);
   --surface-hover: rgba(255, 255, 255, 0.06);
   --card-bg: #121216;
   --accent: #3b82f6;
   --accent-text: #93c5fd;
+  --accent-cyan-text: #67e8f9;
+  --accent-violet-text: #c4b5fd;
+  --accent-green-text: #86efac;
   --badge-bg: rgba(59, 130, 246, 0.08);
   --badge-border: rgba(59, 130, 246, 0.25);
   --accent-btn-bg: #3b82f6;
@@ -108,8 +113,8 @@
 }
 
 body {
-  background-color: #09090b;
-  color: #f4f4f5;
+  background-color: var(--bg);
+  color: var(--text);
   font-family: var(--font-geist-sans), sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -128,16 +133,16 @@ body {
 
 ::selection {
   background: rgba(var(--accent-rgb), 0.3);
-  color: #f4f4f5;
+  color: var(--text);
 }
 
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #09090b; }
+::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
 
 html {
   scrollbar-width: thin;
-  scrollbar-color: var(--accent) #09090b;
+  scrollbar-color: var(--accent) var(--bg);
 }
 
 section { scroll-margin-top: 70px; }

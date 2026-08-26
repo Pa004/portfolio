@@ -44,7 +44,7 @@ export default function LoadingScreen() {
           transition={{ duration: 0.6, ease: "easeInOut" }}
           style={{
             position: "fixed", inset: 0, zIndex: 99999,
-            background: "#09090b",
+            background: "var(--bg)",
             display: "flex", flexDirection: "column",
             alignItems: "center", justifyContent: "center",
             gap: "32px",
@@ -54,8 +54,8 @@ export default function LoadingScreen() {
           <div style={{
             position: "absolute", inset: 0,
             backgroundImage: `
-              linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px)
+              linear-gradient(var(--grid-line-color) 1px, transparent 1px),
+              linear-gradient(90deg, var(--grid-line-color) 1px, transparent 1px)
             `,
             backgroundSize: "32px 32px",
             pointerEvents: "none",
@@ -65,7 +65,7 @@ export default function LoadingScreen() {
           <div style={{
             position: "absolute",
             width: "400px", height: "400px",
-            background: "radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(var(--accent-rgb), 0.08) 0%, transparent 70%)",
             borderRadius: "50%", filter: "blur(40px)",
             pointerEvents: "none",
           }} />
@@ -77,10 +77,10 @@ export default function LoadingScreen() {
             transition={{ duration: 0.5 }}
             style={{ position: "relative", zIndex: 1, textAlign: "center" }}
           >
-            <div style={{ fontSize: "48px", fontWeight: 900, letterSpacing: "-0.05em", color: "#f4f4f5", fontFamily: "var(--font-geist-sans)" }}>
-              PD<span style={{ color: "#3b82f6" }}>.</span>
+            <div style={{ fontSize: "48px", fontWeight: 900, letterSpacing: "-0.05em", color: "var(--text)", fontFamily: "var(--font-geist-sans)" }}>
+              PD<span style={{ color: "var(--accent)" }}>.</span>
             </div>
-            <div style={{ fontSize: "12px", color: "#52525b", marginTop: "4px", fontFamily: "monospace", letterSpacing: "0.15em" }}>
+            <div style={{ fontSize: "12px", color: "var(--text-muted)", marginTop: "4px", fontFamily: "monospace", letterSpacing: "0.15em" }}>
               PORTFOLIO
             </div>
           </motion.div>
@@ -93,39 +93,39 @@ export default function LoadingScreen() {
             style={{
               position: "relative", zIndex: 1,
               width: "280px",
-              background: "rgba(255,255,255,0.02)",
-              border: "0.5px solid rgba(255,255,255,0.08)",
+              background: "var(--surface)",
+              border: "0.5px solid var(--border)",
               borderRadius: "10px", overflow: "hidden",
             }}
           >
             {/* Terminal bar */}
-            <div style={{ display: "flex", alignItems: "center", gap: "6px", padding: "8px 12px", background: "rgba(255,255,255,0.02)", borderBottom: "0.5px solid rgba(255,255,255,0.06)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", padding: "8px 12px", background: "var(--surface)", borderBottom: "0.5px solid var(--border)" }}>
               {["#ff5f57","#ffbd2e","#28c840"].map((c, i) => (
                 <div key={i} style={{ width: "8px", height: "8px", borderRadius: "50%", background: c, opacity: 0.7 }} />
               ))}
-              <span style={{ marginLeft: "6px", fontSize: "10px", color: "#3f3f46", fontFamily: "monospace" }}>loading...</span>
+              <span style={{ marginLeft: "6px", fontSize: "10px", color: "var(--text-muted)", fontFamily: "monospace" }}>loading...</span>
             </div>
 
             {/* Terminal body */}
             <div style={{ padding: "14px 16px", fontFamily: "monospace", fontSize: "11px" }}>
-              <div style={{ color: "#22c55e", marginBottom: "6px" }}>❯ node portfolio.js</div>
-              <div style={{ color: "#52525b", marginBottom: "8px" }}>
+              <div style={{ color: "var(--accent-green-icon)", marginBottom: "6px" }}>❯ node portfolio.js</div>
+              <div style={{ color: "var(--text-muted)", marginBottom: "8px" }}>
                 {phases[phase]}
                 <span style={{ animation: "blink 1s infinite" }}>_</span>
               </div>
 
               {/* Progress bar */}
-              <div style={{ height: "3px", background: "rgba(255,255,255,0.06)", borderRadius: "2px", overflow: "hidden" }}>
+              <div style={{ height: "3px", background: "var(--border)", borderRadius: "2px", overflow: "hidden" }}>
                 <motion.div
-                  style={{ height: "100%", background: "linear-gradient(90deg, #3b82f6, #06b6d4)", borderRadius: "2px" }}
+                  style={{ height: "100%", background: "linear-gradient(90deg, var(--accent), var(--accent-cyan-icon))", borderRadius: "2px" }}
                   animate={{ width: `${Math.min(progress, 100)}%` }}
                   transition={{ duration: 0.1 }}
                 />
               </div>
 
               <div style={{ display: "flex", justifyContent: "space-between", marginTop: "6px" }}>
-                <span style={{ color: "#3b82f6", fontSize: "10px" }}>{Math.min(Math.floor(progress), 100)}%</span>
-                <span style={{ color: "#3f3f46", fontSize: "10px" }}>pablo@dev</span>
+                <span style={{ color: "var(--accent)", fontSize: "10px" }}>{Math.min(Math.floor(progress), 100)}%</span>
+                <span style={{ color: "var(--text-muted)", fontSize: "10px" }}>pablo@dev</span>
               </div>
             </div>
           </motion.div>

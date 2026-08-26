@@ -87,9 +87,13 @@ const content = {
 export default function Contact({ lang }: ContactProps) {
   const t = content[lang];
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText(links.email);
-    toast.success(t.copied);
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(links.email);
+      toast.success(t.copied);
+    } catch {
+      toast.error("Failed to copy email");
+    }
   };
 
   return (

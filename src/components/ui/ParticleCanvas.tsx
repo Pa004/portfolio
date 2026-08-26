@@ -39,19 +39,20 @@ export default function ParticleCanvas() {
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
+    const accentRgbRef =
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--accent-rgb")
+        .trim() || "59,130,246";
+    const aScaleRef =
+      parseFloat(
+        getComputedStyle(document.documentElement)
+          .getPropertyValue("--canvas-alpha-scale")
+      ) || 1;
+
     const paint = () => {
       const W = canvas.width;
       const H = canvas.height;
       ctx.clearRect(0, 0, W, H);
-      const accentRgb =
-        getComputedStyle(document.documentElement)
-          .getPropertyValue("--accent-rgb")
-          .trim() || "59,130,246";
-      const aScale =
-        parseFloat(
-          getComputedStyle(document.documentElement)
-            .getPropertyValue("--canvas-alpha-scale")
-        ) || 1;
 
       particles.forEach((p) => {
         p.x += p.vx;
@@ -61,7 +62,7 @@ export default function ParticleCanvas() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${accentRgb},${Math.min(0.55 * aScale, 0.9)})`;
+        ctx.fillStyle = `rgba(${accentRgbRef},${Math.min(0.55 * aScaleRef, 0.9)})`;
         ctx.fill();
       });
 
@@ -74,7 +75,7 @@ export default function ParticleCanvas() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(${accentRgb},${Math.min(0.18 * aScale * (1 - dist / 90), 0.5)})`;
+            ctx.strokeStyle = `rgba(${accentRgbRef},${Math.min(0.18 * aScaleRef * (1 - dist / 90), 0.5)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }

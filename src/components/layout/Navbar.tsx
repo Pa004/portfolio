@@ -47,15 +47,25 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
   return (
     <header
+      role="banner"
       style={{
         position: "fixed",
         top: 0,
         left: 0,
         right: 0,
         zIndex: 50,
-        transition: "all 0.3s",
+        transition: "background 0.3s, backdrop-filter 0.3s, border-color 0.3s",
         background: scrolled || menuOpen ? (theme === "light" ? "rgba(248,250,252,0.9)" : "rgba(9,9,11,0.9)") : "transparent",
         backdropFilter: scrolled || menuOpen ? "blur(12px)" : "none",
         borderBottom: scrolled ? "0.5px solid var(--border)" : "none",
@@ -198,7 +208,9 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
           {isMobile && (
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle menu"
+              aria-expanded={menuOpen}
+              aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-controls="mobile-menu"
               style={{
                 background: "none",
                 border: "none",
@@ -232,6 +244,8 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
       <AnimatePresence>
         {menuOpen && isMobile && (
           <motion.div
+            id="mobile-menu"
+            role="menu"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
