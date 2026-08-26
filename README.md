@@ -19,7 +19,7 @@
 
 ### Visual & UX
 - 🌓 **Dark / Light mode** — theme toggle with `localStorage` persistence and WCAG 2.2 verified contrast (adaptive indigo palette in light mode)
-- 🔦 **Interactive spotlight** — cursor-following radial glow across the Hero section
+- 🔦 **Interactive spotlight** — cursor-following radial glow across the entire page
 - 🎯 **Custom cursor** — dot + lagged ring with dynamic hover and click states
 - 📊 **Scroll progress bar** — top-of-page gradient indicator
 - 🌊 **Smooth scroll** — cinematic inertia powered by Lenis
@@ -32,7 +32,7 @@
 - ♿ **Reduced motion support** — full compliance with `prefers-reduced-motion` settings
 
 ### Sections
-- 🦸 **Hero** — name with staggered word-by-word blur reveal, typewriter roles, interactive spotlight, theme-adaptive terminal code block with technology marquee carousel, and particle network canvas
+- 🦸 **Hero** — name with staggered word-by-word blur reveal, typewriter roles, theme-adaptive terminal code block with technology marquee carousel, and particle network canvas
 - 👤 **About** — bio, location badges, real-world project & repository metrics counter, and interactive Bento Grid for areas of interest
 - 🛠️ **Skills** — asymmetric Bento Grid highlighting Frontend and Backend with specialized category tags
 - 🚀 **Projects** — featured and secondary cards with previews, screenshots, live links, repository access, and status badges
@@ -43,9 +43,10 @@
 | Section | Background |
 |---|---|
 | Hero | Particle network canvas + Cursor spotlight |
-| About / Skills | Pulsing blueprint grid |
-| Projects | Floating ambient color orbs |
-| Education | Connected particle network |
+| About | Pulsing blueprint grid |
+| Skills | Animated orb field |
+| Projects | Animated dot pattern |
+| Education | Animated grid pattern |
 | Contact | Animated layered wave flows |
 
 ### Extras
@@ -64,11 +65,11 @@
 | Framework | Next.js 16 (App Router) |
 | Language | TypeScript 5 |
 | Styling | Tailwind CSS v4 + Adaptive CSS Variables |
-| Theming | Next-Themes (Dark / Light) |
-| Animations | Framer Motion + GSAP |
+| Theming | Custom toggle (useSyncExternalStore + localStorage) |
+| Animations | Framer Motion |
 | Smooth scroll | Lenis |
 | Notifications | Sonner |
-| Icons | Tabler Icons React + Lucide Icons |
+| Icons | Inline SVG + Emoji |
 | Fonts | Geist Sans + Geist Mono |
 | Deployment | Vercel |
 
@@ -80,7 +81,7 @@
 src/
 ├── app/
 │   ├── layout.tsx              # Root layout — theme provider, toaster, global overlays
-│   ├── page.tsx                # Main page — section composition & dividers
+│   ├── page.tsx                # Main page — section composition, skip-to-content, dynamic lang
 │   ├── not-found.tsx           # Custom 404 terminal page
 │   ├── globals.css             # Theme tokens (light/dark) + Tailwind v4 configuration
 │   ├── opengraph-image.tsx     # Dynamic OG image generator
@@ -104,10 +105,12 @@ src/
 │       ├── CustomCursor.tsx        # Custom dot + ring interactive cursor
 │       ├── GradientText.tsx        # Gradient text wrapper
 │       ├── LoadingScreen.tsx       # First-load terminal animation
+│       ├── MouseSpotlight.tsx      # Document-level cursor spotlight (useRef + direct DOM)
 │       ├── NoiseOverlay.tsx        # Film-grain texture overlay
 │       ├── ParticleCanvas.tsx      # Hero particle network canvas
 │       ├── RevealSection.tsx       # Viewport entry reveal wrapper
 │       ├── ScrollProgress.tsx      # Top scroll progress indicator
+│       ├── SectionHeader.tsx       # Reusable section header (label + gradient title + subtitle)
 │       ├── SectionBackground.tsx   # Per-section animated canvas backgrounds
 │       ├── SmoothScroll.tsx        # Lenis smooth scroll provider
 │       ├── TiltCard.tsx            # 3D perspective tilt card
@@ -140,7 +143,7 @@ Do NOT use `className` with custom Tailwind utilities on components. Only use Ta
 ### Theming system (dark / light)
 Theme tokens are defined as CSS custom properties in `globals.css` under `:root` (dark defaults) and `[data-theme="light"]` (light overrides). ~40 tokens cover backgrounds, text, accents, borders, and terminal colors. Components consume them via `var(--token-name)`.
 
-- `next-themes` manages the toggle; `localStorage` persists the choice
+- Custom toggle in `Navbar.tsx` uses `useSyncExternalStore` to sync across components; `localStorage` persists the choice and a `theme-change` custom event notifies listeners
 - Tokens with `--accent-*-rgb` suffix (raw numbers) exist for canvas/composition: use `rgb(var(--accent-rgb) / alpha)` in styles
 - To add a new themed element: define tokens in both `:root` and `[data-theme="light"]`, then reference via `var()`
 
@@ -148,7 +151,7 @@ Theme tokens are defined as CSS custom properties in `globals.css` under `:root`
 Every section component accepts `lang: "en" | "es"` and exports bilingual `content` objects internally. The toggle lives in `Navbar.tsx` and passes `lang` to all sections. To add content: duplicate the entry in both `en` and `es` blocks.
 
 ### Canvas lifecycle & performance
-`ParticleCanvas` and `SectionBackground` pause rendering when offscreen via Framer Motion's `useInView`. The `useReducedMotion` hook (`src/hooks/useReducedMotion.ts`) disables or simplifies animations when the OS setting requests it. When adding new canvas elements, wrap them with the same `isInView` guard and respect `useReducedMotion`.
+`ParticleCanvas` and `SectionBackground` pause rendering when offscreen via `IntersectionObserver` (native). `MouseSpotlight` uses `useRef` + direct DOM manipulation to avoid re-renders entirely. The `useReducedMotion` hook (`src/hooks/useReducedMotion.ts`) disables or simplifies animations when the OS setting requests it. When adding new canvas elements, wrap them with the same `isInView` guard and respect `prefers-reduced-motion`.
 
 ### Data shape (`src/lib/content.ts`)
 Single source of truth for: project cards (title, description, links, badges, screenshots), skills categories (name, icon, items), education entries, and social links. Sections import from here — avoid hardcoding data in components.
