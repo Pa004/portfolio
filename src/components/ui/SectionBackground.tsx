@@ -3,9 +3,11 @@
 import { useEffect, useRef } from "react";
 
 type Variant = "grid" | "orbs" | "dots" | "waves";
+type Section = "about" | "skills" | "projects" | "education";
 
 interface SectionBackgroundProps {
   variant: Variant;
+  section?: Section;
 }
 
 function hexToRgb(hex: string): string {
@@ -18,8 +20,13 @@ function cssVar(name: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 }
 
-export default function SectionBackground({ variant }: SectionBackgroundProps) {
+function dist(x1: number, y1: number, x2: number, y2: number): number {
+  return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+}
+
+export default function SectionBackground({ variant, section }: SectionBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: -1, y: -1 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -38,6 +45,12 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
     const H = () => canvas.height;
     let t = 0;
 
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const interactive = !!section && !prefersReduced;
+
     const dots =
       variant === "dots"
         ? Array.from({ length: 40 }, () => ({
@@ -46,39 +59,61 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
             vx: (Math.random() - 0.5) * 0.2,
             vy: (Math.random() - 0.5) * 0.2,
             r: Math.random() * 1.2 + 0.3,
+            baseR: 0,
           }))
         : [];
+
+    dots.forEach((d) => { d.baseR = d.r; });
 
     const orbs =
       variant === "orbs"
         ? [
-            { x: 0.2, y: 0.3, r: 200, colorVar: "--accent", speed: 0.0008 },
-            { x: 0.8, y: 0.6, r: 180, colorVar: "--accent-cyan-icon", speed: 0.0012 },
-            { x: 0.5, y: 0.8, r: 150, colorVar: "--accent-violet-icon", speed: 0.001 },
-            { x: 0.1, y: 0.7, r: 120, colorVar: "--accent", speed: 0.0015 },
+            { x: 0.2, y: 0.3, baseR: 200, colorVar: "--accent", speed: 0.0008, pulseSpeed: 0.003 },
+            { x: 0.8, y: 0.6, baseR: 180, colorVar: "--accent-cyan-icon", speed: 0.0012, pulseSpeed: 0.004 },
+            { x: 0.5, y: 0.8, baseR: 150, colorVar: "--accent-violet-icon", speed: 0.001, pulseSpeed: 0.0035 },
+            { x: 0.1, y: 0.7, baseR: 120, colorVar: "--accent", speed: 0.0015, pulseSpeed: 0.0045 },
           ]
         : [];
 
     const paint = () => {
       ctx.clearRect(0, 0, W(), H());
-      const aScale =
-        parseFloat(cssVar("--canvas-alpha-scale")) || 1;
+      const aScale = parseFloat(cssVar("--canvas-alpha-scale")) || 1;
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+      const hasMouse = mx >= 0 && interactive;
 
       if (variant === "grid") {
         const size = 40;
         t += 0.008;
         const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
+        const isEducation = section === "education";
+
         for (let x = 0; x < W(); x += size) {
           for (let y = 0; y < H(); y += size) {
-            const dist = Math.sqrt((x - W() / 2) ** 2 + (y - H() / 2) ** 2);
-            const pulse = Math.sin(dist * 0.015 - t) * 0.5 + 0.5;
-            ctx.strokeStyle = `rgba(${accentRgb},${pulse * 0.06 * aScale})`;
+            let pulse: number;
+
+            if (isEducation) {
+              pulse = Math.sin(y * 0.01 - t * 0.5) * 0.5 + 0.5;
+            } else {
+              const cellDist = dist(x, y, W() / 2, H() / 2);
+              pulse = Math.sin(cellDist * 0.015 - t) * 0.5 + 0.5;
+            }
+
+            if (hasMouse) {
+              const mouseDist = dist(x, y, mx, my);
+              if (mouseDist < 120) {
+                pulse *= 1 + (1 - mouseDist / 120) * 0.8;
+              }
+            }
+
+            ctx.strokeStyle = `rgba(${accentRgb},${Math.min(pulse, 1) * 0.06 * aScale})`;
             ctx.lineWidth = 0.5;
             ctx.strokeRect(x, y, size, size);
+
             if (pulse > 0.7) {
               ctx.beginPath();
               ctx.arc(x, y, 1.2, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(${accentRgb},${pulse * 0.4 * aScale})`;
+              ctx.fillStyle = `rgba(${accentRgb},${Math.min(pulse, 1) * 0.4 * aScale})`;
               ctx.fill();
             }
           }
@@ -87,15 +122,32 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
 
       if (variant === "orbs") {
         t += 1;
+        const isSkills = section === "skills";
+
         orbs.forEach((orb, i) => {
-          const x = (orb.x + Math.sin(t * orb.speed + i) * 0.15) * W();
-          const y = (orb.y + Math.cos(t * orb.speed + i) * 0.1) * H();
+          let orbX = orb.x + Math.sin(t * orb.speed + i) * 0.15;
+          let orbY = orb.y + Math.cos(t * orb.speed + i) * 0.1;
+
+          if (isSkills && hasMouse) {
+            const attractX = (mx / W() - orb.x) * 0.02;
+            const attractY = (my / H() - orb.y) * 0.02;
+            orbX += attractX;
+            orbY += attractY;
+          }
+
+          const x = orbX * W();
+          const y = orbY * H();
+
+          const pulseR = isSkills
+            ? orb.baseR + Math.sin(t * orb.pulseSpeed + i) * (orb.baseR * 0.1)
+            : orb.baseR;
+
           const rgb = hexToRgb(cssVar(orb.colorVar) || "#3b82f6");
-          const grad = ctx.createRadialGradient(x, y, 0, x, y, orb.r);
+          const grad = ctx.createRadialGradient(x, y, 0, x, y, pulseR);
           grad.addColorStop(0, `rgba(${rgb},${0.08 * aScale})`);
           grad.addColorStop(1, `rgba(${rgb},0)`);
           ctx.beginPath();
-          ctx.arc(x, y, orb.r, 0, Math.PI * 2);
+          ctx.arc(x, y, pulseR, 0, Math.PI * 2);
           ctx.fillStyle = grad;
           ctx.fill();
         });
@@ -120,13 +172,32 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
 
       if (variant === "dots") {
         const cyanRgb = hexToRgb(cssVar("--accent-cyan-icon") || "#06b6d4");
+        const isProjects = section === "projects";
+
         dots.forEach((d) => {
-          d.x += d.vx;
-          d.y += d.vy;
+          let speedMult = 1;
+          if (isProjects && hasMouse) {
+            const mouseDist = dist(d.x, d.y, mx, my);
+            if (mouseDist < 150) {
+              speedMult = 0.5;
+            }
+          }
+
+          d.x += d.vx * speedMult;
+          d.y += d.vy * speedMult;
           if (d.x < 0 || d.x > W()) d.vx *= -1;
           if (d.y < 0 || d.y > H()) d.vy *= -1;
+
+          let drawR = d.baseR;
+          if (isProjects && hasMouse) {
+            const mouseDist = dist(d.x, d.y, mx, my);
+            if (mouseDist < 150) {
+              drawR = d.baseR * (1 + (1 - mouseDist / 150) * 0.5);
+            }
+          }
+
           ctx.beginPath();
-          ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+          ctx.arc(d.x, d.y, drawR, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(${cyanRgb},${0.35 * aScale})`;
           ctx.fill();
         });
@@ -135,13 +206,14 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
           for (let j = i + 1; j < dots.length; j++) {
             const dx = dots[i].x - dots[j].x;
             const dy = dots[i].y - dots[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 100) {
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 100) {
+              const t2 = 1 - d / 100;
               ctx.beginPath();
               ctx.moveTo(dots[i].x, dots[i].y);
               ctx.lineTo(dots[j].x, dots[j].y);
-              ctx.strokeStyle = `rgba(${cyanRgb},${0.12 * aScale * (1 - dist / 100)})`;
-              ctx.lineWidth = 0.5;
+              ctx.strokeStyle = `rgba(${cyanRgb},${(0.08 + t2 * 0.15) * aScale})`;
+              ctx.lineWidth = 0.3 + t2 * 1.2;
               ctx.stroke();
             }
           }
@@ -184,9 +256,6 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
     };
 
     let animId: number | null = null;
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
 
     const loop = () => {
       paint();
@@ -219,20 +288,39 @@ export default function SectionBackground({ variant }: SectionBackgroundProps) {
       observer.disconnect();
       window.removeEventListener("resize", setSize);
     };
-  }, [variant]);
+  }, [variant, section]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"
-      style={{
-        position: "absolute",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        pointerEvents: "none",
-        opacity: 0.8,
+    <div
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+      ref={(el) => {
+        if (!el) return;
+        const canvas = canvasRef.current;
+        if (!canvas || !section) return;
+        const onMove = (e: MouseEvent) => {
+          const rect = canvas.getBoundingClientRect();
+          mouseRef.current = {
+            x: (e.clientX - rect.left) * (canvas.width / rect.width),
+            y: (e.clientY - rect.top) * (canvas.height / rect.height),
+          };
+        };
+        const onLeave = () => { mouseRef.current = { x: -1, y: -1 }; };
+        el.addEventListener("mousemove", onMove);
+        el.addEventListener("mouseleave", onLeave);
       }}
-    />
+    >
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          pointerEvents: "none",
+          opacity: 0.8,
+        }}
+      />
+    </div>
   );
 }

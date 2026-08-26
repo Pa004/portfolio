@@ -77,13 +77,14 @@ export default function About({ lang }: AboutProps) {
   return (
     <section
       id="about"
+      className="section-fade-top section-fade-bottom"
       style={{
         position: "relative",
         padding: "80px 24px 64px",
         overflow: "hidden",
       }}
     >
-      <SectionBackground variant="grid" />
+      <SectionBackground variant="grid" section="about" />
       <div
         style={{
           maxWidth: "1152px",

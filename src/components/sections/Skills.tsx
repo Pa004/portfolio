@@ -175,13 +175,14 @@ export default function Skills({ lang }: SkillsProps) {
   return (
     <section
       id="skills"
+      className="section-fade-top section-fade-bottom"
       style={{
         position: "relative",
         padding: "80px 24px 64px",
         overflow: "hidden",
       }}
     >
-      <SectionBackground variant="grid" />
+      <SectionBackground variant="orbs" section="skills" />
       <div
         style={{
           maxWidth: "1152px",

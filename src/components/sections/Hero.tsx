@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import { gridBg } from "@/lib/styles";
 import ParticleCanvas from "@/components/ui/ParticleCanvas";
@@ -58,29 +57,11 @@ const nameVariants: Variants = {
 
 export default function Hero({ lang = "en" }: HeroProps) {
   const t = content[lang];
-  const [mousePos, setMousePos] = useState({ x: 500, y: 300 });
-  const heroRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!heroRef.current) return;
-      const rect = heroRef.current.getBoundingClientRect();
-      setMousePos({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
-    };
-    const el = heroRef.current;
-    if (el) el.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      if (el) el.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
 
   return (
     <section
-      ref={heroRef}
       id="hero"
+      className="section-fade-bottom"
       style={{
         position: "relative",
         minHeight: "100vh",
@@ -91,20 +72,6 @@ export default function Hero({ lang = "en" }: HeroProps) {
       }}
     >
       <ParticleCanvas />
-
-      {/* Spotlight effect */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
-          background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, var(--glass-blue-bg), transparent 70%)`,
-          zIndex: 2,
-        }}
-      />
 
       <div
         style={{

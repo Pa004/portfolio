@@ -95,6 +95,7 @@ export default function Contact({ lang }: ContactProps) {
   return (
     <section
       id="contact"
+      className="section-fade-top"
       style={{
         position: "relative",
         padding: "80px 24px 64px",
@@ -102,17 +103,6 @@ export default function Contact({ lang }: ContactProps) {
       }}
     >
       <SectionBackground variant="waves" />
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "1px",
-          background:
-            "linear-gradient(to right, transparent, var(--accent), transparent)",
-        }}
-      />
       <div
         style={{
           maxWidth: "1152px",

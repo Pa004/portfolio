@@ -163,13 +163,14 @@ export default function Education({ lang }: EducationProps) {
   return (
     <section
       id="education"
+      className="section-fade-top section-fade-bottom"
       style={{
         position: "relative",
         padding: "80px 24px 64px",
         overflow: "hidden",
       }}
     >
-      <SectionBackground variant="dots" />
+      <SectionBackground variant="grid" section="education" />
       <div
         style={{
           maxWidth: "1152px",

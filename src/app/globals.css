@@ -174,3 +174,24 @@ a:hover .nav-underline {
   width: 100%;
   left: 0;
 }
+
+section.section-fade-top::before,
+section.section-fade-bottom::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+section.section-fade-top::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--bg), transparent);
+}
+
+section.section-fade-bottom::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--bg), transparent);
+}

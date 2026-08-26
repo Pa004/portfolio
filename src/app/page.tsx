@@ -9,6 +9,7 @@ import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Education from "@/components/sections/Education";
 import Contact from "@/components/sections/Contact";
+import MouseSpotlight from "@/components/ui/MouseSpotlight";
 
 type Lang = "en" | "es";
 type Theme = "dark" | "light";
@@ -26,14 +27,6 @@ function getThemeSnapshot(): Theme {
 
 const getServerTheme = (): Theme => "dark";
 
-const SectionDivider = () => (
-  <div style={{
-    height: "1px",
-    background: "linear-gradient(to right, transparent, rgba(var(--accent-rgb), 0.15), transparent)",
-    margin: "0 24px"
-  }} />
-);
-
 export default function Home() {
   const [lang, setLang] = useState<Lang>("en");
   const theme = useSyncExternalStore(subscribeTheme, getThemeSnapshot, getServerTheme);
@@ -47,17 +40,13 @@ export default function Home() {
 
   return (
     <main data-theme={theme} style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--text)", transition: "background 0.3s, color 0.3s" }}>
+      <MouseSpotlight />
       <Navbar lang={lang} setLang={setLang} theme={theme} toggleTheme={toggleTheme} />
       <Hero lang={lang} />
-      <SectionDivider />
       <About lang={lang} />
-      <SectionDivider />
       <Skills lang={lang} />
-      <SectionDivider />
       <Projects lang={lang} />
-      <SectionDivider />
       <Education lang={lang} />
-      <SectionDivider />
       <Contact lang={lang} />
       <Footer lang={lang} />
     </main>

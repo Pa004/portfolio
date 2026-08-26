@@ -131,13 +131,14 @@ export default function Projects({ lang }: ProjectsProps) {
   return (
     <section
       id="projects"
+      className="section-fade-top section-fade-bottom"
       style={{
         position: "relative",
         padding: "80px 24px 64px",
         overflow: "hidden",
       }}
     >
-      <SectionBackground variant="orbs" />
+      <SectionBackground variant="dots" section="projects" />
       <div
         style={{
           maxWidth: "1152px",
