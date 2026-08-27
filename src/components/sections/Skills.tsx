@@ -56,6 +56,7 @@ const iconMap: Record<string, ReactNode> = {
 const accentMap = {
   blue: {
     icon: "var(--accent)",
+    rgb: "59,130,246",
     tag: {
       background: "var(--badge-bg)",
       color: "var(--accent-text)",
@@ -64,6 +65,7 @@ const accentMap = {
   },
   cyan: {
     icon: "var(--accent-cyan-icon)",
+    rgb: "6,182,212",
     tag: {
       background: "rgba(var(--accent-cyan-rgb), 0.1)",
       color: "var(--accent-cyan-text)",
@@ -72,6 +74,7 @@ const accentMap = {
   },
   purple: {
     icon: "var(--accent-violet-icon)",
+    rgb: "167,139,250",
     tag: {
       background: "rgba(var(--accent-violet-rgb), 0.1)",
       color: "var(--accent-violet-text)",
@@ -80,6 +83,7 @@ const accentMap = {
   },
   gray: {
     icon: "var(--text-muted)",
+    rgb: "161,161,170",
     tag: {
       background: "var(--surface-dim)",
       color: "var(--text-muted)",
@@ -163,13 +167,21 @@ export default function Skills({ lang }: SkillsProps) {
                   glarePosition="all"
                   style={{ borderRadius: "12px", height: "100%" }}
                 >
-                  <div
+                  <motion.div
+                    whileHover={{
+                      scale: 1.04,
+                      borderColor: accent.icon,
+                      boxShadow: `0 0 20px rgba(${accent.rgb},0.12)`,
+                    }}
+                    transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     style={{
                       ...glass,
                       borderColor: isLarge ? accent.icon : "var(--border)",
                       borderRadius: "12px",
                       padding: "20px",
                       height: "100%",
+                      cursor: "default",
+                      transitionProperty: "border-color, box-shadow, transform",
                     }}
                   >
                     <div
@@ -219,7 +231,7 @@ export default function Skills({ lang }: SkillsProps) {
                         </motion.span>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
                 </Tilt>
               </motion.div>
             );
