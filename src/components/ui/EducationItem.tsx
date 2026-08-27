@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { glass } from "@/lib/styles";
 import MagneticHover from "@/components/ui/MagneticHover";
 import type { Lang } from "@/types";

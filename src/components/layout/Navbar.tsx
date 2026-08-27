@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useSyncExternalStore } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { navLinks } from "@/lib/copy/navbar";
 import type { Lang } from "@/types";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { glass, glassBlue } from "@/lib/styles";
 import MagneticHover from "@/components/ui/MagneticHover";
 import Tilt from "react-parallax-tilt";
