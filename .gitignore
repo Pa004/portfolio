@@ -47,6 +47,9 @@ CLAUDE.md
 # playwright mcp artifacts
 /.playwright-mcp/
 
+# design docs (local only)
+DESIGN.md
+
 # audit reports (local only)
 AUDIT.md
 ARCHITECTURE.md
