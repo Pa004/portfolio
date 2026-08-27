@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -42,18 +42,11 @@ function getLangSnapshot(): Lang {
 const getServerLang = (): Lang => "en";
 
 export default function Home() {
-  const [lang, setLang] = useState<Lang>("en");
   const theme = useSyncExternalStore(subscribeTheme, getThemeSnapshot, getServerTheme);
-
-  useEffect(() => {
-    const stored = getLangSnapshot();
-    if (stored !== lang) setLang(stored);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const lang = useSyncExternalStore(subscribeLang, getLangSnapshot, getServerLang);
 
   useEffect(() => {
     document.documentElement.setAttribute("lang", lang);
-    localStorage.setItem("portfolio-lang", lang);
     window.dispatchEvent(new Event(LANG_EVENT));
   }, [lang]);
 
@@ -105,7 +98,7 @@ export default function Home() {
         Saltar al contenido
       </a>
       <MouseSpotlight />
-      <Navbar lang={lang} setLang={setLang} theme={theme} toggleTheme={toggleTheme} />
+      <Navbar lang={lang} theme={theme} toggleTheme={toggleTheme} />
       <div id="main-content" tabIndex={-1}>
         <Hero lang={lang} />
         <About lang={lang} />
