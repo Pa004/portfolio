@@ -95,7 +95,7 @@ export default function LoadingScreen() {
               width: "280px",
               background: "var(--surface)",
               border: "0.5px solid var(--border)",
-              borderRadius: "10px", overflow: "hidden",
+              borderRadius: "12px", overflow: "hidden",
             }}
           >
             {/* Terminal bar */}
@@ -117,7 +117,7 @@ export default function LoadingScreen() {
               {/* Progress bar */}
               <div style={{ height: "3px", background: "var(--border)", borderRadius: "2px", overflow: "hidden" }}>
                 <motion.div
-                  style={{ height: "100%", background: "linear-gradient(90deg, var(--accent), var(--accent-cyan-icon))", borderRadius: "2px" }}
+                  style={{ height: "100%", background: "var(--accent)", borderRadius: "2px" }}
                   animate={{ width: `${Math.min(progress, 100)}%` }}
                   transition={{ duration: 0.1 }}
                 />

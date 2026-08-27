@@ -35,12 +35,7 @@ export default function SectionHeader({ label, title, subtitle }: SectionHeaderP
             fontWeight: 700,
             letterSpacing: "-0.03em",
             marginBottom: subtitle ? "12px" : 0,
-            background: "linear-gradient(135deg, var(--accent), var(--accent-cyan-icon), var(--accent))",
-            backgroundSize: "200% 200%",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-            animation: "gradient-shift 4s ease infinite",
+            color: "var(--text)",
           }}
         />
         {subtitle && (

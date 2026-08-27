@@ -5,7 +5,6 @@ import { glass } from "@/lib/styles";
 
 import SectionBackground from "@/components/ui/SectionBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
-import FloatingBlob from "@/components/ui/FloatingBlob";
 import MagneticHover from "@/components/ui/MagneticHover";
 
 type Lang = "en" | "es";
@@ -172,8 +171,6 @@ export default function Education({ lang }: EducationProps) {
       }}
     >
       <SectionBackground variant="neural" section="education" />
-      <FloatingBlob color1="rgba(var(--accent-violet-rgb),0.35)" color2="rgba(var(--accent-cyan-rgb),0.2)" size={420} top="20%" left="80%" blur={100} />
-      <FloatingBlob color1="rgba(var(--accent-rgb),0.3)" color2="rgba(var(--accent-green-rgb),0.15)" size={360} top="70%" left="10%" blur={90} />
       <div
         style={{
           maxWidth: "1152px",
@@ -209,8 +206,8 @@ export default function Education({ lang }: EducationProps) {
               return (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, x: -20, filter: "blur(4px)" }}
-                  whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
                   style={{ display: "flex", gap: "24px" }}
@@ -299,7 +296,7 @@ export default function Education({ lang }: EducationProps) {
                           style={{
                             fontSize: "11px",
                             padding: "3px 10px",
-                            borderRadius: "20px",
+                            borderRadius: "999px",
                             fontWeight: 500,
                             ...accent.badge,
                           }}
@@ -354,7 +351,7 @@ export default function Education({ lang }: EducationProps) {
                           style={{
                             fontSize: "11px",
                             padding: "2px 8px",
-                            borderRadius: "4px",
+                            borderRadius: "6px",
                             ...accent.tag,
                           }}
                         >

@@ -46,11 +46,10 @@ const fadeUp: Variants = {
 };
 
 const nameVariants: Variants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: { delay: 0.15 + i * 0.08, duration: 0.5, ease: "easeOut" as const },
   }),
 };
@@ -131,7 +130,7 @@ export default function Hero({ lang = "en" }: HeroProps) {
                 alignItems: "center",
                 gap: "8px",
                 padding: "6px 12px",
-                borderRadius: "20px",
+                borderRadius: "999px",
                 border: "0.5px solid var(--badge-border)",
                 background: "var(--badge-bg)",
                 marginBottom: "24px",
@@ -256,7 +255,7 @@ export default function Hero({ lang = "en" }: HeroProps) {
                 href="#projects"
                 style={{
                   padding: "10px 20px",
-                  borderRadius: "8px",
+                  borderRadius: "6px",
                   background: "var(--accent)",
                   color: "var(--accent-btn-text)",
                   fontSize: "13px",
@@ -270,7 +269,7 @@ export default function Hero({ lang = "en" }: HeroProps) {
                 href="#contact"
                 style={{
                   padding: "10px 20px",
-                  borderRadius: "8px",
+                  borderRadius: "6px",
                   border: "0.5px solid var(--border)",
                   color: "var(--text-muted)",
                   fontSize: "13px",

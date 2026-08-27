@@ -7,7 +7,6 @@ import { projects as projectData } from "@/lib/content";
 
 import SectionBackground from "@/components/ui/SectionBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
-import FloatingBlob from "@/components/ui/FloatingBlob";
 import MagneticHover from "@/components/ui/MagneticHover";
 
 import Tilt from "react-parallax-tilt";
@@ -121,8 +120,6 @@ export default function Projects({ lang }: ProjectsProps) {
       }}
     >
       <SectionBackground variant="stars" section="projects" />
-      <FloatingBlob color1="rgba(var(--accent-rgb),0.35)" color2="rgba(var(--accent-cyan-rgb),0.2)" size={480} top="15%" left="75%" blur={110} />
-      <FloatingBlob color1="rgba(var(--accent-violet-rgb),0.3)" color2="rgba(var(--accent-rgb),0.15)" size={380} top="75%" left="15%" blur={100} />
       <div
         style={{
           maxWidth: "1152px",
@@ -154,8 +151,8 @@ export default function Projects({ lang }: ProjectsProps) {
               return (
                 <motion.div
                   key={project.id}
-                  initial={{ opacity: 0, y: 24, filter: "blur(4px)" }}
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 >
@@ -246,7 +243,7 @@ export default function Projects({ lang }: ProjectsProps) {
                             gap: "6px",
                             fontSize: "11px",
                             padding: "3px 10px",
-                            borderRadius: "20px",
+                            borderRadius: "999px",
                             ...status.badge,
                           }}
                         >
@@ -288,7 +285,7 @@ export default function Projects({ lang }: ProjectsProps) {
                             style={{
                               fontSize: "11px",
                               padding: "2px 8px",
-                              borderRadius: "4px",
+                              borderRadius: "6px",
                               ...tag,
                             }}
                           >
@@ -362,8 +359,8 @@ export default function Projects({ lang }: ProjectsProps) {
               return (
                 <motion.div
                   key={project.id}
-                  initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 >
@@ -404,7 +401,7 @@ export default function Projects({ lang }: ProjectsProps) {
                             gap: "6px",
                             fontSize: "11px",
                             padding: "2px 8px",
-                            borderRadius: "20px",
+                            borderRadius: "999px",
                             ...status.badge,
                           }}
                         >
@@ -443,7 +440,7 @@ export default function Projects({ lang }: ProjectsProps) {
                             style={{
                               fontSize: "11px",
                               padding: "2px 8px",
-                              borderRadius: "4px",
+                              borderRadius: "6px",
                               ...tag,
                             }}
                           >

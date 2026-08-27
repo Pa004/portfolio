@@ -17,8 +17,8 @@ export default function StaggerText({ text, style, as: Tag = "h2" }: StaggerText
       {words.map((word, i) => (
         <motion.span
           key={`${word}-${i}`}
-          initial={reduced ? {} : { opacity: 0, y: 20, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={reduced ? {} : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{
             duration: 0.5,

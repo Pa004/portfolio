@@ -6,7 +6,6 @@ import { links } from "@/lib/content";
 
 import SectionBackground from "@/components/ui/SectionBackground";
 import RevealSection from "@/components/ui/RevealSection";
-import GradientText from "@/components/ui/GradientText";
 import { toast } from "sonner";
 
 type Lang = "en" | "es";
@@ -135,9 +134,10 @@ export default function Contact({ lang }: ContactProps) {
                 fontWeight: 700,
                 letterSpacing: "-0.03em",
                 marginBottom: "12px",
+                color: "var(--text)",
               }}
             >
-              <GradientText>{t.title}</GradientText>
+              {t.title}
             </h2>
             <p
               style={{ fontSize: "14px", color: "var(--text-muted)", maxWidth: "28rem" }}

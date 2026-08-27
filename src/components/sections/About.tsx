@@ -5,7 +5,6 @@ import { glass, glassBlue } from "@/lib/styles";
 import SectionBackground from "@/components/ui/SectionBackground";
 import CounterStat from "@/components/ui/CounterStat";
 import SectionHeader from "@/components/ui/SectionHeader";
-import FloatingBlob from "@/components/ui/FloatingBlob";
 import RevealSection from "@/components/ui/RevealSection";
 
 type Lang = "en" | "es";
@@ -86,8 +85,6 @@ export default function About({ lang }: AboutProps) {
       }}
     >
       <SectionBackground variant="kinetic" section="about" />
-      <FloatingBlob color1="rgba(var(--accent-rgb),0.5)" color2="rgba(var(--accent-cyan-rgb),0.3)" size={500} top="20%" left="80%" blur={120} />
-      <FloatingBlob color1="rgba(var(--accent-cyan-rgb),0.4)" color2="rgba(var(--accent-violet-rgb),0.2)" size={350} top="70%" left="10%" blur={100} />
       <div
         style={{
           maxWidth: "1152px",
@@ -111,8 +108,8 @@ export default function About({ lang }: AboutProps) {
           }}
         >
           <motion.div
-            initial={{ opacity: 0, x: -24, filter: "blur(4px)" }}
-            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             style={{ display: "flex", flexDirection: "column", gap: "16px" }}
@@ -150,7 +147,7 @@ export default function About({ lang }: AboutProps) {
                     alignItems: "center",
                     gap: "6px",
                     padding: "6px 12px",
-                    borderRadius: "8px",
+                    borderRadius: "6px",
                     ...glass,
                     fontSize: "12px",
                     color: "var(--text-muted)",
@@ -169,7 +166,7 @@ export default function About({ lang }: AboutProps) {
                 alignItems: "center",
                 gap: "8px",
                 padding: "8px 14px",
-                borderRadius: "10px",
+                borderRadius: "12px",
                 ...glassBlue,
                 width: "fit-content",
                 marginTop: "4px",
@@ -199,8 +196,8 @@ export default function About({ lang }: AboutProps) {
             style={{ display: "flex", flexDirection: "column", gap: "24px" }}
           >
             <motion.div
-              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               style={{
@@ -255,8 +252,8 @@ export default function About({ lang }: AboutProps) {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               style={{ ...glass, borderRadius: "12px", padding: "20px" }}
@@ -298,7 +295,7 @@ export default function About({ lang }: AboutProps) {
                       alignItems: "center",
                       gap: "10px",
                       padding: "12px 14px",
-                      borderRadius: "10px",
+                      borderRadius: "6px",
                       background: "var(--surface)",
                       border: "1px solid var(--border)",
                       cursor: "default",

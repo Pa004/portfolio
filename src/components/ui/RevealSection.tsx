@@ -16,25 +16,28 @@ export default function RevealSection({
 }: RevealSectionProps) {
   const reduced = useReducedMotion();
 
-  const variants: Variants = {
-    hidden: {
-      opacity: 0,
-      y: direction === "up" ? 40 : 0,
-      x: direction === "left" ? -40 : direction === "right" ? 40 : 0,
-      filter: reduced ? "blur(0px)" : "blur(6px)",
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      x: 0,
-      filter: "blur(0px)",
-      transition: {
-        duration: 0.7,
-        delay,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  };
+  const variants: Variants = reduced
+    ? {
+        hidden: { opacity: 1 },
+        visible: { opacity: 1 },
+      }
+    : {
+        hidden: {
+          opacity: 0,
+          y: direction === "up" ? 40 : 0,
+          x: direction === "left" ? -40 : direction === "right" ? 40 : 0,
+        },
+        visible: {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          transition: {
+            duration: 0.7,
+            delay,
+            ease: [0.22, 1, 0.36, 1],
+          },
+        },
+      };
 
   return (
     <motion.div
