@@ -1,6 +1,6 @@
-﻿"use client";
+"use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { glass, glassBlue } from "@/lib/styles";
 import { links } from "@/lib/content";
 import { contactContent } from "@/lib/copy/contact";
