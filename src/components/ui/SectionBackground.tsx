@@ -611,7 +611,8 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
             const dSq = dx * dx + dy * dy;
             if (dSq < influence * influence && dSq > 0) {
               const d = Math.sqrt(dSq);
-              const force = (1 - d / influence) * 0.9;
+              const t = d / influence;
+              const force = (1 - t) * (1 - t) * 0.6;
               p.x -= (dx / d) * force;
               p.y -= (dy / d) * force;
             }
