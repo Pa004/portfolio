@@ -19,10 +19,10 @@ export default function ParticleCanvas() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const setSize = () => {
-      canvas.width = canvas.offsetWidth * dpr;
-      canvas.height = canvas.offsetHeight * dpr;
+      const currentDpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = canvas.offsetWidth * currentDpr;
+      canvas.height = canvas.offsetHeight * currentDpr;
     };
     setSize();
 
@@ -39,15 +39,21 @@ export default function ParticleCanvas() {
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    const accentRgbRef =
-      getComputedStyle(document.documentElement)
-        .getPropertyValue("--accent-rgb")
-        .trim() || "59,130,246";
-    const aScaleRef =
-      parseFloat(
+    let accentRgb = "59,130,246";
+    let canvasAlphaScale = 1;
+
+    const refreshThemeTokens = () => {
+      accentRgb =
         getComputedStyle(document.documentElement)
-          .getPropertyValue("--canvas-alpha-scale")
-      ) || 1;
+          .getPropertyValue("--accent-rgb")
+          .trim() || "59,130,246";
+      canvasAlphaScale =
+        parseFloat(
+          getComputedStyle(document.documentElement)
+            .getPropertyValue("--canvas-alpha-scale")
+        ) || 1;
+    };
+    refreshThemeTokens();
 
     const paint = () => {
       const W = canvas.width;
@@ -62,7 +68,7 @@ export default function ParticleCanvas() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${accentRgbRef},${Math.min(0.55 * aScaleRef, 0.9)})`;
+        ctx.fillStyle = `rgba(${accentRgb},${Math.min(0.55 * canvasAlphaScale, 0.9)})`;
         ctx.fill();
       });
 
@@ -75,7 +81,7 @@ export default function ParticleCanvas() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(${accentRgbRef},${Math.min(0.18 * aScaleRef * (1 - dist / 90), 0.5)})`;
+            ctx.strokeStyle = `rgba(${accentRgb},${Math.min(0.18 * canvasAlphaScale * (1 - dist / 90), 0.5)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -106,6 +112,12 @@ export default function ParticleCanvas() {
 
     window.addEventListener("resize", setSize);
 
+    const onThemeChange = () => {
+      refreshThemeTokens();
+      if (prefersReduced) paint();
+    };
+    window.addEventListener("theme-change", onThemeChange);
+
     if (prefersReduced) paint();
     else if (animId === null) loop();
 
@@ -113,6 +125,7 @@ export default function ParticleCanvas() {
       stop();
       observer.disconnect();
       window.removeEventListener("resize", setSize);
+      window.removeEventListener("theme-change", onThemeChange);
     };
   }, []);
 
