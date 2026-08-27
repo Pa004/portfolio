@@ -5,9 +5,10 @@ import { useRef, ReactNode } from "react";
 interface TiltCardProps {
   children: ReactNode;
   style?: React.CSSProperties;
+  className?: string;
 }
 
-export default function TiltCard({ children, style }: TiltCardProps) {
+export default function TiltCard({ children, style, className }: TiltCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
 
@@ -43,6 +44,7 @@ export default function TiltCard({ children, style }: TiltCardProps) {
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      className={className}
       style={{
         ...style,
         position: "relative",

@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { glass } from "@/lib/styles";
 
 import SectionBackground from "@/components/ui/SectionBackground";
-import RevealSection from "@/components/ui/RevealSection";
-import GradientText from "@/components/ui/GradientText";
 import SectionHeader from "@/components/ui/SectionHeader";
+import FloatingBlob from "@/components/ui/FloatingBlob";
+import MagneticHover from "@/components/ui/MagneticHover";
 
 type Lang = "en" | "es";
 interface EducationProps {
@@ -172,6 +172,8 @@ export default function Education({ lang }: EducationProps) {
       }}
     >
       <SectionBackground variant="grid" section="education" />
+      <FloatingBlob color1="rgba(var(--accent-violet-rgb),0.35)" color2="rgba(var(--accent-cyan-rgb),0.2)" size={420} top="20%" left="80%" blur={100} />
+      <FloatingBlob color1="rgba(var(--accent-rgb),0.3)" color2="rgba(var(--accent-green-rgb),0.15)" size={360} top="70%" left="10%" blur={90} />
       <div
         style={{
           maxWidth: "1152px",
@@ -207,10 +209,10 @@ export default function Education({ lang }: EducationProps) {
               return (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, x: -20, filter: "blur(4px)" }}
+                  whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.15 }}
+                  transition={{ duration: 0.5, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
                   style={{ display: "flex", gap: "24px" }}
                 >
                   <div style={{ flexShrink: 0 }}>
@@ -220,6 +222,7 @@ export default function Education({ lang }: EducationProps) {
                         height: "40px",
                         borderRadius: "50%",
                         ...glass,
+                        background: "var(--surface-elevated)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -229,45 +232,28 @@ export default function Education({ lang }: EducationProps) {
                       }}
                     >
                       {item.type === "degree" ? (
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke={accent.icon}
-                          strokeWidth="1.5"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
-                          />
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={accent.icon} strokeWidth="1.5">
+                          <path strokeLinecap="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
                         </svg>
                       ) : (
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke={accent.icon}
-                          strokeWidth="1.5"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
-                          />
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={accent.icon} strokeWidth="1.5">
+                          <path strokeLinecap="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
                         </svg>
                       )}
                     </div>
                   </div>
 
-                  <div
+                  <motion.div
+                    whileHover={{ scale: 1.01, borderColor: "var(--accent-cyan-icon)" }}
                     style={{
                       flex: 1,
                       ...glass,
+                      background: "var(--surface-elevated)",
                       borderRadius: "12px",
                       padding: "24px",
                       borderLeft: accent.borderLeft,
                       marginBottom: "8px",
+                      transition: "border-color 0.2s ease",
                     }}
                   >
                     <div
@@ -334,22 +320,9 @@ export default function Education({ lang }: EducationProps) {
                         marginBottom: "12px",
                       }}
                     >
-                      <svg
-                        width="11"
-                        height="11"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#52525b"
-                        strokeWidth="2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                        />
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#52525b" strokeWidth="2">
+                        <path strokeLinecap="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                       </svg>
                       <span style={{ fontSize: "11px", color: "var(--text-muted)" }}>
                         {item.location}
@@ -400,39 +373,31 @@ export default function Education({ lang }: EducationProps) {
                         }}
                       >
                         {item.links.map((link) => (
-                          <a
-                            key={link.label}
-                            href={link.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "6px",
-                              fontSize: "12px",
-                              color: link.color,
-                              textDecoration: "none",
-                            }}
-                          >
-                            <svg
-                              width="11"
-                              height="11"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
+                          <MagneticHover key={link.label} strength={0.2}>
+                            <motion.a
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              whileHover={{ opacity: 0.8, textDecoration: "underline" }}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "6px",
+                                fontSize: "12px",
+                                color: link.color,
+                                textDecoration: "none",
+                              }}
                             >
-                              <path
-                                strokeLinecap="round"
-                                d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                              />
-                            </svg>
-                            {link.label}
-                          </a>
+                              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                              </svg>
+                              {link.label}
+                            </motion.a>
+                          </MagneticHover>
                         ))}
                       </div>
                     )}
-                  </div>
+                  </motion.div>
                 </motion.div>
               );
             })}

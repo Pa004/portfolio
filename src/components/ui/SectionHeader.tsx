@@ -1,7 +1,7 @@
 "use client";
 
 import RevealSection from "@/components/ui/RevealSection";
-import GradientText from "@/components/ui/GradientText";
+import StaggerText from "@/components/ui/StaggerText";
 
 type Lang = "en" | "es";
 
@@ -28,16 +28,21 @@ export default function SectionHeader({ label, title, subtitle }: SectionHeaderP
         >
           {label}
         </p>
-        <h2
+        <StaggerText
+          text={title}
           style={{
             fontSize: "clamp(28px,4vw,36px)",
             fontWeight: 700,
             letterSpacing: "-0.03em",
             marginBottom: subtitle ? "12px" : 0,
+            background: "linear-gradient(135deg, var(--accent), var(--accent-cyan-icon), var(--accent))",
+            backgroundSize: "200% 200%",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            animation: "gradient-shift 4s ease infinite",
           }}
-        >
-          <GradientText>{title}</GradientText>
-        </h2>
+        />
         {subtitle && (
           <p
             style={{ fontSize: "14px", color: "var(--text-muted)", maxWidth: "28rem" }}
