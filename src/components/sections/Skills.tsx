@@ -7,10 +7,11 @@ import SectionBackground from "@/components/ui/SectionBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
 import FloatingBlob from "@/components/ui/FloatingBlob";
 import { skills as skillData } from "@/lib/content";
+import { skillsContent } from "@/lib/copy/skills";
+import type { Lang } from "@/types";
 
 import Tilt from "react-parallax-tilt";
 
-type Lang = "en" | "es";
 interface SkillsProps {
   lang: Lang;
 }
@@ -92,21 +93,8 @@ const accentMap = {
   },
 };
 
-const content = {
-  en: {
-    label: "Expertise",
-    title: "Skills & Technologies",
-    subtitle: "Technologies I work with across the full development stack.",
-  },
-  es: {
-    label: "Experiencia",
-    title: "Skills & Tecnologías",
-    subtitle: "Tecnologías con las que trabajo en todo el stack de desarrollo.",
-  },
-};
-
 export default function Skills({ lang }: SkillsProps) {
-  const t = content[lang];
+  const t = skillsContent[lang];
   return (
     <section
       id="skills"

@@ -2,16 +2,8 @@
 
 import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-  { label: { en: "About", es: "Sobre mí" }, href: "#about" },
-  { label: { en: "Skills", es: "Skills" }, href: "#skills" },
-  { label: { en: "Projects", es: "Proyectos" }, href: "#projects" },
-  { label: { en: "Education", es: "Educación" }, href: "#education" },
-  { label: { en: "Contact", es: "Contacto" }, href: "#contact" },
-];
-
-type Lang = "en" | "es";
+import { navLinks } from "@/lib/copy/navbar";
+import type { Lang } from "@/types";
 
 const noopSubscribe = () => () => {};
 const getMounted = () => true;

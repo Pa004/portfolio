@@ -1,26 +1,13 @@
 ﻿import { links } from "@/lib/content";
+import { footerContent } from "@/lib/copy/footer";
+import type { Lang } from "@/types";
 
-
-type Lang = "en" | "es";
 interface FooterProps {
   lang: Lang;
 }
 
-const content = {
-  en: {
-    built: "Built with",
-    by: "by Pablo Domínguez",
-    rights: "All rights reserved.",
-  },
-  es: {
-    built: "Hecho con",
-    by: "por Pablo Domínguez",
-    rights: "Todos los derechos reservados.",
-  },
-};
-
 export default function Footer({ lang }: FooterProps) {
-  const t = content[lang];
+  const t = footerContent[lang];
   const year = new Date().getFullYear();
 
   return (

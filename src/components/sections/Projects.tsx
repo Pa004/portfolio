@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { projects as projectData } from "@/lib/content";
+import { projectsContent } from "@/lib/copy/projects";
 
 import SectionBackground from "@/components/ui/SectionBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -11,27 +12,8 @@ interface ProjectsProps {
   lang: Lang;
 }
 
-const content = {
-  en: {
-    label: "Work",
-    title: "Featured Projects",
-    subtitle:
-      "A selection of projects I've built — from production systems to experimental ideas.",
-    demo: "Live demo",
-    repo: "Repository",
-  },
-  es: {
-    label: "Proyectos",
-    title: "Proyectos Destacados",
-    subtitle:
-      "Una selección de proyectos que he construido — desde sistemas en producción hasta ideas experimentales.",
-    demo: "Ver demo",
-    repo: "Repositorio",
-  },
-};
-
 export default function Projects({ lang }: ProjectsProps) {
-  const t = content[lang];
+  const t = projectsContent[lang];
 
   const allProjects: Project[] = projectData;
   const featured = allProjects.filter((p) => p.featured);
@@ -73,7 +55,7 @@ export default function Projects({ lang }: ProjectsProps) {
 interface ProjectGridProps {
   projects: Project[];
   lang: Lang;
-  copy: typeof content["en"];
+  copy: typeof projectsContent["en"];
 }
 
 function ProjectGrid({ projects, lang, copy }: ProjectGridProps) {

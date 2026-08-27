@@ -6,35 +6,12 @@ import ParticleCanvas from "@/components/ui/ParticleCanvas";
 import TypeWriter from "@/components/ui/TypeWriter";
 import AvatarIllustration from "@/components/ui/AvatarIllustration";
 import GradientText from "@/components/ui/GradientText";
+import { heroContent } from "@/lib/copy/hero";
+import type { Lang } from "@/types";
 
-
-type Lang = "en" | "es";
 interface HeroProps {
   lang?: Lang;
 }
-
-const content = {
-  en: {
-    badge: "Available for opportunities",
-    greeting: "Hi, I'm",
-    role: "Software Engineering student at ESPE",
-    description:
-      "I build modern web experiences and intelligent systems. Focused on Frontend and Full Stack development, exploring AI and mobile.",
-    cta_projects: "View projects",
-    cta_contact: "Contact me",
-    scroll: "Scroll to explore",
-  },
-  es: {
-    badge: "Disponible para oportunidades",
-    greeting: "Hola, soy",
-    role: "Estudiante de Ingeniería de Software en ESPE",
-    description:
-      "Construyo experiencias web modernas y sistemas inteligentes. Enfocado en desarrollo Frontend y Full Stack, explorando IA y mobile.",
-    cta_projects: "Ver proyectos",
-    cta_contact: "Contáctame",
-    scroll: "Scroll para explorar",
-  },
-};
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -55,7 +32,7 @@ const nameVariants: Variants = {
 };
 
 export default function Hero({ lang = "en" }: HeroProps) {
-  const t = content[lang];
+  const t = heroContent[lang];
 
   return (
     <section
