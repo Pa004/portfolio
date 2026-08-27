@@ -146,10 +146,10 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
             return Array.from({ length: count }, () => ({
               x: Math.random() * W(),
               y: Math.random() * H(),
-              vx: (Math.random() - 0.5) * 0.35,
-              vy: (Math.random() - 0.5) * 0.35,
+              vx: (Math.random() - 0.5) * 0.8,
+              vy: (Math.random() - 0.5) * 0.8,
               pulse: Math.random() * Math.PI * 2,
-              pulseSpeed: 0.5 + Math.random() * 0.7,
+              pulseSpeed: 1 + Math.random() * 1.5,
             }));
           })()
         : [];
@@ -596,7 +596,7 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
         const influence = 210;
 
         latticePoints.forEach((p) => {
-          p.pulse += 0.008 * p.pulseSpeed;
+          p.pulse += 0.02 * p.pulseSpeed;
 
           p.x += p.vx;
           p.y += p.vy;
@@ -611,8 +611,7 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
             const dSq = dx * dx + dy * dy;
             if (dSq < influence * influence && dSq > 0) {
               const d = Math.sqrt(dSq);
-              const t = d / influence;
-              const force = (1 - t) * (1 - t) * 0.6;
+              const force = (1 - d / influence) * 0.9;
               p.x -= (dx / d) * force;
               p.y -= (dy / d) * force;
             }

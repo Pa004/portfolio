@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { glass } from "@/lib/styles";
 import SectionBackground from "@/components/ui/SectionBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
+import FloatingBlob from "@/components/ui/FloatingBlob";
 import { skills as skillData } from "@/lib/content";
 
 import Tilt from "react-parallax-tilt";
@@ -113,6 +114,8 @@ export default function Skills({ lang }: SkillsProps) {
       }}
     >
       <SectionBackground variant="lattice" section="skills" />
+      <FloatingBlob color1="rgba(var(--accent-rgb),0.4)" color2="rgba(var(--accent-cyan-rgb),0.25)" size={450} top="30%" left="85%" blur={110} />
+      <FloatingBlob color1="rgba(var(--accent-green-rgb),0.3)" color2="rgba(var(--accent-rgb),0.2)" size={350} top="65%" left="5%" blur={90} />
       <div
         style={{
           maxWidth: "1152px",
@@ -142,8 +145,8 @@ export default function Skills({ lang }: SkillsProps) {
             return (
               <motion.div
                 key={skill.category.en}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
                 style={{
