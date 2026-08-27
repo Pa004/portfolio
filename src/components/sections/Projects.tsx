@@ -120,7 +120,7 @@ export default function Projects({ lang }: ProjectsProps) {
         overflow: "hidden",
       }}
     >
-      <SectionBackground variant="dots" section="projects" />
+      <SectionBackground variant="stars" section="projects" />
       <FloatingBlob color1="rgba(var(--accent-rgb),0.35)" color2="rgba(var(--accent-cyan-rgb),0.2)" size={480} top="15%" left="75%" blur={110} />
       <FloatingBlob color1="rgba(var(--accent-violet-rgb),0.3)" color2="rgba(var(--accent-rgb),0.15)" size={380} top="75%" left="15%" blur={100} />
       <div
