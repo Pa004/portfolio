@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 interface StaggerTextProps {
   text: string;
@@ -9,7 +10,7 @@ interface StaggerTextProps {
 }
 
 export default function StaggerText({ text, style, as: Tag = "h2" }: StaggerTextProps) {
-  const reduced = useReducedMotion();
+  const reduced = usePrefersReducedMotion();
   const words = text.split(" ");
 
   return (

@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, ReactNode } from "react";
-import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 interface MagneticHoverProps {
   children: ReactNode;
@@ -11,7 +12,7 @@ interface MagneticHoverProps {
 
 export default function MagneticHover({ children, strength = 0.3, style }: MagneticHoverProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = usePrefersReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 150, damping: 15 });

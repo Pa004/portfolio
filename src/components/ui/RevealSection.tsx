@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 import { ReactNode } from "react";
 
 interface RevealSectionProps {
@@ -14,7 +15,7 @@ export default function RevealSection({
   delay = 0,
   direction = "up",
 }: RevealSectionProps) {
-  const reduced = useReducedMotion();
+  const reduced = usePrefersReducedMotion();
 
   const variants: Variants = reduced
     ? {

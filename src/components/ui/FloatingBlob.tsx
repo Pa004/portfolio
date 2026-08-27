@@ -1,6 +1,6 @@
 "use client";
 
-import { useReducedMotion } from "framer-motion";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 interface FloatingBlobProps {
   color1: string;
@@ -21,7 +21,7 @@ export default function FloatingBlob({
   right,
   blur = 100,
 }: FloatingBlobProps) {
-  const reduced = useReducedMotion();
+  const reduced = usePrefersReducedMotion();
 
   return (
     <div
