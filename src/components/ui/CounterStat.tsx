@@ -9,7 +9,12 @@ interface CounterStatProps {
 }
 
 export default function CounterStat({ value, suffix = "", duration = 1500 }: CounterStatProps) {
-  const [count, setCount]     = useState(0);
+  const [count, setCount] = useState(() =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? value
+      : 0
+  );
   const [started, setStarted] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
 
@@ -29,6 +34,7 @@ export default function CounterStat({ value, suffix = "", duration = 1500 }: Cou
 
   useEffect(() => {
     if (!started) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let startTime: number;
     let rafId: number;
     const step = (timestamp: number) => {

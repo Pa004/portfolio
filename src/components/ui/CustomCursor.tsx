@@ -10,7 +10,8 @@ export default function CustomCursor() {
   const [visible, setVisible]       = useState(false);
 
   useEffect(() => {
-    if (!window.matchMedia("(pointer: fine)").matches) return;
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!window.matchMedia("(pointer: fine)").matches || media.matches) return;
 
     const dot  = dotRef.current;
     const ring = ringRef.current;

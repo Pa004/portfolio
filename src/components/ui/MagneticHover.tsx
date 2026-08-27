@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, ReactNode } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 
 interface MagneticHoverProps {
   children: ReactNode;
@@ -11,12 +11,14 @@ interface MagneticHoverProps {
 
 export default function MagneticHover({ children, strength = 0.3, style }: MagneticHoverProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 150, damping: 15 });
   const springY = useSpring(y, { stiffness: 150, damping: 15 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (reducedMotion) return;
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -36,7 +38,7 @@ export default function MagneticHover({ children, strength = 0.3, style }: Magne
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ x: springX, y: springY, display: "inline-block", ...style }}
+      style={{ x: reducedMotion ? 0 : springX, y: reducedMotion ? 0 : springY, display: "inline-block", ...style }}
     >
       {children}
     </motion.div>

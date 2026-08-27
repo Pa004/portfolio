@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useEffect, useState } from "react";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 type BadgeHue = "blue" | "cyan" | "violet";
 
@@ -44,13 +45,18 @@ const lines = [
 ];
 
 export default function AvatarIllustration() {
-  const [visibleLines, setVisibleLines] = useState(0);
-  const [cursorOn, setCursorOn]         = useState(true);
+  const reducedMotion = usePrefersReducedMotion();
+
+  const [visibleLines, setVisibleLines] = useState(() =>
+    reducedMotion ? lines.length : 0
+  );
+  const [cursorOn, setCursorOn] = useState(false);
 
   // Typewriter for code lines
   const [cycle, setCycle] = useState(0);
 
   useEffect(() => {
+    if (reducedMotion) return;
     let i = 0;
     let cancelled = false;
 
@@ -72,13 +78,14 @@ export default function AvatarIllustration() {
 
     type();
     return () => { cancelled = true; };
-  }, [cycle]);
+  }, [cycle, reducedMotion]);
 
   // Cursor blink
   useEffect(() => {
+    if (reducedMotion) return;
     const interval = setInterval(() => setCursorOn(p => !p), 530);
     return () => clearInterval(interval);
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <div aria-hidden="true" style={{ position: "relative", width: "340px", flexShrink: 0 }}>

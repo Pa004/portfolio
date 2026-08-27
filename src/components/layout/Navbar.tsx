@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useSyncExternalStore } from "react";
+import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -17,17 +17,21 @@ const noopSubscribe = () => () => {};
 const getMounted = () => true;
 const getServerMounted = () => false;
 
+const LANG_EVENT = "lang-change";
+
 interface NavbarProps {
   lang: Lang;
-  setLang: (lang: Lang) => void;
   theme: "dark" | "light";
   toggleTheme: () => void;
 }
 
-export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProps) {
+export default function Navbar({ lang, theme, toggleTheme }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const firstMenuLinkRef = useRef<HTMLAnchorElement>(null);
+  const hasOpenedRef = useRef(false);
   const mounted = useSyncExternalStore(noopSubscribe, getMounted, getServerMounted);
 
   useEffect(() => {
@@ -48,17 +52,20 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
   }, []);
 
   useEffect(() => {
-    if (!menuOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false);
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    if (menuOpen) {
+      hasOpenedRef.current = true;
+      const onKey = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setMenuOpen(false);
+      };
+      document.addEventListener("keydown", onKey);
+      firstMenuLinkRef.current?.focus();
+      return () => document.removeEventListener("keydown", onKey);
+    }
+    if (hasOpenedRef.current) hamburgerRef.current?.focus();
   }, [menuOpen]);
 
   return (
     <header
-      role="banner"
       style={{
         position: "fixed",
         top: 0,
@@ -158,7 +165,10 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
               <button
                 key={l}
                 type="button"
-                onClick={() => setLang(l)}
+                onClick={() => {
+                  localStorage.setItem("portfolio-lang", l);
+                  window.dispatchEvent(new Event(LANG_EVENT));
+                }}
                 aria-pressed={lang === l}
                 style={{
                   padding: "4px 10px",
@@ -167,12 +177,11 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
                   fontWeight: 500,
                   cursor: "pointer",
                   border: "none",
-                  fontFamily: "inherit",
                   background:
                     lang === l ? "var(--badge-bg)" : "transparent",
                   color: lang === l ? "var(--accent-text)" : "var(--text-muted)",
-                  outline:
-                    lang === l ? "0.5px solid var(--badge-border)" : "none",
+                  boxShadow:
+                    lang === l ? "inset 0 0 0 0.5px var(--badge-border)" : "none",
                   transition: "all 0.2s",
                 }}
               >
@@ -185,13 +194,13 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
           <button
             type="button"
             onClick={toggleTheme}
-            aria-label="Toggle theme"
+            aria-label={lang === "es" ? "Cambiar tema" : "Toggle theme"}
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: "32px",
-              height: "32px",
+              width: "44px",
+              height: "44px",
               borderRadius: "8px",
               border: "0.5px solid var(--border)",
               background: "var(--surface)",
@@ -207,18 +216,28 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
           {/* Hamburger — only on mobile */}
           {isMobile && (
             <button
+              ref={hamburgerRef}
               onClick={() => setMenuOpen(!menuOpen)}
               aria-expanded={menuOpen}
-              aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-label={
+                menuOpen
+                  ? lang === "es"
+                    ? "Cerrar menú"
+                    : "Close menu"
+                  : lang === "es"
+                    ? "Abrir menú"
+                    : "Open menu"
+              }
               aria-controls="mobile-menu"
               style={{
                 background: "none",
                 border: "none",
                 color: "var(--text-muted)",
                 cursor: "pointer",
-                padding: "4px",
+                padding: "12px",
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <svg
@@ -245,7 +264,6 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
         {menuOpen && isMobile && (
           <motion.div
             id="mobile-menu"
-            role="menu"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -267,16 +285,19 @@ export default function Navbar({ lang, setLang, theme, toggleTheme }: NavbarProp
                 padding: 0,
               }}
             >
-              {navLinks.map((link) => (
+              {navLinks.map((link, index) => (
                 <li key={link.href}>
                   <a
+                    ref={index === 0 ? firstMenuLinkRef : undefined}
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
                     style={{
+                      display: "block",
                       fontSize: "15px",
                       color: "var(--text-muted)",
                       textDecoration: "none",
                       fontWeight: 500,
+                      padding: "8px 0",
                     }}
                   >
                     {link.label[lang]}

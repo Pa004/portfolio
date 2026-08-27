@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 const roles = {
   en: ["Full Stack Developer", "Frontend Engineer", "AI Enthusiast", "Flutter Developer"],
@@ -50,7 +51,7 @@ function TypeWriterInner({ lang }: TypeWriterProps) {
   }, [lang]);
 
   return (
-    <span aria-hidden="true" style={{ color: "var(--accent-cyan-text)", fontWeight: 500 }}>
+    <span aria-hidden="true" style={{ color: "var(--accent-cyan-text)", fontWeight: 500, minHeight: "20px", display: "inline-block" }}>
       {text}
       <span style={{
         display: "inline-block", width: "2px", height: "20px",
@@ -62,5 +63,15 @@ function TypeWriterInner({ lang }: TypeWriterProps) {
 }
 
 export default function TypeWriter({ lang }: TypeWriterProps) {
+  const reducedMotion = usePrefersReducedMotion();
+
+  if (reducedMotion) {
+    return (
+      <span aria-hidden="true" style={{ color: "var(--accent-cyan-text)", fontWeight: 500 }}>
+        {roles[lang][0]}
+      </span>
+    );
+  }
+
   return <TypeWriterInner key={lang} lang={lang} />;
 }
