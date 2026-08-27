@@ -1,24 +1,26 @@
+const blur = {
+  backdropFilter: "blur(12px)",
+  WebkitBackdropFilter: "blur(12px)",
+} as const;
+
 export const glass = {
+  ...blur,
   background: "var(--surface)",
   border: "1px solid var(--border)",
   boxShadow: "0 4px 20px rgba(0, 0, 0, 0.04)",
-  backdropFilter: "blur(12px)",
-  WebkitBackdropFilter: "blur(12px)",
 } as React.CSSProperties;
 
 export const glassBlue = {
+  ...blur,
   background: "var(--glass-blue-bg)",
   border: "0.5px solid var(--glass-blue-border)",
-  backdropFilter: "blur(12px)",
-  WebkitBackdropFilter: "blur(12px)",
 } as React.CSSProperties;
 
 export const cardGlass = {
+  ...blur,
   background: "var(--surface-card)",
   border: "1px solid var(--border)",
   boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
-  backdropFilter: "blur(12px)",
-  WebkitBackdropFilter: "blur(12px)",
 } as React.CSSProperties;
 
 export const gridBg = {
