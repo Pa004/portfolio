@@ -43,11 +43,11 @@
 | Section | Background |
 |---|---|
 | Hero | Particle network canvas + Cursor spotlight |
-| About | Pulsing blueprint grid |
-| Skills | Animated orb field |
-| Projects | Animated dot pattern |
-| Education | Animated grid pattern |
-| Contact | Animated layered wave flows |
+| About | Pulsing blueprint grid (`kinetic`) |
+| Skills | Animated lattice field |
+| Projects | Animated star field (`stars`) |
+| Education | Animated neural connections (`neural`) |
+| Contact | Animated layered wave flows (`waves`) |
 
 ### Extras
 - 🌍 **Bilingual support** — English / Spanish (EN/ES) toggle with full content switch
@@ -82,8 +82,12 @@ src/
 ├── app/
 │   ├── layout.tsx              # Root layout — theme provider, toaster, global overlays
 │   ├── page.tsx                # Main page — section composition, skip-to-content, dynamic lang
+│   ├── error.tsx               # Error boundary terminal page
 │   ├── not-found.tsx           # Custom 404 terminal page
 │   ├── globals.css             # Theme tokens (light/dark) + Tailwind v4 configuration
+│   ├── manifest.ts             # PWA web manifest
+│   ├── robots.ts               # robots.txt (allow all + sitemap)
+│   ├── sitemap.ts              # sitemap.xml
 │   ├── opengraph-image.tsx     # Dynamic OG image generator
 │   └── favicon.ico             # App icon
 ├── components/
@@ -103,8 +107,10 @@ src/
 │       ├── ConsoleEasterEgg.tsx    # DevTools ASCII art message
 │       ├── CounterStat.tsx         # Animated number counter
 │       ├── CustomCursor.tsx        # Custom dot + ring interactive cursor
+│       ├── FloatingBlob.tsx        # Ambient gradient blob (Skills)
 │       ├── GradientText.tsx        # Gradient text wrapper
 │       ├── LoadingScreen.tsx       # First-load terminal animation
+│       ├── MagneticHover.tsx       # Magnetic hover effect (Projects/Education)
 │       ├── MouseSpotlight.tsx      # Document-level cursor spotlight (useRef + direct DOM)
 │       ├── NoiseOverlay.tsx        # Film-grain texture overlay
 │       ├── ParticleCanvas.tsx      # Hero particle network canvas
@@ -113,14 +119,13 @@ src/
 │       ├── SectionHeader.tsx       # Reusable section header (label + gradient title + subtitle)
 │       ├── SectionBackground.tsx   # Per-section animated canvas backgrounds
 │       ├── SmoothScroll.tsx        # Lenis smooth scroll provider
-│       ├── TiltCard.tsx            # 3D perspective tilt card
+│       ├── StaggerText.tsx         # Word-by-word stagger animation
 │       └── TypeWriter.tsx          # Typewriter role cycling animation
-├── hooks/
-│   └── useReducedMotion.ts     # Hook to respect OS prefers-reduced-motion
 ├── lib/
-│   ├── content.ts              # Data source for projects, skills, education & links
+│   ├── content.ts              # Data source for projects, skills & links
 │   ├── lenis.ts                # Lenis smooth scroll configuration
-│   └── styles.ts               # Shared adaptive inline style objects
+│   ├── styles.ts               # Shared adaptive inline style objects
+│   └── usePrefersReducedMotion.ts # Hook to respect OS prefers-reduced-motion
 └── types/
     └── index.ts                # Shared TypeScript definitions
 ```
@@ -151,10 +156,12 @@ Theme tokens are defined as CSS custom properties in `globals.css` under `:root`
 Every section component accepts `lang: "en" | "es"` and exports bilingual `content` objects internally. The toggle lives in `Navbar.tsx` and passes `lang` to all sections. To add content: duplicate the entry in both `en` and `es` blocks.
 
 ### Canvas lifecycle & performance
-`ParticleCanvas` and `SectionBackground` pause rendering when offscreen via `IntersectionObserver` (native). `MouseSpotlight` uses `useRef` + direct DOM manipulation to avoid re-renders entirely. The `useReducedMotion` hook (`src/hooks/useReducedMotion.ts`) disables or simplifies animations when the OS setting requests it. When adding new canvas elements, wrap them with the same `isInView` guard and respect `prefers-reduced-motion`.
+`ParticleCanvas` and `SectionBackground` pause rendering when offscreen via `IntersectionObserver` (native). `MouseSpotlight` uses `useRef` + direct DOM manipulation to avoid re-renders entirely. The `usePrefersReducedMotion` hook (`src/lib/usePrefersReducedMotion.ts`) — or `useReducedMotion` from framer-motion — disables or simplifies animations when the OS setting requests it. When adding new canvas elements, wrap them with the same `isInView` guard and respect `prefers-reduced-motion`.
 
 ### Data shape (`src/lib/content.ts`)
-Single source of truth for: project cards (title, description, links, badges, screenshots), skills categories (name, icon, items), education entries, and social links. Sections import from here — avoid hardcoding data in components.
+Data source for the structured, data-driven content: **project cards** (title, description, links, badges, screenshots) and **skills categories** (name, icon, items), plus social links. **Education entries are NOT in `content.ts`** — they live inside `Education.tsx`. Sections import structured data from here; avoid hardcoding structured data in components.
+
+**Note on bilingual content:** only the structured data above lives in `content.ts` with `{ en, es }` fields. The rest of the visible UI copy (Hero, About, Contact, Navbar, Footer, etc.) is kept as local bilingual `content` objects inside each section component. See the `lang` prop pattern below.
 
 ---
 
