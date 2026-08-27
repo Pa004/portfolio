@@ -23,8 +23,8 @@
 - 🎯 **Custom cursor** — dot + lagged ring with dynamic hover and click states
 - 📊 **Scroll progress bar** — top-of-page gradient indicator
 - 🌊 **Smooth scroll** — cinematic inertia powered by Lenis
-- ✨ **Section reveal animations** — staggered blur + fade on viewport entry (Framer Motion)
-- 🃏 **3D card tilt** — perspective tilt with glow follow on hover (TiltCard)
+- ✨ **Section reveal animations** — staggered blur + fade on viewport entry (Motion)
+- 🃏 **3D card tilt** — perspective tilt with glow follow on hover
 - 🍱 **Bento Grid layouts** — asymmetric card distribution in Skills and About areas of interest
 - 🌈 **Gradient typography** — high-contrast gradient headings
 - 🔲 **Noise texture overlay** — subtle film-grain depth effect
@@ -66,7 +66,7 @@
 | Language | TypeScript 5 |
 | Styling | Tailwind CSS v4 + Adaptive CSS Variables |
 | Theming | Custom toggle (useSyncExternalStore + localStorage) |
-| Animations | Framer Motion |
+| Animations | Motion |
 | Smooth scroll | Lenis |
 | Notifications | Sonner |
 | Icons | Inline SVG + Emoji |
@@ -156,7 +156,7 @@ Theme tokens are defined as CSS custom properties in `globals.css` under `:root`
 Every section component accepts `lang: "en" | "es"` and exports bilingual `content` objects internally. The toggle lives in `Navbar.tsx` and passes `lang` to all sections. To add content: duplicate the entry in both `en` and `es` blocks.
 
 ### Canvas lifecycle & performance
-`ParticleCanvas` and `SectionBackground` pause rendering when offscreen via `IntersectionObserver` (native). `MouseSpotlight` uses `useRef` + direct DOM manipulation to avoid re-renders entirely. The `usePrefersReducedMotion` hook (`src/lib/usePrefersReducedMotion.ts`) — or `useReducedMotion` from framer-motion — disables or simplifies animations when the OS setting requests it. When adding new canvas elements, wrap them with the same `isInView` guard and respect `prefers-reduced-motion`.
+`ParticleCanvas` and `SectionBackground` pause rendering when offscreen via `IntersectionObserver` (native). `MouseSpotlight` uses `useRef` + direct DOM manipulation to avoid re-renders entirely. The `usePrefersReducedMotion` hook (`src/lib/usePrefersReducedMotion.ts`) — or `useReducedMotion` from motion — disables or simplifies animations when the OS setting requests it. When adding new canvas elements, wrap them with the same `isInView` guard and respect `prefers-reduced-motion`.
 
 ### Data shape (`src/lib/content.ts`)
 Data source for the structured, data-driven content: **project cards** (title, description, links, badges, screenshots) and **skills categories** (name, icon, items), plus social links. **Education entries are NOT in `content.ts`** — they live inside `Education.tsx`. Sections import structured data from here; avoid hardcoding structured data in components.
