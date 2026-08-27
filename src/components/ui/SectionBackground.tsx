@@ -66,6 +66,20 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
 
     const interactive = !!section && !prefersReduced;
 
+    const themeTokens = {
+      accent: hexToRgb(cssVar("--accent") || "#3b82f6"),
+      cyan: hexToRgb(cssVar("--accent-cyan-icon") || "#06b6d4"),
+      violet: hexToRgb(cssVar("--accent-violet-icon") || "#a78bfa"),
+      green: hexToRgb(cssVar("--accent-green-icon") || "#22c55e"),
+      aScale: parseFloat(cssVar("--canvas-alpha-scale")) || 1,
+    };
+    const refreshTokens = () => {
+      themeTokens.accent = hexToRgb(cssVar("--accent") || "#3b82f6");
+      themeTokens.cyan = hexToRgb(cssVar("--accent-cyan-icon") || "#06b6d4");
+      themeTokens.violet = hexToRgb(cssVar("--accent-violet-icon") || "#a78bfa");
+      themeTokens.green = hexToRgb(cssVar("--accent-green-icon") || "#22c55e");
+      themeTokens.aScale = parseFloat(cssVar("--canvas-alpha-scale")) || 1;
+    };
     const dots =
       variant === "dots"
         ? Array.from({ length: 50 }, () => ({
@@ -245,13 +259,13 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
 
     const paint = () => {
       ctx!.clearRect(0, 0, W(), H());
-      const aScale = parseFloat(cssVar("--canvas-alpha-scale")) || 1;
+      const aScale = themeTokens.aScale;
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
       const hasMouse = mx >= 0 && interactive;
 
       if (variant === "kinetic") {
-        const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
+        const accentRgb = themeTokens.accent;
 
         const cols = Math.max(2, Math.ceil(W() / KINETIC_CELL)) + 1;
         const rows = Math.max(2, Math.ceil(H() / KINETIC_CELL)) + 1;
@@ -380,7 +394,7 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
       if (variant === "grid") {
         const size = 40;
         t += 0.012;
-        const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
+        const accentRgb = themeTokens.accent;
         const isEducation = section === "education";
 
         for (let x = 0; x < W(); x += size) {
@@ -458,7 +472,12 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
             ? orb.baseR + Math.sin(t * orb.pulseSpeed + i) * (orb.baseR * 0.15)
             : orb.baseR;
 
-          const rgb = hexToRgb(cssVar(orb.colorVar) || "#3b82f6");
+          const rgb =
+            orb.colorVar === "--accent-cyan-icon"
+              ? themeTokens.cyan
+              : orb.colorVar === "--accent-violet-icon"
+                ? themeTokens.violet
+                : themeTokens.accent;
           const grad = ctx!.createRadialGradient(x, y, 0, x, y, pulseR);
           grad.addColorStop(0, `rgba(${rgb},${0.15 * aScale})`);
           grad.addColorStop(0.5, `rgba(${rgb},${0.06 * aScale})`);
@@ -492,7 +511,7 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
               ctx!.beginPath();
               ctx!.moveTo(x1, y1);
               ctx!.lineTo(x2, y2);
-              ctx!.strokeStyle = `rgba(${hexToRgb(cssVar("--accent") || "#3b82f6")},${lineAlpha})`;
+              ctx!.strokeStyle = `rgba(${themeTokens.accent},${lineAlpha})`;
               ctx!.lineWidth = 0.5;
               ctx!.stroke();
             }
@@ -500,7 +519,7 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
         }
 
         const size = 48;
-        const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
+        const accentRgb = themeTokens.accent;
         ctx!.strokeStyle = `rgba(${accentRgb},${0.04 * aScale})`;
         ctx!.lineWidth = 0.5;
         for (let x = 0; x < W(); x += size) {
@@ -518,7 +537,7 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
       }
 
       if (variant === "dots") {
-        const cyanRgb = hexToRgb(cssVar("--accent-cyan-icon") || "#06b6d4");
+        const cyanRgb = themeTokens.cyan;
         const isProjects = section === "projects";
 
         dots.forEach((d) => {
@@ -570,7 +589,7 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
       }
 
       if (variant === "lattice") {
-        const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
+        const accentRgb = themeTokens.accent;
         const isLight = document.documentElement.dataset.theme === "light";
         const neutralRgb = isLight ? "51,65,85" : "148,163,184";
         const maxDist = 150;
@@ -692,8 +711,8 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
       }
 
       if (variant === "stars") {
-        const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
-        const cyanRgb = hexToRgb(cssVar("--accent-cyan-icon") || "#06b6d4");
+        const accentRgb = themeTokens.accent;
+        const cyanRgb = themeTokens.cyan;
         const isLight = document.documentElement.dataset.theme === "light";
         const neutralRgb = isLight ? "51,65,85" : "148,163,184";
 
@@ -795,7 +814,7 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
       }
 
       if (variant === "neural") {
-        const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
+        const accentRgb = themeTokens.accent;
         const isLight = document.documentElement.dataset.theme === "light";
         const neutralRgb = isLight ? "51,65,85" : "148,163,184";
 
@@ -884,10 +903,10 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
 
       if (variant === "waves") {
         t += 0.02;
-        const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
-        const cyanRgb = hexToRgb(cssVar("--accent-cyan-icon") || "#06b6d4");
-        const violetRgb = hexToRgb(cssVar("--accent-violet-icon") || "#a78bfa");
-        const greenRgb = hexToRgb(cssVar("--accent-green-icon") || "#22c55e");
+        const accentRgb = themeTokens.accent;
+        const cyanRgb = themeTokens.cyan;
+        const violetRgb = themeTokens.violet;
+        const greenRgb = themeTokens.green;
 
         const mouseYInfluence = hasMouse ? (my / H() - 0.5) * 20 : 0;
 
@@ -982,6 +1001,7 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
       });
     };
     document.addEventListener("click", onClick);
+    document.addEventListener("theme-change", refreshTokens);
 
     if (prefersReduced) paint();
     else if (animId === null) loop();
@@ -991,6 +1011,7 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
       observer.disconnect();
       resizeObserver.disconnect();
       document.removeEventListener("click", onClick);
+      document.removeEventListener("theme-change", refreshTokens);
     };
   }, [variant, section]);
 
