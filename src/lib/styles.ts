@@ -7,7 +7,7 @@ export const glass = {
   ...blur,
   background: "var(--surface)",
   border: "1px solid var(--border)",
-  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.04)",
+  boxShadow: "var(--shadow-glass)",
 } as React.CSSProperties;
 
 export const glassBlue = {
@@ -20,7 +20,7 @@ export const cardGlass = {
   ...blur,
   background: "var(--surface-card)",
   border: "1px solid var(--border)",
-  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+  boxShadow: "var(--shadow-card)",
 } as React.CSSProperties;
 
 export const gridBg = {
