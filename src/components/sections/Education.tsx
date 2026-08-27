@@ -171,7 +171,7 @@ export default function Education({ lang }: EducationProps) {
         overflow: "hidden",
       }}
     >
-      <SectionBackground variant="grid" section="education" />
+      <SectionBackground variant="neural" section="education" />
       <FloatingBlob color1="rgba(var(--accent-violet-rgb),0.35)" color2="rgba(var(--accent-cyan-rgb),0.2)" size={420} top="20%" left="80%" blur={100} />
       <FloatingBlob color1="rgba(var(--accent-rgb),0.3)" color2="rgba(var(--accent-green-rgb),0.15)" size={360} top="70%" left="10%" blur={90} />
       <div

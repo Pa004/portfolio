@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-type Variant = "grid" | "orbs" | "dots" | "waves" | "kinetic" | "lattice";
+type Variant = "grid" | "orbs" | "dots" | "waves" | "kinetic" | "lattice" | "stars" | "neural";
 type Section = "about" | "skills" | "projects" | "education";
 
 interface SectionBackgroundProps {
@@ -58,6 +58,7 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
     const W = () => canvas.width;
     const H = () => canvas.height;
     let t = 0;
+    let nodesPulse = 0;
 
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -142,6 +143,105 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
     const KINETIC_CELL = 64;
     const KINETIC_INFLUENCE = 240;
     const KINETIC_MAX_WARP = 22;
+
+    interface Meteor {
+      x: number;
+      y: number;
+      len: number;
+      speed: number;
+      angle: number;
+      active: boolean;
+    }
+
+    const STARS_CELL = 40;
+    const STARS_INFLUENCE = 260;
+
+    const starsNodes =
+      variant === "stars"
+        ? (() => {
+            const nodes: { x: number; y: number; pulse: number }[] = [];
+            for (let x = STARS_CELL / 2; x < W(); x += STARS_CELL) {
+              for (let y = STARS_CELL / 2; y < H(); y += STARS_CELL) {
+                nodes.push({
+                  x,
+                  y,
+                  pulse: Math.random() * Math.PI * 2,
+                });
+              }
+            }
+            return nodes;
+          })()
+        : [];
+
+    const starsMeteors: Meteor[] = [];
+
+    const spawnMeteor = (): Meteor => {
+      const len = 130 + Math.random() * 90;
+      const speed = 2.2 + Math.random() * 2.4;
+      const angle = 0.5 + Math.random() * 0.35;
+      return {
+        x: Math.random() * W(),
+        y: Math.random() * H() * 0.5,
+        len,
+        speed,
+        angle,
+        active: false,
+      };
+    };
+
+    for (let i = 0; i < 6; i++) {
+      const m = spawnMeteor();
+      m.active = false;
+      starsMeteors.push(m);
+    }
+
+    const NEURAL_COUNT = 60;
+    const NEURAL_LINK_DIST = 185;
+    const NEURAL_INFLUENCE = 230;
+    const NEURAL_SPEED = 0.3;
+
+    interface NeuralNode {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      pulse: number;
+      pulseSpeed: number;
+    }
+
+    interface NeuralSignal {
+      a: number;
+      b: number;
+      t: number;
+      speed: number;
+    }
+
+    const neuralNodes: NeuralNode[] =
+      variant === "neural"
+        ? Array.from({ length: NEURAL_COUNT }, () => ({
+            x: Math.random() * W(),
+            y: Math.random() * H(),
+            vx: (Math.random() - 0.5) * NEURAL_SPEED,
+            vy: (Math.random() - 0.5) * NEURAL_SPEED,
+            pulse: Math.random() * Math.PI * 2,
+            pulseSpeed: 0.5 + Math.random() * 0.8,
+          }))
+        : [];
+
+    const neuralSignals: NeuralSignal[] = [];
+    const spawnNeuralSignal = (): NeuralSignal => {
+      const a = Math.floor(Math.random() * NEURAL_COUNT);
+      let b = Math.floor(Math.random() * NEURAL_COUNT);
+      if (b === a) b = (b + 1) % NEURAL_COUNT;
+      return {
+        a,
+        b,
+        t: Math.random(),
+        speed: 0.008 + Math.random() * 0.006,
+      };
+    };
+    for (let i = 0; i < 4; i++) neuralSignals.push(spawnNeuralSignal());
+
 
     const paint = () => {
       ctx!.clearRect(0, 0, W(), H());
@@ -588,6 +688,197 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
             ctx!.arc(p.x, p.y, 7 + Math.sin(p.pulse * 2) * 2.5, 0, Math.PI * 2);
             ctx!.stroke();
           }
+        });
+      }
+
+      if (variant === "stars") {
+        const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
+        const cyanRgb = hexToRgb(cssVar("--accent-cyan-icon") || "#06b6d4");
+        const isLight = document.documentElement.dataset.theme === "light";
+        const neutralRgb = isLight ? "51,65,85" : "148,163,184";
+
+        nodesPulse++;
+
+        starsNodes.forEach((n, i) => {
+          const mouseDist = hasMouse ? dist(n.x, n.y, mx, my) : Infinity;
+          const isNear = hasMouse && mouseDist < STARS_INFLUENCE;
+          const nearT = isNear ? 1 - mouseDist / STARS_INFLUENCE : 0;
+          const pulse = Math.sin(n.pulse + nodesPulse * 0.02 + i) * 0.5 + 0.5;
+
+          const r = 1.1 + nearT * 0.9;
+          const baseAlpha = 0.1 + pulse * 0.25;
+
+          if (isNear) {
+            const glowR = 6 + nearT * 6;
+            const grd = ctx!.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowR);
+            grd.addColorStop(0, `rgba(${accentRgb},${(nearT * 0.35).toFixed(3)})`);
+            grd.addColorStop(1, `rgba(${accentRgb},0)`);
+            ctx!.beginPath();
+            ctx!.arc(n.x, n.y, glowR, 0, Math.PI * 2);
+            ctx!.fillStyle = grd;
+            ctx!.fill();
+          }
+
+          ctx!.beginPath();
+          ctx!.arc(n.x, n.y, r, 0, Math.PI * 2);
+          ctx!.fillStyle = isNear
+            ? `rgba(${accentRgb},${(0.15 + nearT * 0.7) * aScale})`
+            : `rgba(${neutralRgb},${baseAlpha * aScale})`;
+          ctx!.fill();
+        });
+
+        const meteorCount = starsMeteors.length;
+        let activeMeteors = 0;
+        for (const m of starsMeteors) if (m.active) activeMeteors++;
+
+        if (interactive && activeMeteors < 3 && Math.random() < 0.008) {
+          const idx = Math.floor(Math.random() * meteorCount);
+          const m = starsMeteors[idx];
+          if (!m.active) {
+            m.x = Math.random() * W();
+            m.y = -Math.random() * 100;
+            m.len = 130 + Math.random() * 90;
+            m.angle = 0.5 + Math.random() * 0.35;
+            m.speed = 2.2 + Math.random() * 2.4;
+            m.active = true;
+          }
+        }
+
+        for (const m of starsMeteors) {
+          if (!m.active) continue;
+
+          if (hasMouse) {
+            const dx = mx - m.x;
+            const dy = my - m.y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < STARS_INFLUENCE && d > 0) {
+              const pull = (1 - d / STARS_INFLUENCE) * 0.6;
+              m.angle += (Math.atan2(dy, dx) - m.angle) * pull * 0.05;
+            }
+          }
+
+          m.x += Math.cos(m.angle) * m.speed;
+          m.y += Math.sin(m.angle) * m.speed;
+
+          if (m.y > H() + 80 || m.x < -200 || m.x > W() + 200) {
+            m.active = false;
+            continue;
+          }
+
+          const headX = m.x;
+          const headY = m.y;
+          const tailX = m.x - Math.cos(m.angle) * m.len;
+          const tailY = m.y - Math.sin(m.angle) * m.len;
+
+          const grd = ctx!.createLinearGradient(headX, headY, tailX, tailY);
+          grd.addColorStop(0, `rgba(${accentRgb},${0.9 * aScale})`);
+          grd.addColorStop(0.4, `rgba(${cyanRgb},${0.25 * aScale})`);
+          grd.addColorStop(1, `rgba(${accentRgb},0)`);
+          ctx!.beginPath();
+          ctx!.moveTo(headX, headY);
+          ctx!.lineTo(tailX, tailY);
+          ctx!.strokeStyle = grd;
+          ctx!.lineWidth = 1.6;
+          ctx!.lineCap = "round";
+          ctx!.stroke();
+
+          ctx!.beginPath();
+          ctx!.arc(headX, headY, 2.1, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(${accentRgb},${0.95 * aScale})`;
+          ctx!.fill();
+
+          ctx!.beginPath();
+          ctx!.arc(headX, headY, 5, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(${accentRgb},${0.18 * aScale})`;
+          ctx!.fill();
+        }
+      }
+
+      if (variant === "neural") {
+        const accentRgb = hexToRgb(cssVar("--accent") || "#3b82f6");
+        const isLight = document.documentElement.dataset.theme === "light";
+        const neutralRgb = isLight ? "51,65,85" : "148,163,184";
+
+        neuralNodes.forEach((n) => {
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0 || n.x > W()) n.vx *= -1;
+          if (n.y < 0 || n.y > H()) n.vy *= -1;
+        });
+
+        for (let i = 0; i < neuralNodes.length; i++) {
+          const ni = neuralNodes[i];
+          for (let j = i + 1; j < neuralNodes.length; j++) {
+            const nj = neuralNodes[j];
+            const dx = nj.x - ni.x;
+            const dy = nj.y - ni.y;
+            const d2 = dx * dx + dy * dy;
+            if (d2 >= NEURAL_LINK_DIST * NEURAL_LINK_DIST) continue;
+            const d = Math.sqrt(d2);
+            if (d === 0) continue;
+            let linkAlpha = (1 - d / NEURAL_LINK_DIST) * 0.3;
+            if (hasMouse) {
+              const mdxi = ni.x - mx;
+              const mdyi = ni.y - my;
+              const md = Math.sqrt(mdxi * mdxi + mdyi * mdyi);
+              if (md < NEURAL_INFLUENCE) {
+                linkAlpha += (1 - md / NEURAL_INFLUENCE) * 0.45;
+              }
+            }
+            ctx!.beginPath();
+            ctx!.moveTo(ni.x, ni.y);
+            ctx!.lineTo(nj.x, nj.y);
+            ctx!.strokeStyle = `rgba(${accentRgb},${Math.min(linkAlpha, 0.75) * aScale})`;
+            ctx!.lineWidth = 0.6;
+            ctx!.stroke();
+          }
+        }
+
+        for (const s of neuralSignals) {
+          s.t += s.speed;
+          if (s.t > 1) {
+            const next = spawnNeuralSignal();
+            s.a = next.a;
+            s.b = next.b;
+            s.t = 0;
+          }
+          const na = neuralNodes[s.a];
+          const nb = neuralNodes[s.b];
+          const dx = nb.x - na.x;
+          const dy = nb.y - na.y;
+          const px = na.x + dx * s.t;
+          const py = na.y + dy * s.t;
+          ctx!.beginPath();
+          ctx!.arc(px, py, 2.2, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(${accentRgb},${0.7 * aScale})`;
+          ctx!.fill();
+          ctx!.beginPath();
+          ctx!.arc(px, py, 5, 0, Math.PI * 2);
+          ctx!.fillStyle = `rgba(${accentRgb},${0.14 * aScale})`;
+          ctx!.fill();
+        }
+
+        neuralNodes.forEach((n, i) => {
+          const pulse = Math.sin(n.pulse + i) * 0.5 + 0.5;
+          let alpha = 0.25 + pulse * 0.35;
+          let r = 1.2 + pulse * 0.7;
+          const md = hasMouse ? dist(n.x, n.y, mx, my) : Infinity;
+          const isNear = hasMouse && md < NEURAL_INFLUENCE;
+          if (isNear) {
+            const nearT = 1 - md / NEURAL_INFLUENCE;
+            alpha += nearT * 0.5;
+            r += nearT * 1.2;
+            ctx!.beginPath();
+            ctx!.arc(n.x, n.y, 7 + nearT * 7, 0, Math.PI * 2);
+            ctx!.fillStyle = `rgba(${accentRgb},${(nearT * 0.28).toFixed(3)})`;
+            ctx!.fill();
+          }
+          ctx!.beginPath();
+          ctx!.arc(n.x, n.y, r, 0, Math.PI * 2);
+          ctx!.fillStyle = isNear
+            ? `rgba(${accentRgb},${Math.min(alpha, 1) * aScale})`
+            : `rgba(${neutralRgb},${alpha * aScale})`;
+          ctx!.fill();
         });
       }
 
