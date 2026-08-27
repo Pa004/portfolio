@@ -1,7 +1,7 @@
-﻿"use client";
+"use client";
 
 import { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { cardGlass } from "@/lib/styles";
 import SectionBackground from "@/components/ui/SectionBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
