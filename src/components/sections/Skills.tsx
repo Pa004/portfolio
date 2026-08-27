@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
-import { glass } from "@/lib/styles";
+import { cardGlass } from "@/lib/styles";
 import SectionBackground from "@/components/ui/SectionBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
 import FloatingBlob from "@/components/ui/FloatingBlob";
@@ -175,7 +175,7 @@ export default function Skills({ lang }: SkillsProps) {
                     }}
                     transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     style={{
-                      ...glass,
+                      ...cardGlass,
                       borderColor: isLarge ? accent.icon : "var(--border)",
                       borderRadius: "12px",
                       padding: "20px",

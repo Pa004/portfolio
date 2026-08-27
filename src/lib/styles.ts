@@ -13,6 +13,14 @@ export const glassBlue = {
   WebkitBackdropFilter: "blur(12px)",
 } as React.CSSProperties;
 
+export const cardGlass = {
+  background: "var(--surface-card)",
+  border: "1px solid var(--border)",
+  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08)",
+  backdropFilter: "blur(12px)",
+  WebkitBackdropFilter: "blur(12px)",
+} as React.CSSProperties;
+
 export const gridBg = {
   backgroundImage: `
     linear-gradient(var(--grid-line-color) 1px, transparent 1px),
