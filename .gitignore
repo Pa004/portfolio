@@ -46,3 +46,6 @@ CLAUDE.md
 
 # playwright mcp artifacts
 /.playwright-mcp/
+
+# audit report (local only)
+AUDIT.md
