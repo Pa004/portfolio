@@ -10,8 +10,7 @@ import ConsoleEasterEgg from "@/components/ui/ConsoleEasterEgg";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import NoiseOverlay from "@/components/ui/NoiseOverlay";
 import { Toaster } from "sonner";
-
-const SITE_URL = "https://portfolio-ochre-xi-ba44zo6k9y.vercel.app";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -19,18 +18,28 @@ export const metadata: Metadata = {
   description: "Software Engineering student at ESPE. Building modern web experiences and intelligent systems.",
   keywords: ["Full Stack Developer", "Frontend", "React", "Next.js", "TypeScript", "AI", "Flutter", "Pablo Domínguez"],
   authors: [{ name: "Pablo Domínguez" }],
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    languages: {
+      "x-default": "/",
+      en: "/",
+      es: "/",
+    },
+  },
   openGraph: {
     title: "Pablo Domínguez — Full Stack Developer",
     description: "Software Engineering student at ESPE. Building modern web experiences and intelligent systems.",
     type: "website",
     url: "/",
+    locale: "es_ES",
+    alternateLocale: ["en_US"],
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Pablo Domínguez — Full Stack Developer",
     description: "Software Engineering student at ESPE. Building modern web experiences and intelligent systems.",
+    images: ["/opengraph-image"],
   },
 };
 
@@ -73,6 +82,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@type": "Person",
               name: "Pablo Domínguez",
               url: SITE_URL,
+              image: `${SITE_URL}/opengraph-image`,
+              description: "Software Engineering student at ESPE. Building modern web experiences and intelligent systems.",
               jobTitle: "Full Stack Developer",
               worksFor: {
                 "@type": "EducationalOrganization",

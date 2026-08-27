@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { SITE_URL } from "@/lib/site";
 
 export const runtime = "edge";
 export const alt     = "Pablo Domínguez — Full Stack Developer";
@@ -75,7 +76,7 @@ export default function OGImage() {
           position: "absolute", bottom: "48px", right: "80px",
           fontSize: "14px", color: "#3f3f46", fontFamily: "monospace",
         }}>
-          portfolio-pabl004.vercel.app
+          {new URL(SITE_URL).host}
         </div>
       </div>
     ),
