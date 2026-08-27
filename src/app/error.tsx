@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { gridBg } from "@/lib/styles";
+import TerminalBar from "@/components/ui/TerminalBar";
 
 type Lang = "en" | "es";
 
@@ -52,23 +53,7 @@ export default function Error({ reset }: { reset: () => void }) {
           overflow: "hidden",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            padding: "12px 16px",
-            background: "var(--surface)",
-            borderBottom: "0.5px solid var(--border)",
-          }}
-        >
-          <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ef4444" }} />
-          <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#f59e0b" }} />
-          <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#22c55e" }} />
-          <span style={{ fontSize: "12px", color: "var(--text-muted)", marginLeft: "8px", fontFamily: "monospace" }}>
-            bash — 500
-          </span>
-        </div>
+        <TerminalBar label="bash — 500" />
 
         <div style={{ padding: "24px", fontFamily: "monospace", fontSize: "13px" }}>
           <p style={{ color: "#ef4444", marginBottom: "16px" }}>

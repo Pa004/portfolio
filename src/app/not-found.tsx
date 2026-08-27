@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { gridBg } from "@/lib/styles";
+import TerminalBar from "@/components/ui/TerminalBar";
 
 export default function NotFound() {
   return (
@@ -28,23 +29,7 @@ export default function NotFound() {
         }}
       >
         {/* Terminal title bar */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            padding: "12px 16px",
-            background: "var(--surface)",
-            borderBottom: "0.5px solid var(--border)",
-          }}
-        >
-          <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ef4444" }} />
-          <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#f59e0b" }} />
-          <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#22c55e" }} />
-          <span style={{ fontSize: "12px", color: "var(--text-muted)", marginLeft: "8px", fontFamily: "monospace" }}>
-            bash — 404
-          </span>
-        </div>
+        <TerminalBar label="bash — 404" />
 
         {/* Terminal body */}
         <div style={{ padding: "24px", fontFamily: "monospace", fontSize: "13px" }}>
@@ -57,10 +42,6 @@ export default function NotFound() {
           <p style={{ color: "var(--text)", fontWeight: 700, marginBottom: "8px" }}>
             $ Error 404 — Page not found
           </p>
-          <p style={{ color: "var(--text-muted)", marginBottom: "24px", lineHeight: 1.6 }}>
-            {/* The route you&apos;re looking for doesn&apos;t exist or has been moved. */}
-          </p>
-
           <Link
             href="/"
             style={{
