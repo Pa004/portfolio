@@ -1,6 +1,17 @@
 "use client";
 
 import { motion } from "motion/react";
+import {
+  Bot,
+  Building2,
+  Database,
+  GraduationCap,
+  MapPin,
+  Palette,
+  Puzzle,
+  Smartphone,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { glass, glassBlue } from "@/lib/styles";
 import SectionBackground from "@/components/ui/SectionBackground";
 import CounterStat from "@/components/ui/CounterStat";
@@ -16,6 +27,15 @@ import type { Lang } from "@/types";
 interface AboutProps {
   lang: Lang;
 }
+
+const interestIcons: Record<string, LucideIcon> = {
+  architecture: Building2,
+  frontend: Palette,
+  ai: Bot,
+  mobile: Smartphone,
+  patterns: Puzzle,
+  databases: Database,
+};
 
 export default function About({ lang }: AboutProps) {
   const t = aboutContent[lang];
@@ -82,12 +102,11 @@ export default function About({ lang }: AboutProps) {
               }}
             >
               {[
-                { icon: "📍", text: t.location },
-                { icon: "🎓", text: t.university },
+                { Icon: MapPin, text: t.location },
+                { Icon: GraduationCap, text: t.university },
               ].map((item) => (
-                <motion.div
+                <div
                   key={item.text}
-                  whileHover={{ scale: 1.04, borderColor: "var(--accent-cyan-icon)", backgroundColor: "rgba(var(--accent-cyan-rgb),0.08)" }}
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -100,9 +119,11 @@ export default function About({ lang }: AboutProps) {
                     transition: "border-color 0.2s ease, background-color 0.2s ease",
                   }}
                 >
-                  <span aria-hidden="true">{item.icon}</span>
+                  <span aria-hidden="true" style={{ display: "flex" }}>
+                    <item.Icon size={14} />
+                  </span>
                   <span>{item.text}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
 
@@ -223,7 +244,9 @@ export default function About({ lang }: AboutProps) {
                   gap: "10px",
                 }}
               >
-                {interests.map((item, i) => (
+                {interests.map((item, i) => {
+                  const InterestIcon = interestIcons[item.icon] ?? Database;
+                  return (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, y: 12 }}
@@ -248,7 +271,9 @@ export default function About({ lang }: AboutProps) {
                       transition: "border-color 0.2s ease, box-shadow 0.2s ease",
                     }}
                   >
-                    <span style={{ fontSize: "16px" }} aria-hidden="true">{item.icon}</span>
+                    <span aria-hidden="true" style={{ display: "flex" }}>
+                      <InterestIcon size={16} />
+                    </span>
                     <span
                       style={{
                         fontSize: "12px",
@@ -259,7 +284,8 @@ export default function About({ lang }: AboutProps) {
                       {item[lang]}
                     </span>
                   </motion.div>
-                ))}
+                  );
+                })}
               </div>
             </motion.div>
           </div>
