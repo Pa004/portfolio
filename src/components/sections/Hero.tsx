@@ -233,7 +233,7 @@ export default function Hero({ lang = "en" }: HeroProps) {
                 style={{
                   padding: "10px 20px",
                   borderRadius: "6px",
-                  background: "var(--accent)",
+                  background: "var(--accent-btn-bg)",
                   color: "var(--accent-btn-text)",
                   fontSize: "13px",
                   fontWeight: 500,
