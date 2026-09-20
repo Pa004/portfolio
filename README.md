@@ -69,7 +69,7 @@
 | Animations | Motion |
 | Smooth scroll | Lenis |
 | Notifications | Sonner |
-| Icons | Inline SVG + Emoji |
+| Icons | lucide-react + Inline SVG |
 | Fonts | Geist Sans + Geist Mono |
 | Deployment | Vercel |
 
