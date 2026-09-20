@@ -5,7 +5,7 @@ import { useEffect } from "react";
 export default function ConsoleEasterEgg() {
   useEffect(() => {
     const styles = {
-      title:   "color: #3b82f6; font-size: 18px; font-weight: bold; font-family: monospace;",
+      title:   "color: #5b8cff; font-size: 18px; font-weight: bold; font-family: monospace;",
       subtitle:"color: #06b6d4; font-size: 12px; font-family: monospace;",
       normal:  "color: #a1a1aa; font-size: 11px; font-family: monospace;",
       green:   "color: #22c55e; font-size: 11px; font-family: monospace;",

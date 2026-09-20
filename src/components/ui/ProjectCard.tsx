@@ -110,7 +110,7 @@ export default function ProjectCard({ project, index, accent, lang, copy }: Proj
         scale={1.02}
         glareEnable
         glareMaxOpacity={featured ? 0.15 : 0.1}
-        glareColor={featured ? "rgba(59,130,246,0.2)" : "rgba(59,130,246,0.15)"}
+        glareColor={featured ? "rgba(91,140,255,0.2)" : "rgba(91,140,255,0.15)"}
         glarePosition="all"
         style={{ borderRadius: featured ? "16px" : "12px" }}
       >

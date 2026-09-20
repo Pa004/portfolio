@@ -41,7 +41,7 @@ export default function ParticleCanvas() {
     }
     const particles = particlesRef.current;
 
-    const accentRgb = readToken(TOKEN_ACCENT) || "59,130,246";
+    const accentRgb = readToken(TOKEN_ACCENT) || "91,140,255";
     const alphaScale = parseFloat(readToken(TOKEN_ALPHA)) || 1;
 
     ctx.clearRect(0, 0, W, H);

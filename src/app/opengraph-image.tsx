@@ -21,7 +21,7 @@ export default function OGImage() {
         {/* Grid lines */}
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "linear-gradient(rgba(59,130,246,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.06) 1px, transparent 1px)",
+          backgroundImage: "linear-gradient(rgba(91,140,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(91,140,255,0.06) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }} />
 
@@ -29,7 +29,7 @@ export default function OGImage() {
         <div style={{
           position: "absolute", top: "-100px", right: "-100px",
           width: "500px", height: "500px",
-          background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(91,140,255,0.12) 0%, transparent 70%)",
           borderRadius: "50%",
         }} />
 
@@ -37,8 +37,8 @@ export default function OGImage() {
         <div style={{
           display: "flex", alignItems: "center", gap: "8px",
           padding: "6px 16px", borderRadius: "20px",
-          border: "1px solid rgba(59,130,246,0.3)",
-          background: "rgba(59,130,246,0.1)",
+          border: "1px solid rgba(91,140,255,0.3)",
+          background: "rgba(91,140,255,0.1)",
           marginBottom: "28px",
         }}>
           <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#22c55e" }} />
@@ -48,8 +48,8 @@ export default function OGImage() {
         {/* Name */}
         <div style={{ fontSize: "72px", fontWeight: 900, letterSpacing: "-3px", lineHeight: 1, marginBottom: "16px", display: "flex" }}>
           <span style={{ color: "#f4f4f5" }}>Pablo </span>
-          <span style={{ background: "linear-gradient(135deg, #3b82f6, #06b6d4)", WebkitBackgroundClip: "text", color: "transparent" }}>Domínguez</span>
-          <span style={{ color: "#3b82f6" }}>.</span>
+          <span style={{ background: "linear-gradient(135deg, #5b8cff, #06b6d4)", WebkitBackgroundClip: "text", color: "transparent" }}>Domínguez</span>
+          <span style={{ color: "#5b8cff" }}>.</span>
         </div>
 
         {/* Role */}
@@ -62,8 +62,8 @@ export default function OGImage() {
           {["React", "Next.js", "Node.js", "Flutter", "Python", "TypeScript"].map(tag => (
             <div key={tag} style={{
               padding: "6px 14px", borderRadius: "6px",
-              background: "rgba(59,130,246,0.1)",
-              border: "1px solid rgba(59,130,246,0.2)",
+              background: "rgba(91,140,255,0.1)",
+              border: "1px solid rgba(91,140,255,0.2)",
               fontSize: "14px", color: "#93c5fd",
             }}>
               {tag}

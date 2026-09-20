@@ -57,7 +57,7 @@ const iconMap: Record<string, ReactNode> = {
 const accentMap = {
   blue: {
     icon: "var(--accent)",
-    rgb: "59,130,246",
+    rgb: "91,140,255",
     tag: {
       background: "var(--badge-bg)",
       color: "var(--accent-text)",
@@ -151,7 +151,7 @@ export default function Skills({ lang }: SkillsProps) {
                   scale={1.02}
                   glareEnable
                   glareMaxOpacity={0.12}
-                  glareColor={`rgb(${skill.color === "blue" ? "59,130,246" : skill.color === "cyan" ? "6,182,212" : skill.color === "purple" ? "167,139,250" : "161,161,170"})`}
+                  glareColor={`rgb(${skill.color === "blue" ? "91,140,255" : skill.color === "cyan" ? "6,182,212" : skill.color === "purple" ? "167,139,250" : "161,161,170"})`}
                   glarePosition="all"
                   style={{ borderRadius: "12px", height: "100%" }}
                 >
@@ -203,7 +203,7 @@ export default function Skills({ lang }: SkillsProps) {
                           whileHover={{
                             scale: 1.08,
                             filter: "brightness(1.3)",
-                            boxShadow: `0 0 12px rgba(${skill.color === "blue" ? "59,130,246" : skill.color === "cyan" ? "6,182,212" : skill.color === "purple" ? "167,139,250" : "161,161,170"},0.25)`,
+                            boxShadow: `0 0 12px rgba(${skill.color === "blue" ? "91,140,255" : skill.color === "cyan" ? "6,182,212" : skill.color === "purple" ? "167,139,250" : "161,161,170"},0.25)`,
                           }}
                           style={{
                             fontSize: "11px",
