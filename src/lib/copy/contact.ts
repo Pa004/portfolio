@@ -1,9 +1,9 @@
 export const contactContent = {
   en: {
     label: "Contact",
-    title: "Let's work together",
+    title: "Have a project in mind?",
     subtitle:
-      "I'm open to new opportunities, collaborations, and interesting projects. Feel free to reach out.",
+      "Open to internships, freelance and collaborations. Write me in English or Spanish — I usually reply within a couple of days.",
     email_label: "Send me an email",
     email_desc: "Best way to reach me directly.",
     email_copy: "Click to copy",
@@ -13,9 +13,9 @@ export const contactContent = {
   },
   es: {
     label: "Contacto",
-    title: "Trabajemos juntos",
+    title: "¿Tienes un proyecto en mente?",
     subtitle:
-      "Estoy abierto a nuevas oportunidades, colaboraciones y proyectos interesantes. No dudes en escribirme.",
+      "Abierto a pasantías, freelance y colaboraciones. Escríbeme en español o inglés — suelo responder en un par de días.",
     email_label: "Envíame un email",
     email_desc: "La mejor manera de contactarme directamente.",
     email_copy: "Clic para copiar",

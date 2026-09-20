@@ -191,35 +191,33 @@ export default function Hero({ lang = "en" }: HeroProps) {
               <TypeWriter lang={lang} />
             </motion.div>
 
-            <motion.p
+            <motion.div
               custom={3}
               initial="hidden"
               animate="visible"
               variants={fadeUp}
-              style={{
-                fontSize: "13px",
-                color: "var(--text-muted)",
-                marginBottom: "20px",
-              }}
+              style={{ marginBottom: "32px", maxWidth: "440px" }}
             >
-              {t.role}
-            </motion.p>
+              <p
+                style={{
+                  fontSize: "13px",
+                  color: "var(--text-muted)",
+                  marginBottom: "20px",
+                }}
+              >
+                {t.role}
+              </p>
 
-            <motion.p
-              custom={4}
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              style={{
-                fontSize: "14px",
-                color: "var(--text-muted)",
-                lineHeight: 1.7,
-                marginBottom: "32px",
-                maxWidth: "440px",
-              }}
-            >
-              {t.description}
-            </motion.p>
+              <p
+                style={{
+                  fontSize: "14px",
+                  color: "var(--text-muted)",
+                  lineHeight: 1.7,
+                }}
+              >
+                {t.description}
+              </p>
+            </motion.div>
 
             <motion.div
               custom={5}
