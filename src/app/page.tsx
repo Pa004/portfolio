@@ -58,7 +58,7 @@ export default function Home() {
   };
 
   return (
-    <main data-theme={theme} style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--text)", transition: "background 0.3s, color 0.3s" }}>
+    <main style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--text)", transition: "background 0.3s, color 0.3s" }}>
       <a
         href="#main-content"
         style={{
@@ -77,7 +77,7 @@ export default function Home() {
           e.currentTarget.style.height = "auto";
           e.currentTarget.style.overflow = "visible";
           e.currentTarget.style.zIndex = "9999";
-          e.currentTarget.style.background = "var(--accent)";
+          e.currentTarget.style.background = "var(--accent-btn-bg)";
           e.currentTarget.style.color = "var(--accent-btn-text)";
           e.currentTarget.style.padding = "12px 24px";
           e.currentTarget.style.borderRadius = "8px";

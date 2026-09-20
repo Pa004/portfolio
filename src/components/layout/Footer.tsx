@@ -34,7 +34,7 @@ export default function Footer({ lang }: FooterProps) {
             {" · "}
             <span style={{ color: "var(--accent-cyan-text)" }}>Tailwind</span>
             {" · "}
-            <span style={{ color: "var(--accent-violet-text)" }}>Framer Motion</span>
+            <span style={{ color: "var(--accent-violet-text)" }}>Motion</span>
           </p>
           <p style={{ fontSize: "12px", color: "var(--text-muted)" }}>
             © {year} {t.by} · {t.rights}

@@ -79,7 +79,7 @@ export default function Contact({ lang }: ContactProps) {
         overflow: "hidden",
       }}
     >
-      <SectionBackground variant="waves" />
+      <SectionBackground variant="waves" section="contact" />
       <div
         style={{
           maxWidth: "1152px",
@@ -250,7 +250,7 @@ export default function Contact({ lang }: ContactProps) {
                 gap: "8px",
                 padding: "10px 20px",
                 borderRadius: "8px",
-                background: "var(--accent)",
+                background: "var(--accent-btn-bg)",
                   color: "var(--accent-btn-text)",
                 fontSize: "13px",
                 fontWeight: 500,
