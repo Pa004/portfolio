@@ -12,7 +12,7 @@ export function readToken(name: string): string {
 
 export function readThemeTokens(): TokenColors {
   return {
-    accent: readToken(TOKEN_ACCENT) || "59,130,246",
+    accent: readToken(TOKEN_ACCENT) || "91,140,255",
     cyan: readToken(TOKEN_CYAN) || "6,182,212",
     violet: readToken(TOKEN_VIOLET) || "167,139,250",
     green: readToken(TOKEN_GREEN) || "34,197,94",

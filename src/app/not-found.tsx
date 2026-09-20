@@ -50,7 +50,7 @@ export default function NotFound() {
               gap: "8px",
               padding: "10px 20px",
               borderRadius: "8px",
-              background: "var(--accent)",
+              background: "var(--accent-btn-bg)",
               color: "var(--accent-btn-text)",
               textDecoration: "none",
               fontSize: "13px",
