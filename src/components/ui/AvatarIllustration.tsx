@@ -36,12 +36,12 @@ const lines = [
   { text: "    'Node.js', 'Flutter',",                  color: "var(--accent-cyan-icon)", indent: 2  },
   { text: "    'Python', 'TypeScript',",                color: "var(--accent-cyan-icon)", indent: 2  },
   { text: "  ],",                                       color: "var(--text)", indent: 1  },
-  { text: "  passion: 'Building things',",              color: "var(--accent-violet-icon)", indent: 1  },
+  { text: "  focus: 'Software in production',",            color: "var(--accent-violet-icon)", indent: 1  },
   { text: "  available: true,",                         color: "var(--accent-green-icon)", indent: 1  },
   { text: "};",                                         color: "var(--text)", indent: 0  },
   { text: "",                                           color: "",        indent: 0  },
   { text: "developer.init();",                          color: "var(--accent-amber-icon)", indent: 0  },
-  { text: "// ✓ Ready for new challenges",              color: "var(--terminal-comment)", indent: 0  },
+  { text: "// ✓ Open to new projects",                     color: "var(--terminal-comment)", indent: 0  },
 ];
 
 export default function AvatarIllustration() {

@@ -4,7 +4,7 @@ export const heroContent = {
     greeting: "Hi, I'm",
     role: "Software Engineering student at ESPE",
     description:
-      "I build modern web experiences and intelligent systems. Focused on Frontend and Full Stack development, exploring AI and mobile.",
+      "I ship production software: a dental clinic system used daily, plus experiments in AI and mobile. React · Node.js · Flutter.",
     cta_projects: "View projects",
     cta_contact: "Contact me",
     scroll: "Scroll to explore",
@@ -14,7 +14,7 @@ export const heroContent = {
     greeting: "Hola, soy",
     role: "Estudiante de Ingeniería de Software en ESPE",
     description:
-      "Construyo experiencias web modernas y sistemas inteligentes. Enfocado en desarrollo Frontend y Full Stack, explorando IA y mobile.",
+      "Hago software en producción: un sistema odontológico de uso diario, más experimentos en IA y móvil. React · Node.js · Flutter.",
     cta_projects: "Ver proyectos",
     cta_contact: "Contáctame",
     scroll: "Scroll para explorar",

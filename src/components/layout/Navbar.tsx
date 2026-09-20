@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { Sun, Moon } from "lucide-react";
 import { navLinks } from "@/lib/copy/navbar";
 import type { Lang } from "@/types";
 
@@ -202,7 +203,7 @@ export default function Navbar({ lang, theme, toggleTheme }: NavbarProps) {
               fontSize: "14px",
             }}
           >
-            {mounted ? (theme === "dark" ? "☀️" : "🌙") : null}
+            {mounted ? (theme === "dark" ? <Sun size={16} /> : <Moon size={16} />) : null}
           </button>
 
           {/* Hamburger — only on mobile */}

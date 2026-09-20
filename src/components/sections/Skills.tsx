@@ -198,13 +198,8 @@ export default function Skills({ lang }: SkillsProps) {
                       style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}
                     >
                       {skill.items.map((item) => (
-                        <motion.span
+                        <span
                           key={item}
-                          whileHover={{
-                            scale: 1.08,
-                            filter: "brightness(1.3)",
-                            boxShadow: `0 0 12px rgba(${skill.color === "blue" ? "91,140,255" : skill.color === "cyan" ? "6,182,212" : skill.color === "purple" ? "167,139,250" : "161,161,170"},0.25)`,
-                          }}
                           style={{
                             fontSize: "11px",
                             padding: "3px 10px",
@@ -216,7 +211,7 @@ export default function Skills({ lang }: SkillsProps) {
                           }}
                         >
                           {item}
-                        </motion.span>
+                        </span>
                       ))}
                     </div>
                   </motion.div>
