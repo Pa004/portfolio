@@ -3,6 +3,7 @@
 import SectionBackground from "@/components/ui/SectionBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
 import EducationItem from "@/components/ui/EducationItem";
+import { sectionContainer } from "@/lib/styles";
 import { educationItems } from "@/lib/content";
 import { educationContent } from "@/lib/copy/education";
 import type { Lang } from "@/types";
@@ -24,14 +25,7 @@ export default function Education({ lang }: EducationProps) {
       }}
     >
       <SectionBackground variant="neural" section="education" />
-      <div
-        style={{
-          maxWidth: "1152px",
-          margin: "0 auto",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
+      <div style={{ ...sectionContainer }}>
         <SectionHeader
           lang={lang}
           label={t.label}
