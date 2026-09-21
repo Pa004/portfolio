@@ -2,7 +2,9 @@
 
 import { motion } from "motion/react";
 import { sectionContainer } from "@/lib/styles";
+import SectionBackground from "@/components/ui/SectionBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
+import FloatingBlob from "@/components/ui/FloatingBlob";
 import { experienceContent, experienceItems } from "@/lib/copy/experience";
 import type { Lang, ExperienceItemData } from "@/types";
 
@@ -23,6 +25,9 @@ export default function Experience({ lang }: ExperienceProps) {
         overflow: "hidden",
       }}
     >
+      <SectionBackground variant="lattice" section="experience" />
+      <FloatingBlob color1="rgba(var(--accent-rgb),0.4)" color2="rgba(var(--accent-cyan-rgb),0.25)" size={450} top="30%" left="85%" blur={110} />
+      <FloatingBlob color1="rgba(var(--accent-green-rgb),0.3)" color2="rgba(var(--accent-rgb),0.2)" size={350} top="65%" left="5%" blur={90} />
       <div style={{ ...sectionContainer }}>
         <SectionHeader
           lang={lang}
@@ -56,6 +61,7 @@ interface RowProps {
 }
 
 function ExperienceRow({ item, index, lang, currentLabel, isLast }: RowProps) {
+  const numeral = String(index + 1).padStart(2, "0");
   return (
     <motion.article
       className="experience-row"
@@ -63,15 +69,27 @@ function ExperienceRow({ item, index, lang, currentLabel, isLast }: RowProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ x: 6, backgroundColor: "var(--surface-dim)" }}
       style={{
         display: "grid",
         gridTemplateColumns: "180px 1fr",
         gap: "32px",
-        padding: "32px 0",
+        padding: "32px 16px",
+        margin: "0 -16px",
         borderBottom: isLast ? "none" : "1px solid var(--border)",
+        borderRadius: "12px",
       }}
     >
       <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+        <span
+          style={{
+            fontSize: "12px",
+            fontFamily: "var(--font-geist-mono)",
+            color: "var(--terminal-line-number)",
+          }}
+        >
+          {numeral}
+        </span>
         <span
           style={{
             fontSize: "12px",

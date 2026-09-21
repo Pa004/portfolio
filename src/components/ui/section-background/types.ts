@@ -1,5 +1,5 @@
 export type Variant = "waves" | "kinetic" | "lattice" | "stars" | "neural";
-export type Section = "about" | "skills" | "projects" | "education" | "contact";
+export type Section = "about" | "skills" | "projects" | "experience" | "education" | "contact";
 
 export interface LatticePoint {
   x: number;
