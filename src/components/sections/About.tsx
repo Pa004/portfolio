@@ -6,6 +6,7 @@ import {
   Building2,
   Database,
   GraduationCap,
+  Languages,
   MapPin,
   Palette,
   Puzzle,
@@ -97,6 +98,7 @@ export default function About({ lang }: AboutProps) {
               {[
                 { Icon: MapPin, text: t.location },
                 { Icon: GraduationCap, text: t.university },
+                { Icon: Languages, text: t.languages },
               ].map((item) => (
                 <div
                   key={item.text}
