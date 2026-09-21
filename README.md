@@ -33,9 +33,10 @@
 
 ### Sections
 - 🦸 **Hero** — name with staggered word-by-word blur reveal, typewriter roles, theme-adaptive terminal code block with technology marquee carousel, and particle network canvas
-- 👤 **About** — bio, location badges, real-world project & repository metrics counter, and interactive Bento Grid for areas of interest
+- 👤 **About** — bio, location/language badges, real-world project & repository metrics counter, and interactive Bento Grid for areas of interest
 - 🛠️ **Skills** — asymmetric Bento Grid highlighting Frontend and Backend with specialized category tags
-- 🚀 **Projects** — featured and secondary cards with previews, screenshots, live links, repository access, and status badges
+- 🚀 **Projects** — featured 2×2 and secondary 3-column cards with previews, screenshots, live links, repository access, and status badges
+- 💼 **Experience** — editorial rows covering freelance work, academic distinction and research
 - 🎓 **Education** — timeline covering ESPE Software Engineering degree and DataCamp certifications
 - 📬 **Contact** — email copy-to-clipboard with Sonner toast notifications and verified social links
 
@@ -46,6 +47,7 @@
 | About | Pulsing blueprint grid (`kinetic`) |
 | Skills | Animated lattice field |
 | Projects | Animated star field (`stars`) |
+| Experience | Animated lattice field + gradient blobs (same set as Skills) |
 | Education | Animated neural connections (`neural`) |
 | Contact | Animated layered wave flows (`waves`) |
 
@@ -80,16 +82,16 @@
 ```
 src/
 ├── app/
-│   ├── layout.tsx              # Root layout — theme provider, toaster, global overlays
+│   ├── layout.tsx              # Root layout — theme bootstrap, toaster, global overlays
 │   ├── page.tsx                # Main page — section composition, skip-to-content, dynamic lang
 │   ├── error.tsx               # Error boundary terminal page
 │   ├── not-found.tsx           # Custom 404 terminal page
 │   ├── globals.css             # Theme tokens (light/dark) + Tailwind v4 configuration
+│   ├── icon.tsx                # Dynamic PWA/app icon route (matches OG style)
 │   ├── manifest.ts             # PWA web manifest
 │   ├── robots.ts               # robots.txt (allow all + sitemap)
 │   ├── sitemap.ts              # sitemap.xml
 │   ├── opengraph-image.tsx     # Dynamic OG image generator
-│   └── favicon.ico             # App icon
 ├── components/
 │   ├── layout/
 │   │   ├── Navbar.tsx          # Fixed navbar with theme & EN/ES toggles + mobile menu
@@ -98,7 +100,8 @@ src/
 │   │   ├── Hero.tsx            # Hero with spotlight, typewriter & terminal
 │   │   ├── About.tsx           # Bio, project metrics & interests bento grid
 │   │   ├── Skills.tsx          # Asymmetric bento grid of tech capabilities
-│   │   ├── Projects.tsx        # Featured project cards with screenshots & links
+│   │   ├── Projects.tsx        # 2×2 featured + 3-column secondary project cards
+│   │   ├── Experience.tsx      # Editorial rows for freelance, distinction & research
 │   │   ├── Education.tsx       # Degree & certifications timeline
 │   │   └── Contact.tsx         # Email copy & direct social channels
 │   └── ui/
@@ -107,7 +110,7 @@ src/
 │       ├── ConsoleEasterEgg.tsx    # DevTools ASCII art message
 │       ├── CounterStat.tsx         # Animated number counter
 │       ├── CustomCursor.tsx        # Custom dot + ring interactive cursor
-│       ├── FloatingBlob.tsx        # Ambient gradient blob (Skills)
+│       ├── FloatingBlob.tsx        # Ambient gradient blob (Skills, Experience)
 │       ├── GradientText.tsx        # Gradient text wrapper
 │       ├── LoadingScreen.tsx       # First-load terminal animation
 │       ├── MagneticHover.tsx       # Magnetic hover effect (Projects/Education)
@@ -120,9 +123,11 @@ src/
 │       ├── SectionBackground.tsx   # Per-section animated canvas backgrounds
 │       ├── SmoothScroll.tsx        # Lenis smooth scroll provider
 │       ├── StaggerText.tsx         # Word-by-word stagger animation
+│       ├── ThemeToaster.tsx        # Theme-aware Sonner toast notifications
 │       └── TypeWriter.tsx          # Typewriter role cycling animation
 ├── lib/
-│   ├── content.ts              # Data source for projects, skills & links
+│   ├── content.ts              # Data source for projects, skills, education & links
+│   ├── copy/                   # Bilingual UI copy per section (hero, about, …)
 │   ├── lenis.ts                # Lenis smooth scroll configuration
 │   ├── styles.ts               # Shared adaptive inline style objects
 │   └── usePrefersReducedMotion.ts # Hook to respect OS prefers-reduced-motion
@@ -159,9 +164,9 @@ Every section component accepts `lang: "en" | "es"` and exports bilingual `conte
 `ParticleCanvas` and `SectionBackground` pause rendering when offscreen via `IntersectionObserver` (native). `MouseSpotlight` uses `useRef` + direct DOM manipulation to avoid re-renders entirely. The `usePrefersReducedMotion` hook (`src/lib/usePrefersReducedMotion.ts`) — or `useReducedMotion` from motion — disables or simplifies animations when the OS setting requests it. When adding new canvas elements, wrap them with the same `isInView` guard and respect `prefers-reduced-motion`.
 
 ### Data shape (`src/lib/content.ts`)
-Data source for the structured, data-driven content: **project cards** (title, description, links, badges, screenshots) and **skills categories** (name, icon, items), plus social links. **Education entries are NOT in `content.ts`** — they live inside `Education.tsx`. Sections import structured data from here; avoid hardcoding structured data in components.
+Data source for the structured, data-driven content: **project cards** (title, description, links, badges, screenshots), **skills categories** (name, icon, items) and **education entries** (degree, certs, links), plus social links. Sections import structured data from here; avoid hardcoding structured data in components.
 
-**Note on bilingual content:** only the structured data above lives in `content.ts` with `{ en, es }` fields. The rest of the visible UI copy (Hero, About, Contact, Navbar, Footer, etc.) is kept as local bilingual `content` objects inside each section component. See the `lang` prop pattern below.
+**Note on bilingual content:** only the structured data above lives in `content.ts` with `{ en, es }` fields. The rest of the visible UI copy (Hero, About, Contact, Navbar, Footer, etc.) is kept as bilingual `content` objects under `src/lib/copy/`, one module per section. See the `lang` prop pattern below.
 
 ---
 
