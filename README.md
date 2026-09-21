@@ -2,6 +2,8 @@
 
 > Full Stack Developer · Software Engineering student at ESPE · Quito, Ecuador
 
+Production software in use daily (dental clinic system), solo-built event platform with 137 passing tests, and live ML-powered football analytics. Freelance developer and co-author of a paper submitted to IEEE BigData 2026.
+
 [![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org)
@@ -12,6 +14,20 @@
 ## 🌐 Live
 
 **[portfolio-ochre-xi-ba44zo6k9y.vercel.app](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app)**
+
+![Portfolio preview](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app/opengraph-image)
+
+---
+
+## 🚀 Featured work
+
+| | Project | Proof |
+|---|---|---|
+| <img src="public/projects/summer-dent-logo.png" width="120" alt="Summer Dent logo" /> | **[Summer Dent](https://aplicacion-summer-dent.vercel.app/login)** — clinic management in production (patients, appointments, inventory, finance) | Live app in daily use |
+| <img src="public/projects/scikick.png" width="120" alt="SciKick screenshot" /> | **[SciKick](https://scikick.pages.dev)** — football analytics with Dixon-Coles + LightGBM ensemble ([repo](https://github.com/Pa004/scikick)) | 600 automated tests, live on Cloudflare |
+| <img src="public/projects/eventual.png" width="120" alt="Eventual logo" /> | **[Eventual](https://github.com/Pa004/Eventual)** — event management built solo end to end | 13/13 requirements, 137 tests passing |
+
+More in the [Projects](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app/#projects) section: Roomify, Chatcito, Sentinel, e2e-APIs.
 
 ---
 
@@ -170,6 +186,18 @@ Data source for the structured, data-driven content: **project cards** (title, d
 
 ---
 
+## 📬 Contact
+
+| | |
+|---|---|
+| **Email** | pablodo004@gmail.com |
+| **GitHub** | [github.com/Pa004](https://github.com/Pa004) |
+| **LinkedIn** | [linkedin.com/in/pabl004-dev](https://www.linkedin.com/in/pabl004-dev) |
+| **ResearchGate** | [researchgate.net/profile/Pablo-Dominguez-21](https://www.researchgate.net/profile/Pablo-Dominguez-21) |
+| **ORCID** | [orcid.org/0009-0000-6400-026X](https://orcid.org/0009-0000-6400-026X) |
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -208,18 +236,6 @@ main          ← production (auto-deploys to Vercel)
 └── dev       ← integration branch
     └── feat/*   ← feature branches branched off dev
 ```
-
----
-
-## 📬 Contact
-
-| | |
-|---|---|
-| **Email** | pablodo004@gmail.com |
-| **GitHub** | [github.com/Pa004](https://github.com/Pa004) |
-| **LinkedIn** | [linkedin.com/in/pabl004-dev](https://www.linkedin.com/in/pabl004-dev) |
-| **ResearchGate** | [researchgate.net/profile/Pablo-Dominguez-21](https://www.researchgate.net/profile/Pablo-Dominguez-21) |
-| **ORCID** | [orcid.org/0009-0000-6400-026X](https://orcid.org/0009-0000-6400-026X) |
 
 ---
 
