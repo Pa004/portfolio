@@ -2,6 +2,8 @@
 
 > Full Stack Developer · Software Engineering student at ESPE · Quito, Ecuador
 
+Production software in use daily (dental clinic system), solo-built event platform with 137 passing tests, and live ML-powered football analytics. Freelance developer and co-author of a paper submitted to IEEE BigData 2026.
+
 [![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org)
@@ -12,6 +14,20 @@
 ## 🌐 Live
 
 **[portfolio-ochre-xi-ba44zo6k9y.vercel.app](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app)**
+
+![Portfolio preview](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app/opengraph-image)
+
+---
+
+## 🚀 Featured work
+
+| | Project | Proof |
+|---|---|---|
+| <img src="public/projects/summer-dent-logo.png" width="120" alt="Summer Dent logo" /> | **[Summer Dent](https://aplicacion-summer-dent.vercel.app/login)** — clinic management in production (patients, appointments, inventory, finance) | Live app in daily use |
+| <img src="public/projects/scikick.png" width="120" alt="SciKick screenshot" /> | **[SciKick](https://scikick.pages.dev)** — football analytics with Dixon-Coles + LightGBM ensemble ([repo](https://github.com/Pa004/scikick)) | 600 automated tests, live on Cloudflare |
+| <img src="public/projects/eventual.png" width="120" alt="Eventual logo" /> | **[Eventual](https://github.com/Pa004/Eventual)** — event management built solo end to end | 13/13 requirements, 137 tests passing |
+
+More in the [Projects](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app/#projects) section: Roomify, Chatcito, Sentinel, e2e-APIs.
 
 ---
 
@@ -33,9 +49,10 @@
 
 ### Sections
 - 🦸 **Hero** — name with staggered word-by-word blur reveal, typewriter roles, theme-adaptive terminal code block with technology marquee carousel, and particle network canvas
-- 👤 **About** — bio, location badges, real-world project & repository metrics counter, and interactive Bento Grid for areas of interest
+- 👤 **About** — bio, location/language badges, real-world project & repository metrics counter, and interactive Bento Grid for areas of interest
 - 🛠️ **Skills** — asymmetric Bento Grid highlighting Frontend and Backend with specialized category tags
-- 🚀 **Projects** — featured and secondary cards with previews, screenshots, live links, repository access, and status badges
+- 🚀 **Projects** — featured 2×2 and secondary 3-column cards with previews, screenshots, live links, repository access, and status badges
+- 💼 **Experience** — editorial rows covering freelance work, academic distinction and research
 - 🎓 **Education** — timeline covering ESPE Software Engineering degree and DataCamp certifications
 - 📬 **Contact** — email copy-to-clipboard with Sonner toast notifications and verified social links
 
@@ -46,6 +63,7 @@
 | About | Pulsing blueprint grid (`kinetic`) |
 | Skills | Animated lattice field |
 | Projects | Animated star field (`stars`) |
+| Experience | Animated lattice field + gradient blobs (same set as Skills) |
 | Education | Animated neural connections (`neural`) |
 | Contact | Animated layered wave flows (`waves`) |
 
@@ -80,16 +98,16 @@
 ```
 src/
 ├── app/
-│   ├── layout.tsx              # Root layout — theme provider, toaster, global overlays
+│   ├── layout.tsx              # Root layout — theme bootstrap, toaster, global overlays
 │   ├── page.tsx                # Main page — section composition, skip-to-content, dynamic lang
 │   ├── error.tsx               # Error boundary terminal page
 │   ├── not-found.tsx           # Custom 404 terminal page
 │   ├── globals.css             # Theme tokens (light/dark) + Tailwind v4 configuration
+│   ├── icon.tsx                # Dynamic PWA/app icon route (matches OG style)
 │   ├── manifest.ts             # PWA web manifest
 │   ├── robots.ts               # robots.txt (allow all + sitemap)
 │   ├── sitemap.ts              # sitemap.xml
 │   ├── opengraph-image.tsx     # Dynamic OG image generator
-│   └── favicon.ico             # App icon
 ├── components/
 │   ├── layout/
 │   │   ├── Navbar.tsx          # Fixed navbar with theme & EN/ES toggles + mobile menu
@@ -98,7 +116,8 @@ src/
 │   │   ├── Hero.tsx            # Hero with spotlight, typewriter & terminal
 │   │   ├── About.tsx           # Bio, project metrics & interests bento grid
 │   │   ├── Skills.tsx          # Asymmetric bento grid of tech capabilities
-│   │   ├── Projects.tsx        # Featured project cards with screenshots & links
+│   │   ├── Projects.tsx        # 2×2 featured + 3-column secondary project cards
+│   │   ├── Experience.tsx      # Editorial rows for freelance, distinction & research
 │   │   ├── Education.tsx       # Degree & certifications timeline
 │   │   └── Contact.tsx         # Email copy & direct social channels
 │   └── ui/
@@ -107,7 +126,7 @@ src/
 │       ├── ConsoleEasterEgg.tsx    # DevTools ASCII art message
 │       ├── CounterStat.tsx         # Animated number counter
 │       ├── CustomCursor.tsx        # Custom dot + ring interactive cursor
-│       ├── FloatingBlob.tsx        # Ambient gradient blob (Skills)
+│       ├── FloatingBlob.tsx        # Ambient gradient blob (Skills, Experience)
 │       ├── GradientText.tsx        # Gradient text wrapper
 │       ├── LoadingScreen.tsx       # First-load terminal animation
 │       ├── MagneticHover.tsx       # Magnetic hover effect (Projects/Education)
@@ -120,9 +139,11 @@ src/
 │       ├── SectionBackground.tsx   # Per-section animated canvas backgrounds
 │       ├── SmoothScroll.tsx        # Lenis smooth scroll provider
 │       ├── StaggerText.tsx         # Word-by-word stagger animation
+│       ├── ThemeToaster.tsx        # Theme-aware Sonner toast notifications
 │       └── TypeWriter.tsx          # Typewriter role cycling animation
 ├── lib/
-│   ├── content.ts              # Data source for projects, skills & links
+│   ├── content.ts              # Data source for projects, skills, education & links
+│   ├── copy/                   # Bilingual UI copy per section (hero, about, …)
 │   ├── lenis.ts                # Lenis smooth scroll configuration
 │   ├── styles.ts               # Shared adaptive inline style objects
 │   └── usePrefersReducedMotion.ts # Hook to respect OS prefers-reduced-motion
@@ -159,9 +180,21 @@ Every section component accepts `lang: "en" | "es"` and exports bilingual `conte
 `ParticleCanvas` and `SectionBackground` pause rendering when offscreen via `IntersectionObserver` (native). `MouseSpotlight` uses `useRef` + direct DOM manipulation to avoid re-renders entirely. The `usePrefersReducedMotion` hook (`src/lib/usePrefersReducedMotion.ts`) — or `useReducedMotion` from motion — disables or simplifies animations when the OS setting requests it. When adding new canvas elements, wrap them with the same `isInView` guard and respect `prefers-reduced-motion`.
 
 ### Data shape (`src/lib/content.ts`)
-Data source for the structured, data-driven content: **project cards** (title, description, links, badges, screenshots) and **skills categories** (name, icon, items), plus social links. **Education entries are NOT in `content.ts`** — they live inside `Education.tsx`. Sections import structured data from here; avoid hardcoding structured data in components.
+Data source for the structured, data-driven content: **project cards** (title, description, links, badges, screenshots), **skills categories** (name, icon, items) and **education entries** (degree, certs, links), plus social links. Sections import structured data from here; avoid hardcoding structured data in components.
 
-**Note on bilingual content:** only the structured data above lives in `content.ts` with `{ en, es }` fields. The rest of the visible UI copy (Hero, About, Contact, Navbar, Footer, etc.) is kept as local bilingual `content` objects inside each section component. See the `lang` prop pattern below.
+**Note on bilingual content:** only the structured data above lives in `content.ts` with `{ en, es }` fields. The rest of the visible UI copy (Hero, About, Contact, Navbar, Footer, etc.) is kept as bilingual `content` objects under `src/lib/copy/`, one module per section. See the `lang` prop pattern below.
+
+---
+
+## 📬 Contact
+
+| | |
+|---|---|
+| **Email** | pablodo004@gmail.com |
+| **GitHub** | [github.com/Pa004](https://github.com/Pa004) |
+| **LinkedIn** | [linkedin.com/in/pabl004-dev](https://www.linkedin.com/in/pabl004-dev) |
+| **ResearchGate** | [researchgate.net/profile/Pablo-Dominguez-21](https://www.researchgate.net/profile/Pablo-Dominguez-21) |
+| **ORCID** | [orcid.org/0009-0000-6400-026X](https://orcid.org/0009-0000-6400-026X) |
 
 ---
 
@@ -203,18 +236,6 @@ main          ← production (auto-deploys to Vercel)
 └── dev       ← integration branch
     └── feat/*   ← feature branches branched off dev
 ```
-
----
-
-## 📬 Contact
-
-| | |
-|---|---|
-| **Email** | pablodo004@gmail.com |
-| **GitHub** | [github.com/Pa004](https://github.com/Pa004) |
-| **LinkedIn** | [linkedin.com/in/pabl004-dev](https://www.linkedin.com/in/pabl004-dev) |
-| **ResearchGate** | [researchgate.net/profile/Pablo-Dominguez-21](https://www.researchgate.net/profile/Pablo-Dominguez-21) |
-| **ORCID** | [orcid.org/0009-0000-6400-026X](https://orcid.org/0009-0000-6400-026X) |
 
 ---
 

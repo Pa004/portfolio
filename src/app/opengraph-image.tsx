@@ -48,7 +48,7 @@ export default function OGImage() {
         {/* Name */}
         <div style={{ fontSize: "72px", fontWeight: 900, letterSpacing: "-3px", lineHeight: 1, marginBottom: "16px", display: "flex" }}>
           <span style={{ color: "#f4f4f5" }}>Pablo </span>
-          <span style={{ background: "linear-gradient(135deg, #5b8cff, #06b6d4)", WebkitBackgroundClip: "text", color: "transparent" }}>Domínguez</span>
+          <span style={{ color: "#5b8cff" }}>Domínguez</span>
           <span style={{ color: "#5b8cff" }}>.</span>
         </div>
 
