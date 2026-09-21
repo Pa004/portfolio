@@ -25,7 +25,7 @@ function TypeWriterInner({ lang }: TypeWriterProps) {
       const word  = words[indexRef.current];
       const ci    = charIndexRef.current;
       const del   = deletingRef.current;
-      const delay = del ? 40 : ci === word.length ? 1800 : 80;
+      const delay = del ? 60 : ci === word.length ? 3200 : 90;
 
       timerRef.current = setTimeout(() => {
         if (!del) {
