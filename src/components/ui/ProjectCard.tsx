@@ -129,9 +129,10 @@ export default function ProjectCard({ project, index, accent, lang, copy }: Proj
               style={{
                 position: "relative",
                 width: "calc(100% + 48px)",
-                height: "160px",
+                height: "220px",
                 margin: "-24px -24px 20px -24px",
                 overflow: "hidden",
+                background: "var(--surface-dim)",
               }}
             >
               <Image
@@ -140,18 +141,7 @@ export default function ProjectCard({ project, index, accent, lang, copy }: Proj
                 fill
                 sizes="(max-width: 768px) 100vw, 500px"
                 className="project-image"
-                style={{ objectFit: "cover", transition: "transform 0.4s cubic-bezier(0.22,1,0.36,1)" }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: "40px",
-                  background: "linear-gradient(to top, rgba(9,9,11,0.95), transparent)",
-                  pointerEvents: "none",
-                }}
+                style={{ objectFit: "contain", padding: "16px", transition: "transform 0.4s cubic-bezier(0.22,1,0.36,1)" }}
               />
             </div>
           )}
