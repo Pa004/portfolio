@@ -3,21 +3,9 @@
 import { motion } from "motion/react";
 import { glass } from "@/lib/styles";
 import MagneticHover from "@/components/ui/MagneticHover";
-import type { Lang } from "@/types";
+import type { Lang, EducationItemData } from "@/types";
 
-export interface EducationItemData {
-  id: string;
-  type: "degree" | "cert";
-  institution: string;
-  degree: { en: string; es: string };
-  period: string;
-  location: string;
-  description: { en: string; es: string };
-  tags: string[];
-  links: { label: string; url: string; color: string }[];
-  accent: "blue" | "cyan" | "purple";
-  current: boolean;
-}
+export type { EducationItemData };
 
 export const accentColors: Record<EducationItemData["accent"], {
   borderLeft: string;

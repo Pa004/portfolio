@@ -12,7 +12,7 @@ import {
   Smartphone,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { glass, glassBlue } from "@/lib/styles";
+import { glass, glassBlue, sectionContainer } from "@/lib/styles";
 import SectionBackground from "@/components/ui/SectionBackground";
 import CounterStat from "@/components/ui/CounterStat";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -51,14 +51,7 @@ export default function About({ lang }: AboutProps) {
       }}
     >
       <SectionBackground variant="kinetic" section="about" />
-      <div
-        style={{
-          maxWidth: "1152px",
-          margin: "0 auto",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
+      <div style={{ ...sectionContainer }}>
         <SectionHeader
           lang={lang}
           label={t.label}

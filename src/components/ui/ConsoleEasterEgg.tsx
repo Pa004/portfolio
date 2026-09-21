@@ -34,7 +34,7 @@ export default function ConsoleEasterEgg() {
     console.log("%c📬 Let's connect:", styles.subtitle);
     console.log("%c   pablodo004@gmail.com", styles.green);
     console.log("%c   github.com/Pa004", styles.green);
-    console.log("%c   linkedin.com/in/pablo-domínguez-445241385", styles.green);
+    console.log("%c   linkedin.com/in/pabl004-dev", styles.green);
     console.log("%c ", "");
     console.log("%c💡 If you're reading this, you're probably a developer too.", styles.normal);
     console.log("%c   Let's build something awesome together! 🔥", styles.subtitle);

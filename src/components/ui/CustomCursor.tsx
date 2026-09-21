@@ -17,6 +17,8 @@ export default function CustomCursor() {
     const ring = ringRef.current;
     if (!dot || !ring) return;
 
+    document.documentElement.classList.add("has-custom-cursor");
+
     let mouseX = 0, mouseY = 0;
     let ringX  = 0, ringY  = 0;
     let animId: number | null = null;
@@ -65,6 +67,7 @@ export default function CustomCursor() {
 
     return () => {
       stopRaf();
+      document.documentElement.classList.remove("has-custom-cursor");
       document.removeEventListener("mousemove",  onMove);
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("mouseover",  onOver);

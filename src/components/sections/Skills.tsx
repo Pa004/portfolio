@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import { motion } from "motion/react";
-import { cardGlass } from "@/lib/styles";
+import { cardGlass, sectionContainer } from "@/lib/styles";
 import SectionBackground from "@/components/ui/SectionBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
 import FloatingBlob from "@/components/ui/FloatingBlob";
@@ -108,14 +108,7 @@ export default function Skills({ lang }: SkillsProps) {
       <SectionBackground variant="lattice" section="skills" />
       <FloatingBlob color1="rgba(var(--accent-rgb),0.4)" color2="rgba(var(--accent-cyan-rgb),0.25)" size={450} top="30%" left="85%" blur={110} />
       <FloatingBlob color1="rgba(var(--accent-green-rgb),0.3)" color2="rgba(var(--accent-rgb),0.2)" size={350} top="65%" left="5%" blur={90} />
-      <div
-        style={{
-          maxWidth: "1152px",
-          margin: "0 auto",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
+      <div style={{ ...sectionContainer }}>
         <SectionHeader
           lang={lang}
           label={t.label}
