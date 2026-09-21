@@ -193,7 +193,13 @@ export const educationItems: EducationItemData[] = [
       es: "Certificación enfocada en construir aplicaciones potenciadas con IA usando la API de OpenAI, incluyendo embeddings, búsqueda semántica y sistemas conversacionales.",
     },
     tags: ["OpenAI API", "Embeddings", "Semantic Search", "AI Engineering"],
-    links: [],
+    links: [
+      {
+        label: "DataCamp",
+        url: "https://www.datacamp.com/certificate/AIEDA0010543717785",
+        color: "#03ef62",
+      },
+    ],
     accent: "cyan",
     current: false,
   },
@@ -212,7 +218,13 @@ export const educationItems: EducationItemData[] = [
       es: "Certificación que cubre los fundamentos de ingeniería de datos incluyendo pipelines, procesos ETL, almacenamiento de datos e infraestructura moderna.",
     },
     tags: ["Data Pipelines", "ETL", "Data Warehousing", "Data Infrastructure"],
-    links: [],
+    links: [
+      {
+        label: "DataCamp",
+        url: "https://www.datacamp.com/certificate/DE0015585598056",
+        color: "#03ef62",
+      },
+    ],
     accent: "purple",
     current: false,
   },
