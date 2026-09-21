@@ -48,10 +48,11 @@ export const projects: Project[] = [
       en: "AI-powered architectural visualization platform that transforms 2D floor plans into realistic rendered spaces.",
       es: "Plataforma de visualización arquitectónica con IA que transforma planos 2D en espacios renderizados realistas.",
     },
-    tags: ["React 19", "TypeScript", "Tailwind", "Docker", "OpenAI API"],
+    tags: ["React 19", "TypeScript", "Tailwind", "Docker", "Puter"],
+    liveUrl: "https://puter.com/app/roomify-eqqi",
     repoUrl: "https://github.com/Pa004/roomify",
     featured: true,
-    status: "deployed",
+    status: "live",
     imageUrl: "/projects/roomify.png",
   },
   {
