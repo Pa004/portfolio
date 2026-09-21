@@ -32,6 +32,12 @@ describe("projects", () => {
     expect(withUrl.length).toBeGreaterThan(0);
   });
 
+  it("grid counts match the fixed layouts", () => {
+    // Featured grid is 2x2, secondary grid is 1x3: any other count leaves gaps.
+    expect(projects.filter((p) => p.featured).length).toBe(4);
+    expect(projects.filter((p) => !p.featured).length).toBe(3);
+  });
+
   it("project links point to known homes", () => {
     for (const project of projects) {
       if (project.repoUrl) {

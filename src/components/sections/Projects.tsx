@@ -39,8 +39,8 @@ export default function Projects({ lang }: ProjectsProps) {
           subtitle={t.subtitle}
         />
 
-        <ProjectGrid projects={featured} lang={lang} copy={t} />
-        <ProjectGrid projects={rest} lang={lang} copy={t} />
+        <ProjectGrid projects={featured} lang={lang} copy={t} className="projects-featured-grid" />
+        <ProjectGrid projects={rest} lang={lang} copy={t} className="projects-rest-grid" />
       </div>
     </section>
   );
@@ -50,19 +50,13 @@ interface ProjectGridProps {
   projects: Project[];
   lang: Lang;
   copy: typeof projectsContent["en"];
+  className: string;
 }
 
-function ProjectGrid({ projects, lang, copy }: ProjectGridProps) {
+function ProjectGrid({ projects, lang, copy, className }: ProjectGridProps) {
   if (projects.length === 0) return null;
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        gap: "20px",
-        marginBottom: "20px",
-      }}
-    >
+    <div className={className}>
       {projects.map((project, i) => (
         <ProjectCard
           key={project.id}
