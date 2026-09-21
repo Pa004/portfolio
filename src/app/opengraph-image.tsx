@@ -42,7 +42,7 @@ export default function OGImage() {
           marginBottom: "28px",
         }}>
           <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#22c55e" }} />
-          <span style={{ fontSize: "14px", color: "#93c5fd" }}>Available for opportunities</span>
+          <span style={{ fontSize: "14px", color: "#93c5fd" }}>Open to remote opportunities</span>
         </div>
 
         {/* Name */}

@@ -1,6 +1,6 @@
 export const heroContent = {
   en: {
-    badge: "Available for opportunities",
+    badge: "Open to remote opportunities",
     greeting: "Hi, I'm",
     role: "Software Engineering student at ESPE",
     description:
@@ -10,7 +10,7 @@ export const heroContent = {
     scroll: "Scroll to explore",
   },
   es: {
-    badge: "Disponible para oportunidades",
+    badge: "Abierto a oportunidades remotas",
     greeting: "Hola, soy",
     role: "Estudiante de Ingeniería de Software en ESPE",
     description:
