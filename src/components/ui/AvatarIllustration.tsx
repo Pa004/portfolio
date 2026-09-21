@@ -3,27 +3,31 @@
 import { useEffect, useState } from "react";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
-type BadgeHue = "blue" | "cyan" | "violet";
+type BadgeHue = "blue" | "cyan" | "green" | "violet";
 
 const hueStyles: Record<BadgeHue, { color: string; border: string }> = {
   blue:   { color: "var(--accent)",             border: "rgba(var(--accent-rgb), 0.4)" },
   cyan:   { color: "var(--accent-cyan-icon)",   border: "rgba(var(--accent-cyan-rgb), 0.4)" },
+  green:  { color: "var(--accent-green-icon)",  border: "rgba(var(--accent-green-rgb), 0.4)" },
   violet: { color: "var(--accent-violet-icon)", border: "rgba(var(--accent-violet-rgb), 0.4)" },
 };
 
+// Hue groups: blue = frontend, cyan = backend, green = data, violet = mobile.
 const allBadges: { label: string; hue: BadgeHue }[] = [
   { label: "React",       hue: "blue"   },
-  { label: "Flutter",     hue: "cyan"   },
-  { label: "Python",      hue: "violet" },
-  { label: "Node.js",     hue: "blue"   },
-  { label: "TypeScript",  hue: "cyan"   },
-  { label: "FastAPI",     hue: "violet" },
-  { label: "MongoDB",     hue: "blue"   },
+  { label: "TypeScript",  hue: "blue"   },
+  { label: "Next.js",     hue: "blue"   },
+  { label: "Tailwind",    hue: "blue"   },
+  { label: "Node.js",     hue: "cyan"   },
+  { label: "Express.js",  hue: "cyan"   },
+  { label: "FastAPI",     hue: "cyan"   },
+  { label: "Python",      hue: "cyan"   },
   { label: "Docker",      hue: "cyan"   },
-  { label: "Next.js",     hue: "violet" },
-  { label: "PostgreSQL",  hue: "blue"   },
-  { label: "Tailwind",    hue: "cyan"   },
-  { label: "Express.js",  hue: "violet" },
+  { label: "MongoDB",     hue: "green"  },
+  { label: "PostgreSQL",  hue: "green"  },
+  { label: "Supabase",    hue: "green"  },
+  { label: "Flutter",     hue: "violet" },
+  { label: "Dart",        hue: "violet" },
 ];
 
 const lines = [
