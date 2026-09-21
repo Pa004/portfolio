@@ -16,6 +16,7 @@ import type {
   NeuralSignal,
   Section,
   StarNode,
+  TokenColors,
   Variant,
   WaveParticle,
 } from "./section-background/types";
@@ -36,6 +37,14 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
   const kineticRipplesRef = useRef<KineticRipple[]>([]);
   const waveParticlesRef = useRef<WaveParticle[] | null>(null);
   const tRef = useRef(0);
+  // Theme tokens are cached: getComputedStyle per frame is the hottest
+  // path here, so refresh only when the theme actually changes.
+  const tokensRef = useRef<TokenColors | null>(null);
+
+  const getTokens = () => {
+    if (!tokensRef.current) tokensRef.current = readThemeTokens();
+    return tokensRef.current;
+  };
 
   const paint = useCallback(() => {
     const canvas = canvasRef.current;
@@ -44,7 +53,7 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
     if (!ctx) return;
     const W = canvas.width;
     const H = canvas.height;
-    const tokens = readThemeTokens();
+    const tokens = getTokens();
     const mx = mouseRef.current.x;
     const my = mouseRef.current.y;
     const hasMouse = mx >= 0 && !!section;
@@ -74,6 +83,9 @@ export default function SectionBackground({ variant, section }: SectionBackgroun
   useCanvasSkeleton(canvasRef, {
     draw: paint,
     drawWhenReduced: paint,
+    onThemeChange: () => {
+      tokensRef.current = readThemeTokens();
+    },
   });
 
   useEffect(() => {
