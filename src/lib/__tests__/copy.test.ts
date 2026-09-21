@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { expectBilingualParity } from "./helpers";
 import { heroContent } from "../copy/hero";
-import { aboutContent, interests, statsData } from "../copy/about";
+import { aboutContent, statsData } from "../copy/about";
 import { skillsContent } from "../copy/skills";
 import { projectsContent } from "../copy/projects";
 import { educationContent } from "../copy/education";
@@ -31,11 +31,6 @@ describe("section copy exports", () => {
     ["footer", footerContent],
   ])("%s content has full bilingual parity", (_name, content) => {
     expectBilingualParity(content);
-  });
-
-  it("about interests are bilingual and non-empty", () => {
-    expectBilingualParity(interests);
-    expect(interests.length).toBeGreaterThan(0);
   });
 
   it("about statsData are bilingual and well-formed", () => {
