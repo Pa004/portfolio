@@ -47,7 +47,6 @@ export default function Home() {
 
   useEffect(() => {
     document.documentElement.setAttribute("lang", lang);
-    window.dispatchEvent(new Event(LANG_EVENT));
   }, [lang]);
 
   const toggleTheme = () => {
@@ -95,7 +94,7 @@ export default function Home() {
           e.currentTarget.style.overflow = "hidden";
         }}
       >
-        Saltar al contenido
+        {lang === "es" ? "Saltar al contenido" : "Skip to content"}
       </a>
       <MouseSpotlight />
       <Navbar lang={lang} theme={theme} toggleTheme={toggleTheme} />

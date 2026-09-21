@@ -129,7 +129,8 @@ body {
 }
 
 @media (pointer: fine) {
-  * {
+  .has-custom-cursor,
+  .has-custom-cursor * {
     cursor: none !important;
   }
 }

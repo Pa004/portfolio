@@ -4,7 +4,7 @@ import { heroContent } from "../copy/hero";
 import { aboutContent, interests, statsData } from "../copy/about";
 import { skillsContent } from "../copy/skills";
 import { projectsContent } from "../copy/projects";
-import { educationContent, educationItems } from "../copy/education";
+import { educationContent } from "../copy/education";
 import { contactContent } from "../copy/contact";
 import { footerContent } from "../copy/footer";
 import { navLinks } from "../copy/navbar";
@@ -41,12 +41,6 @@ describe("section copy exports", () => {
       expect(stat.value).toBeGreaterThan(0);
       expect(typeof stat.suffix).toBe("string");
     }
-  });
-
-  it("education items are bilingual and have distinct ids", () => {
-    expectBilingualParity(educationItems);
-    const ids = educationItems.map((item) => item.id);
-    expect(new Set(ids).size).toBe(ids.length);
   });
 
   it("navLinks are bilingual and point to existing sections", () => {

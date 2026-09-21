@@ -6,6 +6,7 @@ import { projectsContent } from "@/lib/copy/projects";
 import SectionBackground from "@/components/ui/SectionBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
 import ProjectCard, { resolveAccent } from "@/components/ui/ProjectCard";
+import { sectionContainer } from "@/lib/styles";
 import type { Lang, Project } from "@/types";
 
 interface ProjectsProps {
@@ -30,14 +31,7 @@ export default function Projects({ lang }: ProjectsProps) {
       }}
     >
       <SectionBackground variant="stars" section="projects" />
-      <div
-        style={{
-          maxWidth: "1152px",
-          margin: "0 auto",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
+      <div style={{ ...sectionContainer }}>
         <SectionHeader
           lang={lang}
           label={t.label}

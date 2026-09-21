@@ -10,7 +10,7 @@ import ConsoleEasterEgg from "@/components/ui/ConsoleEasterEgg";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import NoiseOverlay from "@/components/ui/NoiseOverlay";
 import ThemeColor from "@/components/ui/ThemeColor";
-import { Toaster } from "sonner";
+import ThemeToaster from "@/components/ui/ThemeToaster";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -61,17 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CustomCursor />
         <BackToTop />
         <ConsoleEasterEgg />
-        <Toaster
-          position="bottom-right"
-          theme="dark"
-          toastOptions={{
-            style: {
-              background: "rgba(9,9,11,0.95)",
-              border: "0.5px solid rgba(91,140,255,0.3)",
-              color: "#f4f4f5",
-            },
-          }}
-        />
+        <ThemeToaster />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

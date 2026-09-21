@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { glass, glassBlue } from "@/lib/styles";
+import { glass, glassBlue, sectionContainer } from "@/lib/styles";
 import { links } from "@/lib/content";
 import { contactContent } from "@/lib/copy/contact";
 
@@ -80,14 +80,7 @@ export default function Contact({ lang }: ContactProps) {
       }}
     >
       <SectionBackground variant="waves" section="contact" />
-      <div
-        style={{
-          maxWidth: "1152px",
-          margin: "0 auto",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
+      <div style={{ ...sectionContainer }}>
         <RevealSection>
           <div style={{ marginBottom: "56px" }}>
             <p

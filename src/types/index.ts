@@ -18,3 +18,23 @@ export interface Skill {
 }
 
 export type Lang = "en" | "es";
+
+export interface EducationLink {
+  label: string;
+  url: string;
+  color: string;
+}
+
+export interface EducationItemData {
+  id: string;
+  type: "degree" | "cert";
+  institution: string;
+  degree: { en: string; es: string };
+  period: string;
+  location: string;
+  description: { en: string; es: string };
+  tags: string[];
+  links: EducationLink[];
+  accent: "blue" | "cyan" | "purple";
+  current: boolean;
+}

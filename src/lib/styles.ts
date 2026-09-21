@@ -30,3 +30,10 @@ export const gridBg = {
   `,
   backgroundSize: "32px 32px",
 } as React.CSSProperties;
+
+export const sectionContainer = {
+  maxWidth: "1152px",
+  margin: "0 auto",
+  position: "relative",
+  zIndex: 1,
+} as React.CSSProperties;
