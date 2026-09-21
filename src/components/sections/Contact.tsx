@@ -82,7 +82,7 @@ export default function Contact({ lang }: ContactProps) {
       <SectionBackground variant="waves" section="contact" />
       <div style={{ ...sectionContainer }}>
         <RevealSection>
-          <div style={{ marginBottom: "56px" }}>
+          <div style={{ marginBottom: "40px" }}>
             <p
               style={{
                 fontSize: "11px",
