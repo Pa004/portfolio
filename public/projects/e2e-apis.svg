@@ -1,0 +1,16 @@
+<svg width="600" height="340" viewBox="0 0 600 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="340" fill="#09090b"/>
+  <rect x="40" y="40" width="520" height="260" rx="12" fill="#121216" stroke="rgba(91,140,255,0.3)" stroke-width="1"/>
+  <rect x="40" y="40" width="520" height="36" fill="rgba(255,255,255,0.02)" stroke-width="1"/>
+  <circle cx="64" cy="58" r="6" fill="#ef4444"/>
+  <circle cx="84" cy="58" r="6" fill="#f59e0b"/>
+  <circle cx="104" cy="58" r="6" fill="#22c55e"/>
+  <text x="300" y="62" fill="#71717a" font-family="monospace" font-size="12" text-anchor="middle">e2e-apis — cypress run</text>
+  <text x="80" y="120" fill="#22c55e" font-family="monospace" font-size="14">✓ POST /pet — 200 (12ms)</text>
+  <text x="80" y="150" fill="#22c55e" font-family="monospace" font-size="14">✓ GET /pet/findByStatus — 200</text>
+  <text x="80" y="180" fill="#22c55e" font-family="monospace" font-size="14">✓ saucedemo checkout — pass</text>
+  <text x="80" y="210" fill="#5b8cff" font-family="monospace" font-size="14">▸ mochawesome report…</text>
+  <rect x="70" y="232" width="460" height="10" rx="5" fill="rgba(255,255,255,0.06)"/>
+  <rect x="70" y="232" width="460" height="10" rx="5" fill="#22c55e"/>
+  <text x="80" y="268" fill="#f4f4f5" font-family="sans-serif" font-size="14" font-weight="bold">Cypress · TypeScript · GitHub Actions</text>
+</svg>
