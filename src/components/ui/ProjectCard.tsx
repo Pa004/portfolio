@@ -71,6 +71,7 @@ const tagStyles = {
 
 export function resolveAccent(id: string, index: number): "cyan" | "blue" | "gray" {
   if (id === "roomify") return "cyan";
+  if (id === "scikick") return "cyan";
   if (id === "summer-dent") return "blue";
   if (index === 2) return "blue";
   return "gray";

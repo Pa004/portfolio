@@ -1,0 +1,17 @@
+<svg width="600" height="340" viewBox="0 0 600 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="340" fill="#09090b"/>
+  <rect x="40" y="40" width="520" height="260" rx="12" fill="#121216" stroke="rgba(91,140,255,0.3)" stroke-width="1"/>
+  <rect x="40" y="40" width="520" height="36" fill="rgba(255,255,255,0.02)" stroke-width="1"/>
+  <circle cx="64" cy="58" r="6" fill="#ef4444"/>
+  <circle cx="84" cy="58" r="6" fill="#f59e0b"/>
+  <circle cx="104" cy="58" r="6" fill="#22c55e"/>
+  <text x="300" y="62" fill="#71717a" font-family="monospace" font-size="12" text-anchor="middle">chatcito — realtime chat</text>
+  <rect x="70" y="100" width="250" height="56" rx="12" fill="rgba(91,140,255,0.08)" stroke="rgba(91,140,255,0.25)" stroke-width="1"/>
+  <rect x="280" y="168" width="250" height="56" rx="12" fill="rgba(6,182,212,0.07)" stroke="rgba(6,182,212,0.2)" stroke-width="1"/>
+  <rect x="70" y="236" width="180" height="56" rx="12" fill="rgba(91,140,255,0.08)" stroke="rgba(91,140,255,0.25)" stroke-width="1"/>
+  <circle cx="92" cy="128" r="10" fill="rgba(91,140,255,0.3)"/>
+  <circle cx="508" cy="196" r="10" fill="rgba(6,182,212,0.3)"/>
+  <text x="112" y="132" fill="#bfdbfe" font-family="sans-serif" font-size="13">Hola! Todo listo?</text>
+  <text x="300" y="200" fill="#8cecfd" font-family="sans-serif" font-size="13">Sí, push en camino</text>
+  <text x="90" y="270" fill="#f4f4f5" font-family="sans-serif" font-size="14" font-weight="bold">Flutter · Firebase · Riverpod</text>
+</svg>

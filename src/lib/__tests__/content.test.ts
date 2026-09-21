@@ -31,6 +31,20 @@ describe("projects", () => {
     );
     expect(withUrl.length).toBeGreaterThan(0);
   });
+
+  it("project links point to known homes", () => {
+    for (const project of projects) {
+      if (project.repoUrl) {
+        expect(project.repoUrl.startsWith("https://github.com/Pa004/")).toBe(true);
+      }
+      if (project.liveUrl) {
+        expect(project.liveUrl.startsWith("https://")).toBe(true);
+      }
+      if (project.imageUrl) {
+        expect(project.imageUrl.startsWith("/projects/")).toBe(true);
+      }
+    }
+  });
 });
 
 describe("skills", () => {
