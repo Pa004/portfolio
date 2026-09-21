@@ -38,3 +38,16 @@ export interface EducationItemData {
   accent: "blue" | "cyan" | "purple";
   current: boolean;
 }
+
+export interface ExperienceItemData {
+  id: string;
+  role: { en: string; es: string };
+  organization: string;
+  period: string;
+  location: string;
+  description: { en: string; es: string };
+  tags: string[];
+  links: EducationLink[];
+  accent: "blue" | "cyan" | "purple";
+  current: boolean;
+}

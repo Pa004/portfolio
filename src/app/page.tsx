@@ -7,6 +7,7 @@ import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
+import Experience from "@/components/sections/Experience";
 import Education from "@/components/sections/Education";
 import Contact from "@/components/sections/Contact";
 import MouseSpotlight from "@/components/ui/MouseSpotlight";
@@ -103,6 +104,7 @@ export default function Home() {
         <About lang={lang} />
         <Skills lang={lang} />
         <Projects lang={lang} />
+        <Experience lang={lang} />
         <Education lang={lang} />
         <Contact lang={lang} />
         <Footer lang={lang} />
