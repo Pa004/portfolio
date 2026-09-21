@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { expectBilingualParity, isBilingual } from "./helpers";
-import { links, projects, skills } from "../content";
+import { links, projects, skills, educationItems } from "../content";
 
 describe("projects", () => {
   it("each project has bilingual description", () => {
@@ -39,6 +39,18 @@ describe("skills", () => {
     for (const skill of skills) {
       expect(skill.items.length).toBeGreaterThan(0);
       expect(["blue", "cyan", "purple", "gray"]).toContain(skill.color);
+    }
+  });
+});
+
+describe("education", () => {
+  it("items are bilingual and have distinct ids", () => {
+    expectBilingualParity(educationItems);
+    const ids = educationItems.map((item) => item.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const item of educationItems) {
+      expect(["degree", "cert"]).toContain(item.type);
+      expect(["blue", "cyan", "purple"]).toContain(item.accent);
     }
   });
 });

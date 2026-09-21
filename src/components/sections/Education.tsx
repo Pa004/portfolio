@@ -3,10 +3,8 @@
 import SectionBackground from "@/components/ui/SectionBackground";
 import SectionHeader from "@/components/ui/SectionHeader";
 import EducationItem from "@/components/ui/EducationItem";
-import {
-  educationContent,
-  educationItems,
-} from "@/lib/copy/education";
+import { educationItems } from "@/lib/content";
+import { educationContent } from "@/lib/copy/education";
 import type { Lang } from "@/types";
 interface EducationProps {
   lang: Lang;
