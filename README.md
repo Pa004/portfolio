@@ -15,7 +15,7 @@ Production software in use daily (dental clinic system), solo-built event platfo
 
 **[portfolio-ochre-xi-ba44zo6k9y.vercel.app](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app)**
 
-![Portfolio preview](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app/opengraph-image)
+![Portfolio preview](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app/opengraph-image?v=2)
 
 ---
 
