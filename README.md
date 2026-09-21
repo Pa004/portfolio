@@ -31,158 +31,17 @@ More in the [Projects](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app/#project
 
 ---
 
-## ✨ Features
+## ✨ Highlights
 
-### Visual & UX
-- 🌓 **Dark / Light mode** — theme toggle with `localStorage` persistence and WCAG 2.2 verified contrast (adaptive indigo palette in light mode)
-- 🔦 **Interactive spotlight** — cursor-following radial glow across the entire page
-- 🎯 **Custom cursor** — dot + lagged ring with dynamic hover and click states
-- 📊 **Scroll progress bar** — top-of-page gradient indicator
-- 🌊 **Smooth scroll** — cinematic inertia powered by Lenis
-- ✨ **Section reveal animations** — staggered blur + fade on viewport entry (Motion)
-- 🃏 **3D card tilt** — perspective tilt with glow follow on hover
-- 🍱 **Bento Grid layouts** — asymmetric card distribution in Skills and About areas of interest
-- 🌈 **Gradient typography** — high-contrast gradient headings
-- 🔲 **Noise texture overlay** — subtle film-grain depth effect
-- ⬆️ **Back to top button** — floating button appearing after 400px scroll
-- ♿ **Reduced motion support** — full compliance with `prefers-reduced-motion` settings
-
-### Sections
-- 🦸 **Hero** — name with staggered word-by-word blur reveal, typewriter roles, theme-adaptive terminal code block with technology marquee carousel, and particle network canvas
-- 👤 **About** — bio, location/language badges, real-world project & repository metrics counter, and interactive Bento Grid for areas of interest
-- 🛠️ **Skills** — asymmetric Bento Grid highlighting Frontend and Backend with specialized category tags
-- 🚀 **Projects** — featured 2×2 and secondary 3-column cards with previews, screenshots, live links, repository access, and status badges
-- 💼 **Experience** — editorial rows covering freelance work, academic distinction and research
-- 🎓 **Education** — timeline covering ESPE Software Engineering degree and DataCamp certifications
-- 📬 **Contact** — email copy-to-clipboard with Sonner toast notifications and verified social links
-
-### Animated backgrounds (per section)
-| Section | Background |
-|---|---|
-| Hero | Particle network canvas + Cursor spotlight |
-| About | Pulsing blueprint grid (`kinetic`) |
-| Skills | Animated lattice field |
-| Projects | Animated star field (`stars`) |
-| Experience | Animated lattice field + gradient blobs (same set as Skills) |
-| Education | Animated neural connections (`neural`) |
-| Contact | Animated layered wave flows (`waves`) |
-
-### Extras
-- 🌍 **Bilingual support** — English / Spanish (EN/ES) toggle with full content switch
-- 🖥️ **Loading screen** — terminal-style boot progress animation on initial visit
-- 🚫 **Custom 404 page** — interactive terminal-themed error route (`/not-found`)
-- 🐣 **Console easter egg** — ASCII art greeting and contact details in DevTools (F12)
-- 🖼️ **Dynamic OG Image** — automatic metadata preview card generation
+- Dark / light mode, custom cursor, smooth scroll (Lenis), scroll progress, 3D card tilt, per-section animated canvas backgrounds
+- Bilingual EN/ES, dynamic OG image, custom 404, `prefers-reduced-motion` support
+- Sections: Hero · About · Skills · Projects · Experience · Education · Contact
 
 ---
 
 ## 🏗️ Tech Stack
 
-| Category | Technology |
-|---|---|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript 5 |
-| Styling | Tailwind CSS v4 + Adaptive CSS Variables |
-| Theming | Custom toggle (useSyncExternalStore + localStorage) |
-| Animations | Motion |
-| Smooth scroll | Lenis |
-| Notifications | Sonner |
-| Icons | lucide-react + Inline SVG |
-| Fonts | Geist Sans + Geist Mono |
-| Deployment | Vercel |
-
----
-
-## 📁 Project Structure
-
-```
-src/
-├── app/
-│   ├── layout.tsx              # Root layout — theme bootstrap, toaster, global overlays
-│   ├── page.tsx                # Main page — section composition, skip-to-content, dynamic lang
-│   ├── error.tsx               # Error boundary terminal page
-│   ├── not-found.tsx           # Custom 404 terminal page
-│   ├── globals.css             # Theme tokens (light/dark) + Tailwind v4 configuration
-│   ├── icon.tsx                # Dynamic PWA/app icon route (matches OG style)
-│   ├── manifest.ts             # PWA web manifest
-│   ├── robots.ts               # robots.txt (allow all + sitemap)
-│   ├── sitemap.ts              # sitemap.xml
-│   ├── opengraph-image.tsx     # Dynamic OG image generator
-├── components/
-│   ├── layout/
-│   │   ├── Navbar.tsx          # Fixed navbar with theme & EN/ES toggles + mobile menu
-│   │   └── Footer.tsx          # Footer with social links & copyright
-│   ├── sections/
-│   │   ├── Hero.tsx            # Hero with spotlight, typewriter & terminal
-│   │   ├── About.tsx           # Bio, project metrics & interests bento grid
-│   │   ├── Skills.tsx          # Asymmetric bento grid of tech capabilities
-│   │   ├── Projects.tsx        # 2×2 featured + 3-column secondary project cards
-│   │   ├── Experience.tsx      # Editorial rows for freelance, distinction & research
-│   │   ├── Education.tsx       # Degree & certifications timeline
-│   │   └── Contact.tsx         # Email copy & direct social channels
-│   └── ui/
-│       ├── AvatarIllustration.tsx  # Hero terminal code block + badge marquee carousel
-│       ├── BackToTop.tsx           # Floating back-to-top button
-│       ├── ConsoleEasterEgg.tsx    # DevTools ASCII art message
-│       ├── CounterStat.tsx         # Animated number counter
-│       ├── CustomCursor.tsx        # Custom dot + ring interactive cursor
-│       ├── FloatingBlob.tsx        # Ambient gradient blob (Skills, Experience)
-│       ├── GradientText.tsx        # Gradient text wrapper
-│       ├── LoadingScreen.tsx       # First-load terminal animation
-│       ├── MagneticHover.tsx       # Magnetic hover effect (Projects/Education)
-│       ├── MouseSpotlight.tsx      # Document-level cursor spotlight (useRef + direct DOM)
-│       ├── NoiseOverlay.tsx        # Film-grain texture overlay
-│       ├── ParticleCanvas.tsx      # Hero particle network canvas
-│       ├── RevealSection.tsx       # Viewport entry reveal wrapper
-│       ├── ScrollProgress.tsx      # Top scroll progress indicator
-│       ├── SectionHeader.tsx       # Reusable section header (label + gradient title + subtitle)
-│       ├── SectionBackground.tsx   # Per-section animated canvas backgrounds
-│       ├── SmoothScroll.tsx        # Lenis smooth scroll provider
-│       ├── StaggerText.tsx         # Word-by-word stagger animation
-│       ├── ThemeToaster.tsx        # Theme-aware Sonner toast notifications
-│       └── TypeWriter.tsx          # Typewriter role cycling animation
-├── lib/
-│   ├── content.ts              # Data source for projects, skills, education & links
-│   ├── copy/                   # Bilingual UI copy per section (hero, about, …)
-│   ├── lenis.ts                # Lenis smooth scroll configuration
-│   ├── styles.ts               # Shared adaptive inline style objects
-│   └── usePrefersReducedMotion.ts # Hook to respect OS prefers-reduced-motion
-└── types/
-    └── index.ts                # Shared TypeScript definitions
-```
-
----
-
-## 🧠 Architecture Notes
-
-### Inline styles over Tailwind classes
-Tailwind v4 custom classes don't process reliably in this codebase. All component styles use **inline `style={{}}` props**. Shared style objects live in `src/lib/styles.ts`:
-
-```tsx
-import { glass, gridBg } from "@/lib/styles";
-
-<div style={{ ...glass, padding: "24px" }}>
-```
-
-Do NOT use `className` with custom Tailwind utilities on components. Only use Tailwind for standard utilities (flex, p, gap, etc.) when inline is impractical.
-
-### Theming system (dark / light)
-Theme tokens are defined as CSS custom properties in `globals.css` under `:root` (dark defaults) and `[data-theme="light"]` (light overrides). ~40 tokens cover backgrounds, text, accents, borders, and terminal colors. Components consume them via `var(--token-name)`.
-
-- Custom toggle in `Navbar.tsx` uses `useSyncExternalStore` to sync across components; `localStorage` persists the choice and a `theme-change` custom event notifies listeners
-- Tokens with `--accent-*-rgb` suffix (raw numbers) exist for canvas/composition: use `rgb(var(--accent-rgb) / alpha)` in styles
-- To add a new themed element: define tokens in both `:root` and `[data-theme="light"]`, then reference via `var()`
-
-### Bilingual pattern (`lang` prop)
-Every section component accepts `lang: "en" | "es"` and exports bilingual `content` objects internally. The toggle lives in `Navbar.tsx` and passes `lang` to all sections. To add content: duplicate the entry in both `en` and `es` blocks.
-
-### Canvas lifecycle & performance
-`ParticleCanvas` and `SectionBackground` pause rendering when offscreen via `IntersectionObserver` (native). `MouseSpotlight` uses `useRef` + direct DOM manipulation to avoid re-renders entirely. The `usePrefersReducedMotion` hook (`src/lib/usePrefersReducedMotion.ts`) — or `useReducedMotion` from motion — disables or simplifies animations when the OS setting requests it. When adding new canvas elements, wrap them with the same `isInView` guard and respect `prefers-reduced-motion`.
-
-### Data shape (`src/lib/content.ts`)
-Data source for the structured, data-driven content: **project cards** (title, description, links, badges, screenshots), **skills categories** (name, icon, items) and **education entries** (degree, certs, links), plus social links. Sections import structured data from here; avoid hardcoding structured data in components.
-
-**Note on bilingual content:** only the structured data above lives in `content.ts` with `{ en, es }` fields. The rest of the visible UI copy (Hero, About, Contact, Navbar, Footer, etc.) is kept as bilingual `content` objects under `src/lib/copy/`, one module per section. See the `lang` prop pattern below.
+Next.js 16 (App Router) · TypeScript 5 · Tailwind CSS v4 + CSS variables · Motion · Lenis · Sonner · lucide-react · Geist · Vercel
 
 ---
 
@@ -200,32 +59,17 @@ Data source for the structured, data-driven content: **project cards** (title, d
 
 ## 🚀 Getting Started
 
-### Prerequisites
-- Node.js 20.9+
-- npm
-
-### Installation
+Prerequisites: Node.js 20.9+, npm.
 
 ```bash
-# Clone the repository
 git clone https://github.com/Pa004/portfolio.git
 cd portfolio
-
-# Install dependencies
 npm install
-
-# Run development server
-npm run dev
+npm run dev      # http://localhost:3000
+npm run build && npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Build for production
-
-```bash
-npm run build
-npm start
-```
+Verify with `npm run test:run` and `npm run lint`.
 
 ---
 

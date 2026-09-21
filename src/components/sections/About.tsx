@@ -2,17 +2,10 @@
 
 import { motion } from "motion/react";
 import {
-  Bot,
-  Building2,
-  Database,
   GraduationCap,
   Languages,
   MapPin,
-  Palette,
-  Puzzle,
-  Smartphone,
 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import { glass, glassBlue, sectionContainer } from "@/lib/styles";
 import SectionBackground from "@/components/ui/SectionBackground";
 import CounterStat from "@/components/ui/CounterStat";
@@ -20,7 +13,6 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import RevealSection from "@/components/ui/RevealSection";
 import {
   aboutContent,
-  interests,
   statsData,
 } from "@/lib/copy/about";
 import type { Lang } from "@/types";
@@ -28,15 +20,6 @@ import type { Lang } from "@/types";
 interface AboutProps {
   lang: Lang;
 }
-
-const interestIcons: Record<string, LucideIcon> = {
-  architecture: Building2,
-  frontend: Palette,
-  ai: Bot,
-  mobile: Smartphone,
-  patterns: Puzzle,
-  databases: Database,
-};
 
 export default function About({ lang }: AboutProps) {
   const t = aboutContent[lang];
@@ -211,77 +194,6 @@ export default function About({ lang }: AboutProps) {
                   </div>
                 </motion.div>
               ))}
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              style={{ ...glass, borderRadius: "12px", padding: "20px" }}
-            >
-              <p
-                style={{
-                  fontSize: "11px",
-                  fontWeight: 600,
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "var(--text-muted)",
-                  marginBottom: "14px",
-                }}
-              >
-                {t.interests}
-              </p>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-                  gap: "10px",
-                }}
-              >
-                {interests.map((item, i) => {
-                  const InterestIcon = interestIcons[item.icon] ?? Database;
-                  return (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: i * 0.05 }}
-                    whileHover={{
-                      scale: 1.05,
-                      backgroundColor: "rgba(var(--accent-cyan-rgb),0.1)",
-                      borderColor: "var(--accent-cyan-icon)",
-                      boxShadow: "0 0 16px rgba(var(--accent-cyan-rgb),0.1)",
-                    }}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      padding: "12px 14px",
-                      borderRadius: "6px",
-                      background: "var(--surface)",
-                      border: "1px solid var(--border)",
-                      cursor: "default",
-                      transition: "border-color 0.2s ease, box-shadow 0.2s ease",
-                    }}
-                  >
-                    <span aria-hidden="true" style={{ display: "flex" }}>
-                      <InterestIcon size={16} />
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "12px",
-                        color: "var(--text)",
-                        fontWeight: 500,
-                      }}
-                    >
-                      {item[lang]}
-                    </span>
-                  </motion.div>
-                  );
-                })}
-              </div>
             </motion.div>
           </div>
         </div>
