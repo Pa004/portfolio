@@ -19,6 +19,12 @@ describe("projects", () => {
     }
   });
 
+  it("featured projects render a preview image", () => {
+    // ProjectCard only renders the image block when featured is true.
+    for (const project of projects.filter((p) => p.featured)) {
+      expect(project.imageUrl).toBeTruthy();
+    }
+  });
   it("has at least one featured project with a live/demo link", () => {
     const withUrl = projects.filter(
       (project) => project.liveUrl || project.repoUrl
