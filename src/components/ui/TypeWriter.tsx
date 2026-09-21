@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 const roles = {
-  en: ["Full Stack Developer", "Frontend Engineer", "AI Enthusiast", "Flutter Developer"],
-  es: ["Desarrollador Full Stack", "Ingeniero Frontend", "Entusiasta de IA", "Desarrollador Flutter"],
+  en: ["Full Stack Developer", "Frontend Engineer", "AI Engineer", "Flutter Developer"],
+  es: ["Desarrollador Full Stack", "Ingeniero Frontend", "Ingeniero de IA", "Desarrollador Flutter"],
 };
 
 interface TypeWriterProps {
