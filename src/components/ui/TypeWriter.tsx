@@ -20,33 +20,40 @@ function TypeWriterInner({ lang }: TypeWriterProps) {
   const timerRef    = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    function tick() {
-      const words = roles[lang];
-      const word  = words[indexRef.current];
-      const ci    = charIndexRef.current;
-      const del   = deletingRef.current;
-      const delay = del ? 60 : ci === word.length ? 3200 : 90;
-
-      timerRef.current = setTimeout(() => {
-        if (!del) {
-          const next = ci + 1;
-          setText(word.slice(0, next));
-          charIndexRef.current = next;
-          if (next === word.length) deletingRef.current = true;
-        } else {
-          const next = ci - 1;
-          setText(word.slice(0, next));
-          charIndexRef.current = next;
-          if (next === 0) {
-            deletingRef.current = false;
-            indexRef.current = (indexRef.current + 1) % words.length;
-          }
-        }
-        tick();
-      }, delay);
+    function schedule(delay: number) {
+      timerRef.current = setTimeout(() => step(), delay);
     }
 
-    tick();
+    function step() {
+      const words = roles[lang];
+      const word = words[indexRef.current];
+      const ci = charIndexRef.current;
+
+      if (!deletingRef.current) {
+        const next = ci + 1;
+        setText(word.slice(0, next));
+        charIndexRef.current = next;
+        if (next === word.length) {
+          deletingRef.current = true;
+          schedule(3200);
+        } else {
+          schedule(90);
+        }
+      } else {
+        const next = ci - 1;
+        setText(word.slice(0, next));
+        charIndexRef.current = next;
+        if (next === 0) {
+          deletingRef.current = false;
+          indexRef.current = (indexRef.current + 1) % words.length;
+          schedule(400);
+        } else {
+          schedule(60);
+        }
+      }
+    }
+
+    schedule(90);
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
   }, [lang]);
 
