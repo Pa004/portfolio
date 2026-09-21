@@ -26,10 +26,10 @@ export default function ConsoleEasterEgg() {
     console.log("%c👋 Hey there, fellow developer!", styles.subtitle);
     console.log("%c ", "");
     console.log("%c📍 Pablo Domínguez — Software Engineering @ ESPE", styles.normal);
-    console.log("%c🚀 Full Stack Developer · AI Enthusiast · Flutter Dev", styles.normal);
+    console.log("%c🚀 Full Stack Developer · AI Engineer · Flutter Dev", styles.normal);
     console.log("%c ", "");
     console.log("%c🛠️  Stack:", styles.purple);
-    console.log("%c   React · Next.js · Node.js · Flutter · Python · TensorFlow", styles.green);
+    console.log("%c   React · Next.js · Node.js · FastAPI · Flutter · Python", styles.green);
     console.log("%c ", "");
     console.log("%c📬 Let's connect:", styles.subtitle);
     console.log("%c   pablodo004@gmail.com", styles.green);
