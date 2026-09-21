@@ -2,15 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 export default function LoadingScreen() {
   const [visible, setVisible] = useState(true);
   const [progress, setProgress] = useState(0);
+  const reducedMotion = usePrefersReducedMotion();
 
   const phases = [
-    "Initializing...",
-    "Loading modules...",
-    "Building interface...",
+    "Loading projects...",
+    "Calibrating models...",
+    "Rendering interface...",
     "Almost ready...",
   ];
 
@@ -32,6 +34,8 @@ export default function LoadingScreen() {
       return () => clearTimeout(timeout);
     }
   }, [progress]);
+
+  if (reducedMotion) return null;
 
   return (
     <AnimatePresence>
