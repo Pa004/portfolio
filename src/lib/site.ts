@@ -1,4 +1,4 @@
-const FALLBACK_SITE_URL = "https://portfolio-ochre-xi-ba44zo6k9y.vercel.app";
+const FALLBACK_SITE_URL = "https://pablo004.is-a.dev";
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
