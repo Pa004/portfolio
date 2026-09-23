@@ -4,7 +4,7 @@
 
 Production software in use daily (dental clinic system), solo-built event platform with 137 passing tests, and live ML-powered football analytics. Freelance developer and co-author of a paper submitted to IEEE BigData 2026.
 
-[![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app)
+[![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://pablo004.is-a.dev)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8?logo=tailwindcss)](https://tailwindcss.com)
@@ -13,9 +13,9 @@ Production software in use daily (dental clinic system), solo-built event platfo
 
 ## 🌐 Live
 
-**[portfolio-ochre-xi-ba44zo6k9y.vercel.app](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app)**
+**[pablo004.is-a.dev](https://pablo004.is-a.dev)**
 
-![Portfolio preview](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app/opengraph-image)
+![Portfolio preview](https://pablo004.is-a.dev/opengraph-image)
 
 ---
 
@@ -27,7 +27,7 @@ Production software in use daily (dental clinic system), solo-built event platfo
 | <img src="public/projects/scikick.png" width="120" alt="SciKick screenshot" /> | **[SciKick](https://scikick.pages.dev)** — football analytics with Dixon-Coles + LightGBM ensemble ([repo](https://github.com/Pa004/scikick)) | 600 automated tests, live on Cloudflare |
 | <img src="public/projects/eventual.png" width="120" alt="Eventual logo" /> | **[Eventual](https://github.com/Pa004/Eventual)** — event management built solo end to end | 13/13 requirements, 137 tests passing |
 
-More in the [Projects](https://portfolio-ochre-xi-ba44zo6k9y.vercel.app/#projects) section: Roomify, Chatcito, Sentinel, e2e-APIs.
+More in the [Projects](https://pablo004.is-a.dev/#projects) section: Roomify, Chatcito, Sentinel, e2e-APIs.
 
 ---
 
