@@ -15,7 +15,7 @@ Production software in use daily (dental clinic system), solo-built event platfo
 
 **[pablo004.is-a.dev](https://pablo004.is-a.dev)**
 
-![Portfolio preview](https://pablo004.is-a.dev/opengraph-image?v=2)
+![Portfolio preview](public/preview.png)
 
 ---
 
