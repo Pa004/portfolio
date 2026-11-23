@@ -4,9 +4,10 @@ export interface Project {
   description: { en: string; es: string };
   tags: string[];
   liveUrl?: string;
+  liveAction?: { en: string; es: string };
   repoUrl?: string;
   featured: boolean;
-  status: "live" | "deployed" | "academic";
+  status: "live" | "deployed" | "repository";
   imageUrl?: string;
 }
 

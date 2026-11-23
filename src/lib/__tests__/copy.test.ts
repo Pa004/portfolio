@@ -41,6 +41,13 @@ describe("section copy exports", () => {
     }
   });
 
+  it("reports the current public repository count", () => {
+    const repositories = statsData.find(
+      (stat) => stat.label.en === "GitHub repositories"
+    );
+    expect(repositories).toMatchObject({ value: 23, suffix: "" });
+  });
+
   it("experience items are bilingual and have distinct ids", () => {
     expectBilingualParity(experienceItems);
     const ids = experienceItems.map((item) => item.id);

@@ -15,7 +15,7 @@ describe("projects", () => {
     const ids = projects.map((project) => project.id);
     expect(new Set(ids).size).toBe(ids.length);
     for (const project of projects) {
-      expect(["live", "deployed", "academic"]).toContain(project.status);
+      expect(["live", "deployed", "repository"]).toContain(project.status);
     }
   });
 
@@ -49,6 +49,18 @@ describe("projects", () => {
       if (project.imageUrl) {
         expect(project.imageUrl.startsWith("/projects/")).toBe(true);
       }
+    }
+  });
+
+  it("labels restricted-access and repository-only projects accurately", () => {
+    const roomify = projects.find((project) => project.id === "roomify");
+    expect(roomify?.status).toBe("deployed");
+    expect(roomify?.liveAction?.en).toBe("Open in Puter");
+
+    for (const id of ["eventual", "chatcito", "e2e-apis"]) {
+      const project = projects.find((item) => item.id === id);
+      expect(project?.status).toBe("repository");
+      expect(project?.liveUrl).toBeUndefined();
     }
   });
 });

@@ -38,9 +38,9 @@ const statusConfig = {
     },
     blink: false,
   },
-  academic: {
-    en: "Academic",
-    es: "Académico",
+  repository: {
+    en: "Repository",
+    es: "Repositorio",
     dot: "var(--text-muted)",
     badge: {
       background: "var(--surface)",
@@ -173,7 +173,7 @@ export default function ProjectCard({ project, index, accent, lang, copy }: Proj
             {project.description[lang]}
           </p>
           <ProjectTags tags={project.tags} tag={tag} />
-          <ProjectActions project={project} copy={copy} />
+          <ProjectActions project={project} copy={copy} lang={lang} />
         </div>
       </Tilt>
     </motion.div>
@@ -260,7 +260,15 @@ function ProjectTags({ tags, tag }: { tags: string[]; tag: React.CSSProperties }
   );
 }
 
-function ProjectActions({ project, copy }: { project: Project; copy: { demo: string; repo: string } }) {
+function ProjectActions({
+  project,
+  copy,
+  lang,
+}: {
+  project: Project;
+  copy: { demo: string; repo: string };
+  lang: Lang;
+}) {
   return (
     <div style={{ display: "flex", gap: "16px" }}>
       {project.liveUrl && (
@@ -280,7 +288,7 @@ function ProjectActions({ project, copy }: { project: Project; copy: { demo: str
             }}
           >
             <ExternalIcon />
-            {copy.demo}
+            {project.liveAction?.[lang] ?? copy.demo}
           </a>
         </MagneticHover>
       )}
