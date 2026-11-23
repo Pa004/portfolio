@@ -2,7 +2,7 @@
 
 > Full Stack Developer · Software Engineering student at ESPE · Quito, Ecuador
 
-Production software in use daily (dental clinic system), solo-built event platform with 137 passing tests, and live ML-powered football analytics. Freelance developer and co-author of a paper submitted to IEEE BigData 2026.
+Production software in use daily (dental clinic system), a solo-built event platform with 137 passing tests, and live ML-powered football analytics. Freelance developer and co-author of a scientific article on cyberbullying detection in Ecuadorian Spanish.
 
 [![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?logo=vercel)](https://pablo004.is-a.dev)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)

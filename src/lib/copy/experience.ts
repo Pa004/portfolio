@@ -5,13 +5,13 @@ export const experienceContent = {
   en: {
     label: "Career",
     title: "Experience & Research",
-    subtitle: "Freelance work, academic distinction and published research.",
+    subtitle: "Freelance work, academic distinction and scientific research.",
     current: "Current",
   },
   es: {
     label: "Trayectoria",
     title: "Experiencia e Investigación",
-    subtitle: "Trabajo freelance, distinción académica e investigación publicada.",
+    subtitle: "Trabajo freelance, distinción académica e investigación científica.",
     current: "Actual",
   },
 };
@@ -59,20 +59,18 @@ export const experienceItems: ExperienceItemData[] = [
   {
     id: "ieee-bigdata",
     role: {
-      en: "Co-author — IEEE BigData 2026 (under review)",
-      es: "Coautor — IEEE BigData 2026 (en revisión)",
+      en: "Co-author — Scientific article",
+      es: "Coautor — Artículo científico",
     },
     organization: "Cyberbullying detection in Ecuadorian Spanish",
     period: "2026",
     location: "Research",
     description: {
-      en: "Comparative study of BETO, CNN1D and BiLSTM for automatic cyberbullying detection in social media. Notification: Oct 24, 2026.",
-      es: "Estudio comparativo de BETO, CNN1D y BiLSTM para detección automática de ciberacoso en redes sociales. Notificación: 24 oct 2026.",
+      en: "Scientific article on automatic cyberbullying detection in Ecuadorian Spanish social media using BETO, CNN1D and BiLSTM.",
+      es: "Artículo científico sobre detección automática de ciberacoso en redes sociales ecuatorianas en español usando BETO, CNN1D y BiLSTM.",
     },
     tags: ["BETO", "CNN1D", "BiLSTM", "NLP"],
-    links: [
-      { label: "IEEE BigData", url: "https://bigdataieee.org/BigData2026/calls/papers/", color: "#a78bfa" },
-    ],
+    links: [],
     accent: "purple",
     current: false,
   },

@@ -38,21 +38,22 @@ export const projects: Project[] = [
     tags: ["Flutter", "Node.js", "Express", "Supabase", "BLoC"],
     repoUrl: "https://github.com/Pa004/Eventual",
     featured: true,
-    status: "deployed",
+    status: "repository",
     imageUrl: "/projects/eventual.png",
   },
   {
     id: "roomify",
     name: "Roomify",
     description: {
-      en: "AI-powered architectural visualization platform that transforms 2D floor plans into realistic rendered spaces.",
-      es: "Plataforma de visualización arquitectónica con IA que transforma planos 2D en espacios renderizados realistas.",
+      en: "AI-powered architectural visualization platform that transforms 2D floor plans into realistic rendered spaces. Deployed on Puter; a Puter account is required to access it.",
+      es: "Plataforma de visualización arquitectónica con IA que transforma planos 2D en espacios renderizados realistas. Desplegada en Puter; requiere una cuenta de Puter para acceder.",
     },
     tags: ["React 19", "TypeScript", "Tailwind", "Docker", "Puter"],
     liveUrl: "https://puter.com/app/roomify-eqqi",
+    liveAction: { en: "Open in Puter", es: "Abrir en Puter" },
     repoUrl: "https://github.com/Pa004/roomify",
     featured: true,
-    status: "live",
+    status: "deployed",
     imageUrl: "/projects/roomify.png",
   },
   {
@@ -65,7 +66,7 @@ export const projects: Project[] = [
     tags: ["Flutter", "Dart", "Firebase", "Riverpod"],
     repoUrl: "https://github.com/Pa004/chatcito",
     featured: false,
-    status: "deployed",
+    status: "repository",
     imageUrl: "/projects/chatcito.svg",
   },
   {
@@ -92,7 +93,7 @@ export const projects: Project[] = [
     tags: ["Cypress", "TypeScript", "GitHub Actions", "Mochawesome"],
     repoUrl: "https://github.com/Pa004/e2e-APIs",
     featured: false,
-    status: "deployed",
+    status: "repository",
     imageUrl: "/projects/e2e-apis.svg",
   },
 ];
@@ -105,21 +106,15 @@ export const skills: Skill[] = [
     color: "blue",
   },
   {
-    category: { en: "Backend", es: "Backend" },
+    category: { en: "Backend & Data", es: "Backend y datos" },
     icon: "server",
-    items: ["Node.js", "Express.js", "Python", "FastAPI", "REST APIs", "JWT", "Auth"],
+    items: ["Node.js", "Express.js", "Python", "FastAPI", "PostgreSQL", "Supabase"],
     color: "cyan",
   },
   {
-    category: { en: "Databases", es: "Bases de datos" },
-    icon: "database",
-    items: ["MongoDB", "PostgreSQL", "MySQL", "SQL Server", "Supabase", "SQLite"],
-    color: "blue",
-  },
-  {
-    category: { en: "AI / ML", es: "IA / ML" },
+    category: { en: "Applied AI", es: "IA aplicada" },
     icon: "brain",
-    items: ["Python", "OpenAI API", "Embeddings", "LightGBM", "Neural Networks", "NLP", "Machine Learning"],
+    items: ["OpenAI API", "Embeddings", "LightGBM", "NLP"],
     color: "purple",
   },
   {
@@ -132,12 +127,6 @@ export const skills: Skill[] = [
     category: { en: "Tools & DevOps", es: "Herramientas" },
     icon: "tools",
     items: ["Git", "Docker", "Cypress", "Postman", "Vercel", "Render", "GitHub Actions", "Jest", "Cloudflare"],
-    color: "gray",
-  },
-  {
-    category: { en: "Other Languages", es: "Otros lenguajes" },
-    icon: "code",
-    items: ["Java", "C#", "C++", "SQL", "Python"],
     color: "gray",
   },
 ];
@@ -154,8 +143,8 @@ export const educationItems: EducationItemData[] = [
     period: "2022 — Present",
     location: "Sangolquí, Ecuador",
     description: {
-      en: "Studying software architecture, design patterns, databases, AI, and full stack development. Active researcher with profiles on ORCID and ResearchGate.",
-      es: "Estudio de arquitectura de software, patrones de diseño, bases de datos, IA y desarrollo full stack. Investigador activo con perfiles en ORCID y ResearchGate.",
+      en: "Studying software architecture, design patterns, databases, AI, and full stack development. Interests include scientific research, with profiles on ORCID and ResearchGate.",
+      es: "Estudio de arquitectura de software, patrones de diseño, bases de datos, IA y desarrollo full stack. Tengo interés en investigación científica y perfiles en ORCID y ResearchGate.",
     },
     tags: [
       "Software Architecture",
@@ -187,7 +176,7 @@ export const educationItems: EducationItemData[] = [
       en: "AI Engineer for Developers Associate",
       es: "AI Engineer for Developers Associate",
     },
-    period: "Jun 2026 — Jun 2028",
+    period: "Jun 4, 2026 — Jun 3, 2028",
     location: "Online",
     description: {
       en: "Certification focused on building AI-powered applications using the OpenAI API, including embeddings, semantic search and conversational systems.",
@@ -210,9 +199,9 @@ export const educationItems: EducationItemData[] = [
     institution: "DataCamp",
     degree: {
       en: "Data Engineer Certificate",
-      es: "Data Engineer Certificate",
+      es: "Certificado Data Engineer",
     },
-    period: "Jun 2026 — Jun 2028",
+    period: "Jun 5, 2026 — Jun 4, 2028",
     location: "Online",
     description: {
       en: "Certification covering data engineering fundamentals including data pipelines, ETL processes, data warehousing and modern data infrastructure.",
